@@ -15,13 +15,29 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
+            // $table->increments('id');
+            $table->string('first_name', 45);
+            $table->string('last_name', 45)->nullable();
+            $table->string('email', 45)->unique();
+            //'password' le quité nullable
+            $table->string('password', 100);
+            //nullable?
+            $table->smallInteger('address_id')->unsigned()->nullable();
+            //string?? no es mejor date?
+            $table->string('terms_conditions_date', 45)->nullable();
+            //nullable?
+            $table->tinyInteger('company_id')->unsigned()->nullable();
+            $table->string('active', 45);
+            $table->string('avatar', 45)->nullable();
+            $table->smallInteger('respuesta1')->unsigned()->nullable();
+            $table->smallInteger('respuesta2')->unsigned()->nullable();
+            $table->tinyInteger('admin')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
+
 
     /**
      * Reverse the migrations.

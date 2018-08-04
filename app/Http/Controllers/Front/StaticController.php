@@ -16,4 +16,8 @@ class StaticController extends Controller
     {
       return view('Front.contacto');
     }
+     public function showIndex()
+    {
+      return view('Front.index');
+    }
 }
