@@ -212,11 +212,17 @@ class CreateTables extends Migration
             $table->softDeletes();
         });
 
+        Schema::create('product_types', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
+            $table->increments('id');
+            $table->string('name', 45);
+            $table->string('product_type', 45);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
     }
-
-
-
-
 
 
     /**
@@ -239,7 +245,8 @@ class CreateTables extends Migration
         Schema::dropIfExists('product_photos');
         Schema::dropIfExists('event_type_product');
         Schema::dropIfExists('event_types');
-        // Schema::dropIfExists('users');
+        Schema::dropIfExists('product_user');
+        Schema::dropIfExists('product_types');
 
     }
 }

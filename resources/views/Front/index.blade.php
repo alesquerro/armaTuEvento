@@ -59,16 +59,13 @@
           <div class="form-group row">
             <label for="tipoEvento" class="col-form-label col-sm-2 col-md-2 col-lg-2">Evento</label>
             <select class="form-control col-sm-8 col-md-9 col-lg-8" id="tipoEvento" name="tipoEvento">
-              <option></option>
-              
+              <option>
+              </option>
               <pre>
-
-                <?php foreach ($tipoEventos as $tipoEvento) {
-                $id = key($tipoEvento);
-                ?>
+                @foreach ($tipoEventos as $tipoEvento)
               </pre>
-              <option value="<?php echo $id; ?>"> <?php echo $tipoEvento[$id]; ?></option>
-              <?php } ?>
+              <option value="{{ key($tipoEvento) }}">{{ $tipoEvento[$id] }}</option>
+              @endforeach
             </select>
           </div>
           <div class="contenedor_boton">
@@ -85,23 +82,23 @@
       <div class="row card_row">
 
         <?php foreach ($salones as $salon) {
-        ?>
-        <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
-          <div class="card mb-4 box-shadow">
-            <div class="img_thumb">
-              <img class="card-img-top" src="subidos/productos/<?php echo $salon->getPortada(); ?>"  alt="Salón 1">
-            </div>
-            <div class="card-body">
-              <p class="h4" id="nombre_salon" name="nombre_salon">
-                <?php echo $salon->getNombre(); ?></p>
-                <p class="card-text"><?php echo $salon->getDescripcion();  ?></p>
-                <p class="card-text">Consultar disponibilidad y precio</p>
+          ?>
+          <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
+            <div class="card mb-4 box-shadow">
+              <div class="img_thumb">
+                <img class="card-img-top" src="subidos/productos/<?php echo $salon->getPortada(); ?>"  alt="Salón 1">
               </div>
-              <div class="corazon" style="justify-content: flex-end; padding: 15px;">
+              <div class="card-body">
+                <p class="h4" id="nombre_salon" name="nombre_salon">
+                  <?php echo $salon->getNombre(); ?></p>
+                  <p class="card-text"><?php echo $salon->getDescripcion();  ?></p>
+                  <p class="card-text">Consultar disponibilidad y precio</p>
+                </div>
+                <div class="corazon" style="justify-content: flex-end; padding: 15px;">
 
-                <a href="#" id="likes">
-                  <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
-                </a>
+                  <a href="#" id="likes">
+                    <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
+                  </a>
               <!-- ARMAR BUSQUEDA EN FAVORITOS DINAMICO
               <?php if(in_array($salon->getId(), $favoritos)){ ?>
 
@@ -150,23 +147,23 @@
     <div class="row card_row">
 
       <?php foreach ($servicios as $servicio) {
-      ?>
-      <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
-        <div class="card mb-4 box-shadow">
-          <div class="img_thumb">
-            <img class="card-img-top" src="subidos/productos/<?php echo $servicio->getPortada(); ?>"  alt="Foto Servicio">
-          </div>
-          <div class="card-body">
-            <p class="h4" id="nombre_salon" name="nombre_salon">
-              <?php echo $servicio->getNombre(); ?></p>
-              <p class="card-text"><?php echo $servicio->getDescripcion();  ?></p>
-              <p class="card-text">Consultar disponibilidad y precio</p>
+        ?>
+        <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
+          <div class="card mb-4 box-shadow">
+            <div class="img_thumb">
+              <img class="card-img-top" src="subidos/productos/<?php echo $servicio->getPortada(); ?>"  alt="Foto Servicio">
             </div>
-            <div class="corazon" style="justify-content: flex-end; padding: 15px;">
+            <div class="card-body">
+              <p class="h4" id="nombre_salon" name="nombre_salon">
+                <?php echo $servicio->getNombre(); ?></p>
+                <p class="card-text"><?php echo $servicio->getDescripcion();  ?></p>
+                <p class="card-text">Consultar disponibilidad y precio</p>
+              </div>
+              <div class="corazon" style="justify-content: flex-end; padding: 15px;">
 
-              <a href="#" id="likes">
-                <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
-              </a>
+                <a href="#" id="likes">
+                  <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
+                </a>
               <!-- ARMAR BUSQUEDA EN FAVORITOS DINAMICO
               <?php if(in_array($servicio->getId(), $favoritos)){ ?>
 
