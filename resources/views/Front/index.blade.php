@@ -47,7 +47,7 @@
       <!-- BUSCADOR -->
 
       <section class="section-index-buttons">
-        <form method="get" class="contenedor_form" action="listado.php" enctype="multipart/form-data">
+        <form method="get" class="contenedor_form" action="listado.blade.php" enctype="multipart/form-data">
           <p class="h3">Buscá salon y/o servicios para tu evento</p>
           <div class="form-group row">
             <label for="fecha" class="col-form-label col-sm-2 col-md-2 col-lg-2">Fecha</label>
@@ -109,7 +109,7 @@
               
 {{-- FALTA QUE, SI EL USUARIO ESTÁ LOGUEADO, QUE LE MOSTREMOS SUS FAVORITOS Y USEMOS EL CORAZON DE LOS SELECCIONADOS--}}
              
-            <form  action="agregar_producto.php" method="post" id="agregar_carrito_{{ $salon->id }}">
+            <form  action="agregar_producto.blade.php" method="post" id="agregar_carrito_{{ $salon->id }}">
               <input type="hidden" name="id" value="{{ $salon->id }}">
               <input type="hidden" name="producto" value="{{ $salon->name }}">
               <input type="hidden" name="precio" value="{{ $salon->price}}">
@@ -124,8 +124,8 @@
 
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a class="btn btn-sm btn-outline-secondary" href="producto.php?id={{ $salon->id }}">Ver</a>
-                <a class="btn btn-sm btn-outline-secondary" href="contacto.php?producto={{ $salon->id }}"  onclick="agregar_carrito({{ $salon->id }})">Consultar</a>
+                <a class="btn btn-sm btn-outline-secondary" href="producto.blade.php?id={{ $salon->id }}">Ver</a>
+                <a class="btn btn-sm btn-outline-secondary" href="contacto.blade.php?producto={{ $salon->id }}"  onclick="agregar_carrito({{ $salon->id }})">Consultar</a>
               </div>
             </div>
 
@@ -164,7 +164,7 @@
             <a href="#" id="likes">
               <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
             </a>
-            <form  action="agregar_producto.php" method="post" id="agregar_carrito_<?php //traer salon id ?>">
+            <form  action="agregar_producto.blade.php" method="post" id="agregar_carrito_<?php //traer salon id ?>">
               <input type="hidden" name="id" value="{{ $servicio->id }}">
               <input type="hidden" name="producto" value="{{ $servicio->Name }}">
               <input type="hidden" name="precio" value="{{ $servicio->price }}">
@@ -174,8 +174,8 @@
                 input type="submit" name="" value="carrito"-->
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a class="btn btn-sm btn-outline-secondary" href="producto.php?id={{ $servicio->id }}">Ver</a>
-                    <a class="btn btn-sm btn-outline-secondary" href="contacto.php?producto={{ $servicio->id }}"  onclick="agregar_carrito(<?php //echo servicio id ?>)">Consultar</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="producto.blade.php?id={{ $servicio->id }}">Ver</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="contacto.blade.php?producto={{ $servicio->id }}"  onclick="agregar_carrito(<?php //echo servicio id ?>)">Consultar</a>
                   </div>
                 </div>
               </form>

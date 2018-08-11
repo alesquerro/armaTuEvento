@@ -17,12 +17,13 @@
 
 Auth::routes();
 
-Route::get('/','Front\ProductController@Index');
+Route::get('/','Front\ProductController@index');
 // Route::get('/','Front\StaticController@showIndex');
 Route::get('FAQs','Front\StaticController@showFAQs');
 Route::get('contacto','Front\StaticController@showContacto');
 Route::get('carrito','Front\CartController@show');
 Route::get('carrito/{id}','Front\CartController@add');
-Route::get('listado','Front\ProductController@Index');
+Route::get('listado','Front\ProductController@list');
+Route::get('Admin/','Admin\ProductController@index');
 
 

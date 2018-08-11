@@ -38,6 +38,29 @@ class ProductController extends Controller
     //     le paso las variables a la vista
     //     //return view('index', []);
     }
-    
 
+
+
+
+
+    
+  /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function list()
+    {
+        $productos = Product::get();
+       
+        // $tipoEventos = EventType::all();
+        // dd($tipoEventos);
+
+        return view('Front.listado', [
+            'productos' => $productos, 
+            // 'servicios' => $servicios,
+            // 'tipoEventos' => $tipoEventos, 
+        ]);
+    }
 }
