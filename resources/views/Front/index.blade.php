@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 @include('Components.head')
@@ -9,7 +13,7 @@
 
 
 
-{{--
+
     <!-- INICIO CAROUSEL -->
     <div class="container-fluid">
       <div id="carouselExampleIndicators" class="carousel slide contenido" data-ride="carousel">
@@ -62,7 +66,7 @@
               <option>
               </option>
               <pre>
-                @foreach ($tipoEventos as $tipoEvento)
+                @foreach ($tiposEventos as $tipoEvento)
               </pre>
               <option value="{{ key($tipoEvento) }}">{{ $tipoEvento[$id] }}</option>
               @endforeach
@@ -210,7 +214,7 @@
 
 
 
---}}
+ 
     <!--Footer-->
 
     @include('Components.footer')
