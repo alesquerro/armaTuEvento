@@ -9,7 +9,7 @@
 
 
 
-
+{{--
     <!-- INICIO CAROUSEL -->
     <div class="container-fluid">
       <div id="carouselExampleIndicators" class="carousel slide contenido" data-ride="carousel">
@@ -210,7 +210,7 @@
 
 
 
-
+--}}
     <!--Footer-->
 
     @include('Components.footer')

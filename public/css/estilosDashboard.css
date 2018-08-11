@@ -265,6 +265,11 @@ section .section-container #green {
   margin-bottom: 10px;
 }
 
+.botones-admin{
+  padding: 5px;
+  margin: 5px;  
+}
+
 /* media rules for 1050px and below */
 
 @media screen and (max-width: 1050px) {
