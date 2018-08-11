@@ -66,9 +66,9 @@
               <option>
               </option>
               <pre>
-                @foreach ($tiposEventos as $tipoEvento)
+                @foreach ($tipoEventos as $tipoEvento)
               </pre>
-              <option value="{{ key($tipoEvento) }}">{{ $tipoEvento[$id] }}</option>
+              <option value="{{ key($tipoEvento) }}">{{ $tipoEvento->id }}</option>
               @endforeach
             </select>
           </div>
@@ -90,12 +90,15 @@
           <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
             <div class="card mb-4 box-shadow">
               <div class="img_thumb">
-                <img class="card-img-top" src="subidos/productos/<?php echo $salon->getPortada(); ?>"  alt="Salón 1">
+
+{{-- reemplazar todos los get... por {{ variable->column }}--}}
+
+                <img class="card-img-top" src="subidos/productos/{{ $salon->cover }}"  alt="Salón 1">
               </div>
               <div class="card-body">
                 <p class="h4" id="nombre_salon" name="nombre_salon">
-                  <?php echo $salon->getNombre(); ?></p>
-                  <p class="card-text"><?php echo $salon->getDescripcion();  ?></p>
+                  {{ $salon->name }}</p>
+                  <p class="card-text">{{ $salon->description }}></p>
                   <p class="card-text">Consultar disponibilidad y precio</p>
                 </div>
                 <div class="corazon" style="justify-content: flex-end; padding: 15px;">
@@ -103,25 +106,14 @@
                   <a href="#" id="likes">
                     <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
                   </a>
-              <!-- ARMAR BUSQUEDA EN FAVORITOS DINAMICO
-              <?php if(in_array($salon->getId(), $favoritos)){ ?>
-
-              <a href="#" id="likes">
-                <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
-              </a>
-
-              <?php }else{ ?>
-
-              <a href="#" id="likes">
-                <i class="fa fa-heart-o" style="font-size:24px;color:#B21917"></i>
-              </a>
-              <?php } ?>
-            -->
-            <form  action="agregar_producto.php" method="post" id="agregar_carrito_<?php echo $salon->getId(); ?>">
-              <input type="hidden" name="id" value="<?php echo $salon->getId(); ?>">
-              <input type="hidden" name="producto" value="<?php echo $salon->getNombre(); ?>">
-              <input type="hidden" name="precio" value="<?php echo $salon->getPrecio(); ?>">
-              <button onclick="agregar_carrito(<?php echo $salon->getId(); ?>)" class="btn btn-link btn-link-custom">
+              
+{{-- FALTA QUE, SI EL USUARIO ESTÁ LOGUEADO, QUE LE MOSTREMOS SUS FAVORITOS Y USEMOS EL CORAZON DE LOS SELECCIONADOS--}}
+             
+            <form  action="agregar_producto.php" method="post" id="agregar_carrito_{{ $salon->id }}">
+              <input type="hidden" name="id" value="{{ $salon->id }}">
+              <input type="hidden" name="producto" value="{{ $salon->name }}">
+              <input type="hidden" name="precio" value="{{ $salon->price}}">
+              <button onclick="agregar_carrito({{ $salon->id }})" class="btn btn-link btn-link-custom">
                 <i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i>
               </button>
             </form>
@@ -132,8 +124,8 @@
 
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a class="btn btn-sm btn-outline-secondary" href="producto.php?id=<?php echo $salon->getId();  ?>">Ver</a>
-                <a class="btn btn-sm btn-outline-secondary" href="contacto.php?producto=<?php echo $salon->getId(); ?>"  onclick="agregar_carrito(<?php echo $salon->getId(); ?>)">Consultar</a>
+                <a class="btn btn-sm btn-outline-secondary" href="producto.php?id={{ $salon->id }}">Ver</a>
+                <a class="btn btn-sm btn-outline-secondary" href="contacto.php?producto={{ $salon->id }}"  onclick="agregar_carrito({{ $salon->id }})">Consultar</a>
               </div>
             </div>
 
@@ -155,12 +147,12 @@
         <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
           <div class="card mb-4 box-shadow">
             <div class="img_thumb">
-              <img class="card-img-top" src="subidos/productos/<?php echo $servicio->getPortada(); ?>"  alt="Foto Servicio">
+              <img class="card-img-top" src="subidos/productos/{{ $servicio->cover }}"  alt="Foto Servicio">
             </div>
             <div class="card-body">
               <p class="h4" id="nombre_salon" name="nombre_salon">
-                <?php echo $servicio->getNombre(); ?></p>
-                <p class="card-text"><?php echo $servicio->getDescripcion();  ?></p>
+                {{ $servicio->name }}</p>
+                <p class="card-text">{{ $servicio->description }}</p>
                 <p class="card-text">Consultar disponibilidad y precio</p>
               </div>
               <div class="corazon" style="justify-content: flex-end; padding: 15px;">
@@ -168,35 +160,22 @@
                 <a href="#" id="likes">
                   <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
                 </a>
-              <!-- ARMAR BUSQUEDA EN FAVORITOS DINAMICO
-              <?php if(in_array($servicio->getId(), $favoritos)){ ?>
 
-              <a href="#" id="likes">
-                <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
-              </a>
-
-              <?php }else{ ?>
-
-              <a href="#" id="likes">
-                <i class="fa fa-heart-o" style="font-size:24px;color:#B21917"></i>
-              </a>
-              <?php } ?>
-            -->
             <a href="#" id="likes">
               <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
             </a>
             <form  action="agregar_producto.php" method="post" id="agregar_carrito_<?php //traer salon id ?>">
-              <input type="hidden" name="id" value="<?php echo $servicio->getId(); ?>">
-              <input type="hidden" name="producto" value="<?php echo $servicio->getNombre(); ?>">
-              <input type="hidden" name="precio" value="<?php echo $servicio->getPrecio(); ?>">
-                <!--<button onclick="agregar_carrito(<?php echo $servicio->getId(); ?>)" class="btn btn-link btn-link-custom">
+              <input type="hidden" name="id" value="{{ $servicio->id }}">
+              <input type="hidden" name="producto" value="{{ $servicio->Name }}">
+              <input type="hidden" name="precio" value="{{ $servicio->price }}">
+                <!--<button onclick="agregar_carrito({{ $servicio->id }})" class="btn btn-link btn-link-custom">
                   <i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i>
                 </button>
                 input type="submit" name="" value="carrito"-->
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a class="btn btn-sm btn-outline-secondary" href="producto.php?id=<?php echo $servicio->getId();  ?>">Ver</a>
-                    <a class="btn btn-sm btn-outline-secondary" href="contacto.php?producto=<?php echo $servicio->getId(); ?>"  onclick="agregar_carrito(<?php //echo servicio id ?>)">Consultar</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="producto.php?id={{ $servicio->id }}">Ver</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="contacto.php?producto={{ $servicio->id }}"  onclick="agregar_carrito(<?php //echo servicio id ?>)">Consultar</a>
                   </div>
                 </div>
               </form>

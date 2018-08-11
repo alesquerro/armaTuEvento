@@ -5,26 +5,38 @@ namespace App\Http\Controllers\Front;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\EventType;
+
 
 class ProductController extends Controller
 {
 
     public function index()
     {
-        $productos = \App\Product::table('products')->limit(3)->get();
-        $servicios = \App\Product::
-        return view('Front.index');
+        $salones = Product::where('type', '=', 'salon')->limit(3)->get();
+        $servicios = Product::where('type', '=', 'servicio')->limit(3)->get();
+
+        $tipoEventos = EventType::all();
+        // dd($tipoEventos);
+
+        return view('Front.index', [
+            'salones' => $salones, 
+            'servicios' => $servicios,
+            'tipoEventos' => $tipoEventos, 
+        ]);
+
+
     }
 
     
     public function show(Product $product)
     {
-        productos
-        servicios
-        limit3
+    // productos
+    //     servicios
+    //     limit3
 
-        le paso las variables a la vista
-        //return view('index', []);
+    //     le paso las variables a la vista
+    //     //return view('index', []);
     }
     
 
