@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Product;
+use App\EventType;
+
 
 class ProductController extends Controller
 {
@@ -15,19 +18,15 @@ class ProductController extends Controller
     public function index()
     {
 
-        $products = \App\Product::paginate(10);
-        return view('admin.products.index', ['products' => $products]);
 
-
-
-        $salones = Product::where('type', '=', 'salon')->paginate(10)->get();
-        $servicios = Product::where('type', '=', 'servicio')->paginate(10)->get();
+        $products = Product::where('type', '=', 'salon')->get();
+        $servicios = Product::where('type', '=', 'servicio')->get();
 
         $tipoEventos = EventType::all();
         // dd($tipoEventos);
 
         return view('Admin.index', [
-            'salones' => $salones, 
+            'products' => $products, 
             'servicios' => $servicios,
             'tipoEventos' => $tipoEventos, 
         ]);

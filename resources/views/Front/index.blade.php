@@ -59,7 +59,6 @@
               <label class="form-check-label" for="buscar_servicio">Servicios</label>
             </div>
           </div>
-
           <div class="form-group row">
             <label for="tipoEvento" class="col-form-label col-sm-2 col-md-2 col-lg-2">Evento</label>
             <select class="form-control col-sm-8 col-md-9 col-lg-8" id="tipoEvento" name="tipoEvento">
@@ -73,86 +72,26 @@
             </select>
           </div>
           <div class="contenedor_boton">
-            <input type="submit" class="button-meeting-room" id="Buscar" value="Buscar">
-          </input>
-        </div>
-      </form>
-    </section>
+            <input type="submit" class="button-meeting-room" id="Buscar" value="Buscar"></input>
+          </div>
+        </form>
+      </section>
+    {{-- FIN BUSCADOR --}}
 
-
-    <section style="padding: 5rem; padding-bottom: 1rem;">
-      <!-- NUEVO INICIO CONTENIDO -->
+    <!-- NUEVO INICIO CONTENIDO -->
+      <section style="padding: 5rem; padding-bottom: 1rem;">
       <p class="h4" style="margin-top: 50px; font-size: 40px; ">Conocé nuestros salones</p>
       <div class="row card_row">
-
-        <?php foreach ($salones as $salon) {
-          ?>
-          <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
-            <div class="card mb-4 box-shadow">
-              <div class="img_thumb">
-
-{{-- reemplazar todos los get... por {{ variable->column }}--}}
-
-                <img class="card-img-top" src="subidos/productos/{{ $salon->cover }}"  alt="Salón 1">
-              </div>
-              <div class="card-body">
-                <p class="h4" id="nombre_salon" name="nombre_salon">
-                  {{ $salon->name }}</p>
-                  <p class="card-text">{{ $salon->description }}></p>
-                  <p class="card-text">Consultar disponibilidad y precio</p>
-                </div>
-                <div class="corazon" style="justify-content: flex-end; padding: 15px;">
-
-                  <a href="#" id="likes">
-                    <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
-                  </a>
-              
-{{-- FALTA QUE, SI EL USUARIO ESTÁ LOGUEADO, QUE LE MOSTREMOS SUS FAVORITOS Y USEMOS EL CORAZON DE LOS SELECCIONADOS--}}
-             
-            <form  action="agregar_producto.blade.php" method="post" id="agregar_carrito_{{ $salon->id }}">
-              <input type="hidden" name="id" value="{{ $salon->id }}">
-              <input type="hidden" name="producto" value="{{ $salon->name }}">
-              <input type="hidden" name="precio" value="{{ $salon->price}}">
-              <button onclick="agregar_carrito({{ $salon->id }})" class="btn btn-link btn-link-custom">
-                <i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i>
-              </button>
-            </form>
-            <a href="#" id="likes">
-              <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
-            </a>
-
-
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a class="btn btn-sm btn-outline-secondary" href="producto.blade.php?id={{ $salon->id }}">Ver</a>
-                <a class="btn btn-sm btn-outline-secondary" href="contacto.blade.php?producto={{ $salon->id }}"  onclick="agregar_carrito({{ $salon->id }})">Consultar</a>
-              </div>
-            </div>
-
-          </div>
-        </div><!-- card -->
-      </div> <!-- col -->
-      <?php } ?>
-    </div> <!-- row -->
-  </section>
-
-
-  <section style="padding: 5rem; padding-bottom: 1rem;">
-    <!-- NUEVO INICIO CONTENIDO -->
-    <p class="h4" style="margin-top: 50px; font-size: 40px; ">Conocé nuestros servicios</p>
-    <div class="row card_row">
-
-      <?php foreach ($servicios as $servicio) {
-        ?>
+        @foreach ($salones as $salon)
         <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
           <div class="card mb-4 box-shadow">
             <div class="img_thumb">
-              <img class="card-img-top" src="subidos/productos/{{ $servicio->cover }}"  alt="Foto Servicio">
+              <img class="card-img-top" src="subidos/productos/{{ $salon->cover }}"  alt="Salón 1">
             </div>
             <div class="card-body">
               <p class="h4" id="nombre_salon" name="nombre_salon">
-                {{ $servicio->name }}</p>
-                <p class="card-text">{{ $servicio->description }}</p>
+                {{ $salon->name }}</p>
+                <p class="card-text">{{ $salon->description }}></p>
                 <p class="card-text">Consultar disponibilidad y precio</p>
               </div>
               <div class="corazon" style="justify-content: flex-end; padding: 15px;">
@@ -161,13 +100,65 @@
                   <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
                 </a>
 
-            <a href="#" id="likes">
-              <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
-            </a>
-            <form  action="agregar_producto.blade.php" method="post" id="agregar_carrito_<?php //traer salon id ?>">
-              <input type="hidden" name="id" value="{{ $servicio->id }}">
-              <input type="hidden" name="producto" value="{{ $servicio->Name }}">
-              <input type="hidden" name="precio" value="{{ $servicio->price }}">
+                {{-- FALTA QUE, SI EL USUARIO ESTÁ LOGUEADO, QUE LE MOSTREMOS SUS FAVORITOS Y USEMOS EL CORAZON DE LOS SELECCIONADOS--}}
+
+                <form  action="agregar_producto.blade.php" method="post" id="agregar_carrito_{{ $salon->id }}">
+                  <input type="hidden" name="id" value="{{ $salon->id }}">
+                  <input type="hidden" name="producto" value="{{ $salon->name }}">
+                  <input type="hidden" name="precio" value="{{ $salon->price}}">
+                  <button onclick="agregar_carrito({{ $salon->id }})" class="btn btn-link btn-link-custom">
+                    <i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i>
+                  </button>
+                </form>
+                <a href="#" id="likes">
+                  <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
+                </a>
+
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a class="btn btn-sm btn-outline-secondary" href="producto.blade.php?id={{ $salon->id }}">Ver</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="contacto.blade.php?producto={{ $salon->id }}"  onclick="agregar_carrito({{ $salon->id }})">Consultar</a>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- card -->
+          </div> <!-- col -->
+          @endforeach
+
+
+        </div> <!-- row -->
+      </section>
+
+
+      <section style="padding: 5rem; padding-bottom: 1rem;">
+        <!-- NUEVO INICIO CONTENIDO -->
+        <p class="h4" style="margin-top: 50px; font-size: 40px; ">Conocé nuestros servicios</p>
+        <div class="row card_row">
+          @foreach ($servicios as $servicio)
+          <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
+            <div class="card mb-4 box-shadow">
+              <div class="img_thumb">
+                <img class="card-img-top" src="subidos/productos/{{ $servicio->cover }}"  alt="Foto Servicio">
+              </div>
+              <div class="card-body">
+                <p class="h4" id="nombre_salon" name="nombre_salon">
+                  {{ $servicio->name }}</p>
+                  <p class="card-text">{{ $servicio->description }}</p>
+                  <p class="card-text">Consultar disponibilidad y precio</p>
+                </div>
+                <div class="corazon" style="justify-content: flex-end; padding: 15px;">
+                  <a href="#" id="likes">
+                    <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
+                  </a>
+                  <a href="#" id="likes">
+                    <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
+                  </a>
+                  <form  action="agregar_producto.blade.php" method="post" id="agregar_carrito_<?php //traer salon id ?>">
+                    <input type="hidden" name="id" value="{{ $servicio->id }}">
+                    <input type="hidden" name="producto" value="{{ $servicio->Name }}">
+                    <input type="hidden" name="precio" value="{{ $servicio->price }}">
                 <!--<button onclick="agregar_carrito({{ $servicio->id }})" class="btn btn-link btn-link-custom">
                   <i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i>
                 </button>
@@ -180,10 +171,9 @@
                 </div>
               </form>
             </div>
-
           </div><!-- card -->
         </div> <!-- col -->
-        <?php } ?>
+        @endforeach   
       </div> <!-- row -->
     </section>
 
@@ -193,16 +183,10 @@
 
 
 
- 
     <!--Footer-->
-
     @include('Components.footer')
-
     <!--/Footer-->
   </div>
-
-
-
 </body>
 </html>
 
