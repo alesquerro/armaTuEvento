@@ -40,10 +40,10 @@ $usuario = false;
   <ul class="navbar menu_lista">
       <?php if(!$usuario){ ?>
     <li class="">
-      <a class="" href="login.php">Ingresar</a>
+      <a class="" href="/login">Ingresar</a>
     </li>
     <li class="">
-      <a class="" href="registro.php">Registrarme</a>
+      <a class="" href="/register">Registrarme</a>
     </li>
   <?php }
         else {
@@ -71,13 +71,13 @@ $usuario = false;
   <?php  } ?>
 
     <li class="">
-      <a class="" href="FAQs">FAQs</a>
+      <a class="" href="/FAQs">FAQs</a>
     </li>
     <li class="">
-      <a class="" href="contacto">Contacto</a>
+      <a class="" href="/contacto">Contacto</a>
     </li>
     <li class="">
-      <a class="" href="carrito.php"><img id="carrito" src="imagenes/w-shop.png"></a>
+      <a class="" href="/carrito"><img id="carrito" src="imagenes/w-shop.png"></a>
     </li>
   </ul>
 </nav>
