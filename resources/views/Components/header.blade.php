@@ -23,7 +23,7 @@ $usuario = false;
 
 <nav class="navigation bg-header">
   <div class="logo">
-    <a class="navbar-brand"  href="index">
+    <a class="navbar-brand"  href="/">
       <img id="logo" src="/imagenes/logo_completo.svg">
     </a>
   </div>
@@ -43,7 +43,7 @@ $usuario = false;
       <a class="" href="/login">Ingresar</a>
     </li>
     <li class="">
-      <a class="" href="/register">Registrarme</a>
+      <a class="" href="/registro">Registrarme</a>
     </li>
   <?php }
         else {
@@ -96,7 +96,7 @@ function mostrar_menu_md(){
 <nav class="navigation-sm bg-header">
   <div class="nav_linea">
     <div class="logo">
-      <a class=""  href="index.blade.php">
+      <a class=""  href="/">
         <img id="logo" src="/imagenes/logo_completo.svg">
       </a>
     </div>
@@ -189,7 +189,7 @@ function mostrar_menu_md(){
 <nav class="navigation-md bg-header">
   <div class="nav_linea">
     <div class="logo">
-      <a class=""  href="index">
+      <a class=""  href="/">
         <img id="logo" src="/imagenes/logo_completo.svg">
       </a>
     </div>

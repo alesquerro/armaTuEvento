@@ -47,7 +47,7 @@
       <!-- BUSCADOR -->
 
       <section class="section-index-buttons">
-        <form method="get" class="contenedor_form" action="listado.blade.php" enctype="multipart/form-data">
+        <form method="get" class="contenedor_form" action="listado" enctype="multipart/form-data">
           <p class="h3">Buscá salon y/o servicios para tu evento</p>
           <div class="form-group row">
             <label for="fecha" class="col-form-label col-sm-2 col-md-2 col-lg-2">Fecha</label>
@@ -117,8 +117,8 @@
 
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a class="btn btn-sm btn-outline-secondary" href="producto.blade.php?id={{ $salon->id }}">Ver</a>
-                    <a class="btn btn-sm btn-outline-secondary" href="contacto.blade.php?producto={{ $salon->id }}"  onclick="agregar_carrito({{ $salon->id }})">Consultar</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="producto/{{ $salon->id }}">Ver</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="contacto/{{ $salon->id }}"  onclick="agregar_carrito({{ $salon->id }})">Consultar</a>
                   </div>
                 </div>
 
@@ -165,15 +165,15 @@
                 input type="submit" name="" value="carrito"-->
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a class="btn btn-sm btn-outline-secondary" href="producto.blade.php?id={{ $servicio->id }}">Ver</a>
-                    <a class="btn btn-sm btn-outline-secondary" href="contacto.blade.php?producto={{ $servicio->id }}"  onclick="agregar_carrito(<?php //echo servicio id ?>)">Consultar</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="producto/{{ $servicio->id }}">Ver</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="contacto/{{ $servicio->id }}"  onclick="agregar_carrito(<?php //echo servicio id ?>)">Consultar</a>
                   </div>
                 </div>
               </form>
             </div>
           </div><!-- card -->
         </div> <!-- col -->
-        @endforeach   
+        @endforeach
       </div> <!-- row -->
     </section>
 
@@ -189,8 +189,3 @@
   </div>
 </body>
 </html>
-
-
-
-
-

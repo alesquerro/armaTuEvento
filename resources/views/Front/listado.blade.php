@@ -19,27 +19,27 @@
             <div class="col-sm-12 col-md-6 col-lg-4 card_margin">
               <div class="card mb-4 box-shadow">
                 <div class="img_thumb">
-                  <img class="card-img-top" src="subidos/productos/{{ $producto->cover }}" alt="Foto producto">
+                  <img class="card-img-top" src="/subidos/productos/{{ $producto->cover }}" alt="Foto producto">
                 </div>
                 <div class="card-body">
                   <p class="h4">{{ $producto->name }}</p>
                   <p class="card-text">{{ $producto->description }}</p>
                   <p class="card-text">Consultar disponibilidad y precio</p>
                   <div class="corazon card-body">
-                    
+
                     @if ($producto->id == 1)
                       <a href="#" id="likes">
                         <span class="fa fa-heart" style="font-size:24px;color:#B21917"></span>
                       </a>
                       @else
-  
+
                       <a href="#" id="likes">
                         <span class="fa fa-heart-o" style="font-size:24px;color:#B21917"></span>
                       </a>
 
                     @endif
-                    
-                    
+
+
                     <a href="#" id="likes">
                       <span class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></span>
                     </a>
@@ -55,8 +55,8 @@
                   </div><!-- <div class="d-flex justify-content align-items-left"> -->
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <a class="btn btn-sm btn-outline-secondary" href="producto.php?{{ $producto->id }}">Ver</a>
-                        <a class="btn btn-sm btn-outline-secondary" href="contacto.php?{{ $producto->id }}">Consultar</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="producto/{{ $producto->id }}">Ver</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="contacto/{{ $producto->id }}">Consultar</a>
                       </div>
 
                     </div>
@@ -65,7 +65,7 @@
               </div>
           @endforeach
 
-           
+
           </div>
 
 
@@ -73,13 +73,13 @@
       </main>
 
     </div>
-   
+
     <!-- FIN CONTENIDO GENERICO -->
 
 
 
 
- 
+
     <!--Footer-->
 
     @include('Components.footer')

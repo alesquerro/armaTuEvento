@@ -58,7 +58,7 @@
           <div class="card-body"> <!-- placeholder espacio -->
           </div>
           <p class="h4 card_margin caracteristicas"> Precio $: {{ $producto->price }} {{ $producto->price_type }} -
-            Reserva mínima $: {{ $producto->minumum_reservation }} </p>
+            Reserva mínima $: {{ $producto->minimum_reservation }} </p>
           <p class="card-text">{{ $producto->description }}</p><!-- Descripcion salon -->
 
             <div class="corazon card-body">
