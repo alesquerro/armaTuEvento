@@ -17,10 +17,12 @@
 
 Auth::routes();
 
+Route::get('register', 'RegisterController@showOptions');
 
 Route::get('/','Front\StaticController@showIndex');
 Route::get('FAQs','Front\StaticController@showFAQs');
 Route::get('contacto','Front\StaticController@showContacto');
+Route::get('register','Front\StaticController@showOptions');
 Route::get('carrito','Front\CartController@show');
 Route::get('carrito/{id}','Front\CartController@add');
 
