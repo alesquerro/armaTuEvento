@@ -108,7 +108,7 @@ function mostrar_menu_md(){
     </div>
   </div>
   <div class="ingreso-busquedas">
-    <form action="listado.blade.php" method="get" id="buscar_sm">
+    <form action="listado" method="get" id="buscar_sm">
       <div class="input-group buscador">
         <input class="form-control" type="search" placeholder="Buscar" name="texto">
         <button class="btn" type="submit" onclick="buscar_sm()">

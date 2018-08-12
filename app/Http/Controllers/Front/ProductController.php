@@ -33,7 +33,7 @@ class ProductController extends Controller
         $producto = Product::find($id);
         $pagina_anterior = url()->previous();
         if(! $pagina_anterior){
-            $pagina_anterior = 'index';
+            $pagina_anterior = '/';
         }
         return view('Front.producto', ['producto' => $producto,
                                        'pagina_anterior' => $pagina_anterior,
