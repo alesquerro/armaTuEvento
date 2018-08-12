@@ -25,7 +25,7 @@
           <label for="exampleInputEmail1" class="col-form-label h4">Email</label>
           <input type="email" name="email" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp" placeholder="ejemplo@mail.com"
-                required value="<?php echo $_POST['mail'] ?? '' ?>">
+                required value="{{old('email')}}">
         </div>
         <div class="form-group col-lg-8 offset-lg-2 col-md-8 offset-md-2">
           <label for="exampleInputPassword1" class="col-form-label h4">Contraseña</label>
@@ -43,10 +43,10 @@
             <button type="submit" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 btn">Enviar</button>
         </div>
         <div class="form-group col-lg-8 offset-lg-2 col-md-8 offset-md-2">
-            <button type="button" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 btn btn-link" id="link-forget"><a href="olvidoContrasena.php" id="link-forget">Olvidé mi contraseña</a></button>
+            <button type="button" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 btn btn-link" id="link-forget"><a href="/olvidoContrasena" id="link-forget">Olvidé mi contraseña</a></button>
         </div>
         <div class="form-group col-lg-8 offset-lg-2 col-md-8 offset-md-2">
-            <button type="button" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 btn btn-link" id="link-forget"><a href="registro.php" id="link-forget">Si no tenés usuario: ¡Registrate!</a></button>
+            <button type="button" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 btn btn-link" id="link-forget"><a href="/registro" id="link-forget">Si no tenés usuario: ¡Registrate!</a></button>
         </div>
       </form>
       <!--  FIN FORM -->

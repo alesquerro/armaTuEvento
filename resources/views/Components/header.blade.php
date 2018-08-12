@@ -1,7 +1,7 @@
 <?php
 //
-// require_once('funciones/autenticacion.php');
-// require_once('funciones/usuarios.php');
+// require_once('funciones/autenticacion.blade.php');
+// require_once('funciones/usuarios.blade.php');
 
 $usuario = false;
 // if(isset($_SESSION['usuario']) && $_SESSION['usuario']){
@@ -23,12 +23,12 @@ $usuario = false;
 
 <nav class="navigation bg-header">
   <div class="logo">
-    <a class="navbar-brand"  href="index.php">
+    <a class="navbar-brand"  href="index.blade.php">
       <img id="logo" src="imagenes/logo_completo.svg">
     </a>
   </div>
   <div class="ingreso-busquedas">
-    <form action="listado.php" method="get" id="buscar_lg">
+    <form action="listado.blade.php" method="get" id="buscar_lg">
       <div class="input-group buscador">
         <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" name="texto">
         <button class="btn" type="submit" onclick="buscar_lg()">
@@ -58,11 +58,11 @@ $usuario = false;
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><?php echo 'Hola ' . $usuario['nombre'] . '!'; ?></a>
       <div class="dropdown-menu">
-        <a class="" href="perfil.php">Mi cuenta</a><br>
+        <a class="" href="perfil.blade.php">Mi cuenta</a><br>
         <?php if (isset($usuario['admin']) && $usuario['admin']) {
-        ?>   <a class="" href="dashboard.php">Administrar</a>
+        ?>   <a class="" href="dashboard.blade.php">Administrar</a>
       <?php  } ?>
-        <a class="" href="logout.php">Cerrar sesión</a>
+        <a class="" href="logout.blade.php">Cerrar sesión</a>
 
       </div>
     </div>
@@ -96,7 +96,7 @@ function mostrar_menu_md(){
 <nav class="navigation-sm bg-header">
   <div class="nav_linea">
     <div class="logo">
-      <a class=""  href="index.php">
+      <a class=""  href="index.blade.php">
         <img id="logo" src="imagenes/logo_completo.svg">
       </a>
     </div>
@@ -108,7 +108,7 @@ function mostrar_menu_md(){
     </div>
   </div>
   <div class="ingreso-busquedas">
-    <form action="listado.php" method="get" id="buscar_sm">
+    <form action="listado.blade.php" method="get" id="buscar_sm">
       <div class="input-group buscador">
         <input class="form-control" type="search" placeholder="Buscar" name="texto">
         <button class="btn" type="submit" onclick="buscar_sm()">
@@ -120,12 +120,12 @@ function mostrar_menu_md(){
   <ul class="menu_lista-sm" id="menu_lista-sm">
 
     <?php if(! $usuario){ ?>
-    <a class="" href="login.php">
+    <a class="" href="login.blade.php">
       <li class="opciones_menu">
       Ingresar
       </li>
     </a>
-    <a class="" href="registro.php">
+    <a class="" href="registro.blade.php">
       <li class="opciones_menu">
       Registrarme
     </li>
@@ -136,7 +136,7 @@ function mostrar_menu_md(){
     <li class="">
       <?php
       if($avatar){ ?>
-        <a class="" href="perfil.php">
+        <a class="" href="perfil.blade.php">
           <?php
           if(! $usuario['avatar']){
             echo 'Hola '.$usuario['nombre'].'!';
@@ -154,15 +154,15 @@ function mostrar_menu_md(){
       ?>
 
     </li>
-    <a class="" href="perfil.php">
+    <a class="" href="perfil.blade.php">
     <li class="opciones_menu">
       Mi cuenta
     </li>
     </a>
     <?php if (isset($usuario['admin']) && $usuario['admin']) {
-    ?>   <a class="" href="dashboard.php">Administrar</a>
+    ?>   <a class="" href="dashboard.blade.php">Administrar</a>
   <?php  } ?>
-    <a class="" href="logout.php">
+    <a class="" href="logout.blade.php">
     <li class="opciones_menu">
       Cerrar sesión
     </li>
@@ -189,12 +189,12 @@ function mostrar_menu_md(){
 <nav class="navigation-md bg-header">
   <div class="nav_linea">
     <div class="logo">
-      <a class=""  href="index.php">
+      <a class=""  href="index.blade.php">
         <img id="logo" src="imagenes/logo_completo.svg">
       </a>
     </div>
     <div class="ingreso-busquedas-md">
-      <form action="listado.php" method="get" id="buscar_md">
+      <form action="listado.blade.php" method="get" id="buscar_md">
         <div class="input-group buscador">
           <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" name="texto">
           <button class="btn" type="submit" onclick="buscar_md()">
@@ -212,12 +212,12 @@ function mostrar_menu_md(){
   </div>
   <ul class="menu_lista-md" id="menu_lista-md">
     <?php if(! $usuario){ ?>
-    <a class="" href="login.php">
+    <a class="" href="login.blade.php">
     <li class="opciones_menu">
       Ingresar
     </li>
     </a>
-    <a class="" href="registro.php">
+    <a class="" href="registro.blade.php">
     <li class="opciones_menu">
       Registrarme
     </li>
@@ -225,7 +225,7 @@ function mostrar_menu_md(){
   <?php }
         else {
             if($avatar){ ?>
-        <a class="" href="perfil.php">
+        <a class="" href="perfil.blade.php">
           <?php
           if(! $usuario['avatar']){
             echo 'Hola '.$usuario['nombre'].'!';
@@ -240,15 +240,15 @@ function mostrar_menu_md(){
           echo 'Hola '.$usuario['nombre'].'!';
         } ?>
     </li>
-    <a class="" href="perfil.php">
+    <a class="" href="perfil.blade.php">
     <li class="opciones_menu">
       Mi cuenta
     </li>
     </a>
     <?php if (isset($usuario['admin']) && $usuario['admin']) {
-    ?>   <a class="" href="dashboard.php">Administrar</a>
+    ?>   <a class="" href="dashboard.blade.php">Administrar</a>
   <?php  } ?>
-    <a class="" href="logout.php">
+    <a class="" href="logout.blade.php">
     <li class="opciones_menu">
       Cerrar sesión
     </li>

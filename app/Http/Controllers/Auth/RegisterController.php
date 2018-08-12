@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Answer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -49,9 +50,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'alias' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'avatar' => 'required',
+            'admin' => 'integer',
+            'respuesta1' => 'integer',
+            'respuesta2' => 'integer',
+            'terms_conditions_date' => 'required',
+            'active' => 'integer',            
         ]);
     }
 
@@ -63,10 +72,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $path = request()->file('avatar')->store('images');
+
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['name'],
+            'last_name' => $data['name'],
+            'alias' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'avatar' => $path,
+            'admin' => $data['admin'],
+            'respuesta1' => $data['respuesta1'],
+            'respuesta2' => $data['respuesta2'],
+            'terms_conditions_date' => $data['terms_conditions_date'],
+            'active' => $data['active'],
         ]);
+    }
+
+    public function showOptions()
+    {
+        $options1 = Answer::all()->limit(4)->get();
+        $options2 = Answer::all()->offset(4)->limit(4)->get();
+
+        return view('auth.register', ['options1' => $options1, 'options2' => $options2]);
     }
 }
