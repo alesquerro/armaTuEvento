@@ -12,20 +12,22 @@ class ProductController extends Controller
     public function index()
     {
         $productos = \App\Product::table('products')->limit(3)->get();
-        $servicios = \App\Product::
+        //$servicios = \App\Product::
         return view('Front.index');
     }
 
-    
-    public function show(Product $product)
-    {
-        productos
-        servicios
-        limit3
 
-        le paso las variables a la vista
-        //return view('index', []);
+    public function show($id)
+    {
+        $producto = Product::find($id);
+         $pagina_anterior = url()->previous();
+        if(! $pagina_anterior){
+            $pagina_anterior = 'index';
+        }
+        return view('Front.producto', ['producto' => $producto,
+                                       'pagina_anterior' => $pagina_anterior,
+                                     ]);
     }
-    
+
 
 }

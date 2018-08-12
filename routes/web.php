@@ -23,5 +23,4 @@ Route::get('FAQs','Front\StaticController@showFAQs');
 Route::get('contacto','Front\StaticController@showContacto');
 Route::get('carrito','Front\CartController@show');
 Route::get('carrito/{id}','Front\CartController@add');
-
-
+Route::get('producto/{id}','Front\ProductController@show');
