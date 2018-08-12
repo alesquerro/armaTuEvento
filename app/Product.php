@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     public function photos(){
-      return $this->hasMany('App\PhotoProdut');
+      return $this->hasMany('App\ProductPhotos');
     }
 }
