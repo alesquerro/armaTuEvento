@@ -23,16 +23,16 @@ $usuario = false;
 
 <nav class="navigation bg-header">
   <div class="logo">
-    <a class="navbar-brand"  href="index.blade.php">
-      <img id="logo" src="imagenes/logo_completo.svg">
+    <a class="navbar-brand"  href="index">
+      <img id="logo" src="/imagenes/logo_completo.svg">
     </a>
   </div>
   <div class="ingreso-busquedas">
-    <form action="listado.blade.php" method="get" id="buscar_lg">
+    <form action="listado" method="get" id="buscar_lg">
       <div class="input-group buscador">
         <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" name="texto">
         <button class="btn" type="submit" onclick="buscar_lg()">
-          <img class="buscador_img" src="imagenes/search.png" alt="">
+          <img class="buscador_img" src="/imagenes/search.png" alt="">
         </button>
       </div>
     </form>
@@ -58,11 +58,11 @@ $usuario = false;
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><?php echo 'Hola ' . $usuario['nombre'] . '!'; ?></a>
       <div class="dropdown-menu">
-        <a class="" href="perfil.blade.php">Mi cuenta</a><br>
+        <a class="" href="perfil">Mi cuenta</a><br>
         <?php if (isset($usuario['admin']) && $usuario['admin']) {
-        ?>   <a class="" href="dashboard.blade.php">Administrar</a>
+        ?>   <a class="" href="dashboard">Administrar</a>
       <?php  } ?>
-        <a class="" href="logout.blade.php">Cerrar sesión</a>
+        <a class="" href="logout">Cerrar sesión</a>
 
       </div>
     </div>
@@ -77,7 +77,7 @@ $usuario = false;
       <a class="" href="/contacto">Contacto</a>
     </li>
     <li class="">
-      <a class="" href="/carrito"><img id="carrito" src="imagenes/w-shop.png"></a>
+      <a class="" href="/carrito"><img id="carrito" src="/imagenes/w-shop.png"></a>
     </li>
   </ul>
 </nav>
@@ -97,7 +97,7 @@ function mostrar_menu_md(){
   <div class="nav_linea">
     <div class="logo">
       <a class=""  href="index.blade.php">
-        <img id="logo" src="imagenes/logo_completo.svg">
+        <img id="logo" src="/imagenes/logo_completo.svg">
       </a>
     </div>
     <div class="boton_menu">
@@ -112,7 +112,7 @@ function mostrar_menu_md(){
       <div class="input-group buscador">
         <input class="form-control" type="search" placeholder="Buscar" name="texto">
         <button class="btn" type="submit" onclick="buscar_sm()">
-          <img class="buscador_img" src="imagenes/search.png" alt="">
+          <img class="buscador_img" src="/imagenes/search.png" alt="">
         </button>
       </div>
     </form>
@@ -125,7 +125,7 @@ function mostrar_menu_md(){
       Ingresar
       </li>
     </a>
-    <a class="" href="registro.blade.php">
+    <a class="" href="registro">
       <li class="opciones_menu">
       Registrarme
     </li>
@@ -136,7 +136,7 @@ function mostrar_menu_md(){
     <li class="">
       <?php
       if($avatar){ ?>
-        <a class="" href="perfil.blade.php">
+        <a class="" href="perfil">
           <?php
           if(! $usuario['avatar']){
             echo 'Hola '.$usuario['nombre'].'!';
@@ -154,15 +154,15 @@ function mostrar_menu_md(){
       ?>
 
     </li>
-    <a class="" href="perfil.blade.php">
+    <a class="" href="perfil">
     <li class="opciones_menu">
       Mi cuenta
     </li>
     </a>
     <?php if (isset($usuario['admin']) && $usuario['admin']) {
-    ?>   <a class="" href="dashboard.blade.php">Administrar</a>
+    ?>   <a class="" href="dashboard">Administrar</a>
   <?php  } ?>
-    <a class="" href="logout.blade.php">
+    <a class="" href="logout">
     <li class="opciones_menu">
       Cerrar sesión
     </li>
@@ -180,7 +180,7 @@ function mostrar_menu_md(){
     </a>
     <a class="" href="#">
     <li class="opciones_menu">
-      <img id="carrito" src="imagenes/w-shop.png">
+      <img id="carrito" src="/imagenes/w-shop.png">
     </li>
     </a>
   </ul>
@@ -189,16 +189,16 @@ function mostrar_menu_md(){
 <nav class="navigation-md bg-header">
   <div class="nav_linea">
     <div class="logo">
-      <a class=""  href="index.blade.php">
-        <img id="logo" src="imagenes/logo_completo.svg">
+      <a class=""  href="index">
+        <img id="logo" src="/imagenes/logo_completo.svg">
       </a>
     </div>
     <div class="ingreso-busquedas-md">
-      <form action="listado.blade.php" method="get" id="buscar_md">
+      <form action="listado" method="get" id="buscar_md">
         <div class="input-group buscador">
           <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" name="texto">
           <button class="btn" type="submit" onclick="buscar_md()">
-            <img class="buscador_img" src="imagenes/search.png" alt="">
+            <img class="buscador_img" src="/imagenes/search.png" alt="">
           </button>
         </div>
       </form>
@@ -212,12 +212,12 @@ function mostrar_menu_md(){
   </div>
   <ul class="menu_lista-md" id="menu_lista-md">
     <?php if(! $usuario){ ?>
-    <a class="" href="login.blade.php">
+    <a class="" href="login">
     <li class="opciones_menu">
       Ingresar
     </li>
     </a>
-    <a class="" href="registro.blade.php">
+    <a class="" href="registro">
     <li class="opciones_menu">
       Registrarme
     </li>
@@ -225,7 +225,7 @@ function mostrar_menu_md(){
   <?php }
         else {
             if($avatar){ ?>
-        <a class="" href="perfil.blade.php">
+        <a class="" href="perfil">
           <?php
           if(! $usuario['avatar']){
             echo 'Hola '.$usuario['nombre'].'!';
@@ -240,15 +240,15 @@ function mostrar_menu_md(){
           echo 'Hola '.$usuario['nombre'].'!';
         } ?>
     </li>
-    <a class="" href="perfil.blade.php">
+    <a class="" href="perfil">
     <li class="opciones_menu">
       Mi cuenta
     </li>
     </a>
     <?php if (isset($usuario['admin']) && $usuario['admin']) {
-    ?>   <a class="" href="dashboard.blade.php">Administrar</a>
+    ?>   <a class="" href="dashboard">Administrar</a>
   <?php  } ?>
-    <a class="" href="logout.blade.php">
+    <a class="" href="logout">
     <li class="opciones_menu">
       Cerrar sesión
     </li>
@@ -266,7 +266,7 @@ function mostrar_menu_md(){
     </a>
     <a class="" href="#">
     <li class="opciones_menu">
-      <img id="carrito" src="imagenes/w-shop.png">
+      <img id="carrito" src="/imagenes/w-shop.png">
     </li>
     </a>
   </ul>

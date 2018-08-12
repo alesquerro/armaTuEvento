@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> <!-- ICONS -->
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
   <meta name="keywords" content="evento, servicios, catering">
   <meta name="description" content="Web para armar tu evento">
   <meta name="author" content="Ale, Roma, Flora, Dani">

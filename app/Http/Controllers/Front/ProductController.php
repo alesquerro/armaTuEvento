@@ -20,9 +20,9 @@ class ProductController extends Controller
         // dd($tipoEventos);
 
         return view('Front.index', [
-            'salones' => $salones, 
+            'salones' => $salones,
             'servicios' => $servicios,
-            'tipoEventos' => $tipoEventos, 
+            'tipoEventos' => $tipoEventos,
         ]);
 
 
@@ -31,15 +31,16 @@ class ProductController extends Controller
     public function show($id)
     {
         $producto = Product::find($id);
-         $pagina_anterior = url()->previous();
+        $pagina_anterior = url()->previous();
         if(! $pagina_anterior){
             $pagina_anterior = 'index';
         }
         return view('Front.producto', ['producto' => $producto,
                                        'pagina_anterior' => $pagina_anterior,
+                                       'favorito' => false,
                                      ]);
     }
-    
+
   /**
      * Display a listing of the resource.
      *
@@ -49,14 +50,14 @@ class ProductController extends Controller
     public function list()
     {
         $productos = Product::get();
-       
+
         // $tipoEventos = EventType::all();
         // dd($tipoEventos);
 
         return view('Front.listado', [
-            'productos' => $productos, 
+            'productos' => $productos,
             // 'servicios' => $servicios,
-            // 'tipoEventos' => $tipoEventos, 
+            // 'tipoEventos' => $tipoEventos,
         ]);
     }
 }

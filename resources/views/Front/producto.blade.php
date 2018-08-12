@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   @include('Components.head')
@@ -34,15 +35,10 @@
                      continue;
                    @endif
 
-                 {{-- <?php
-                 foreach ($producto->getProductoFotos() as $key => $foto){
-                  if($key == 0){ continue; }
-                   ?> --}}
                  <div class="carousel-item ">
                    <img class="d-block w-100" src="subidos/productos/{{ $photo }}" alt="First slide">
                  </div>
 
-               {{-- <?php } ?> --}}
                @endforeach
                </div>
                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -61,9 +57,9 @@
         <div class="col-sm-12 col-md-6 col-lg-6 card_margin"> <!-- bloque derecho -->
           <div class="card-body"> <!-- placeholder espacio -->
           </div>
-          <p class="h4 card_margin caracteristicas"> Precio $: <?php echo $producto->getPrecio(); ?> <?php echo $producto->getTipoPrecio(); ?> -
-            Reserva mínima $: <?php echo $producto->getReservaMinima(); ?> </p>
-          <p class="card-text"><?php echo $producto->getDescripcion();  ?></p><!-- Descripcion salon -->
+          <p class="h4 card_margin caracteristicas"> Precio $: {{ $producto->price }} {{ $producto->price_type }} -
+            Reserva mínima $: {{ $producto->minumum_reservation }} </p>
+          <p class="card-text">{{ $producto->description }}</p><!-- Descripcion salon -->
 
             <div class="corazon card-body">
               <p class="card-text"> <!-- botones favorito y compartir -->
@@ -87,7 +83,7 @@
                 </p>
               </div><!-- <div class="d-flex justify-content align-items-left"> -->
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary"  href="contacto.php?producto=<?php echo $producto->getId(); ?>">Consultar</a>
+                  <a class="btn btn-sm btn-outline-secondary"  href="contacto.php?producto={{ $producto->id }}">Consultar</a>
                   <!--<a class="btn btn-sm btn-outline-secondary"  href="carrito.php?producto=<?php //echo $producto['id'];  ?>">Agregar a carrito</a>-->
                   <a class="btn btn-sm btn-outline-secondary"  onclick="agregar_carrito()"><i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i><span class="carrito_boton">Agregar a carrito</span></a>
                 </div><!-- <div class="btn-group"> -->
@@ -111,15 +107,13 @@
                   </div><!-- <div class="contenido_thumbnail"> -->
 
                 <form  action="agregar_producto.php" method="post" id="agregar_carrito">
-                  <input type="hidden" name="id" value="<?php echo $prod_id; ?>">
-                  <input type="hidden" name="producto" value="<?php echo $producto->getNombre(); ?>">
-                  <input type="hidden" name="precio" value="<?php echo $producto->getPrecio(); ?>">
+                  <input type="hidden" name="id" value="{{ $producto->id }}">
+                  <input type="hidden" name="producto" value="{{ $producto->nombre }}">
+                  <input type="hidden" name="precio" value="{{ $producto->precio }}">
                 </form>
-                    <!--Footer-->
-                    <?php
-                    include('componentes/footer.php');
-                    ?>
-                    <!--/Footer-->
+                <!--Footer-->
+                @include('Components.footer')
+                <!--/Footer-
                   <script type="text/javascript">
                     function agregar_carrito(){
                       $( "#agregar_carrito" ).submit();
