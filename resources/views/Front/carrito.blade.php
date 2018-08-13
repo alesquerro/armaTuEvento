@@ -38,12 +38,13 @@
                 </tr>
                 <input type="hidden" name="sacar_producto" value="{{ $posicion }}">
               </form>
-            <h3> Total: </h3>
+
           @empty
             <h2 class="titulos-carrito text-center mt-5 mb-5" > <?php echo "Tu carrito está vacío"; ?> </h2>
             <h2 class="bajada-carrito" > <?php echo "¿No sabés qué seleccionar? ¡Miles de salones y servicios te esperan!"; ?> </h2>
           @endforelse
           </table>
+          <h3> Total $: {{ $total }}</h3>
         </div>
 
       </div>

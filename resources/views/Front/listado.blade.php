@@ -43,7 +43,8 @@
                     <a href="#" id="likes">
                       <span class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></span>
                     </a>
-                    <form  action="agregar_producto.php" method="post" id="agregar_carrito_{{ $producto->id }}">
+                    <form  action="/carrito/{{ $producto->id }}" method="post" id="agregar_carrito_{{ $producto->id }}">
+                      @csrf
                       <input type="hidden" name="id" value="{{ $producto->id }}">
                       <input type="hidden" name="producto" value="{{ $producto->name }}">
                       <input type="hidden" name="precio" value="{{ $producto->price }}">

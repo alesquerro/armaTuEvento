@@ -102,12 +102,13 @@
 
                 {{-- FALTA QUE, SI EL USUARIO ESTÁ LOGUEADO, QUE LE MOSTREMOS SUS FAVORITOS Y USEMOS EL CORAZON DE LOS SELECCIONADOS--}}
 
-                <form  action="agregar_producto.blade.php" method="post" id="agregar_carrito_{{ $salon->id }}">
+                <form  action="/carrito/{{ $salon->id }}" method="post" id="agregar_carrito_{{ $salon->id }}">
+                  @csrf
                   <input type="hidden" name="id" value="{{ $salon->id }}">
                   <input type="hidden" name="producto" value="{{ $salon->name }}">
                   <input type="hidden" name="precio" value="{{ $salon->price}}">
                   <button onclick="agregar_carrito({{ $salon->id }})" class="btn btn-link btn-link-custom">
-                    <i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i>
+                    <span class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></span>
                   </button>
                 </form>
                 <a href="#" id="likes">
@@ -155,14 +156,15 @@
                   <a href="#" id="likes">
                     <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
                   </a>
-                  <form  action="agregar_producto.blade.php" method="post" id="agregar_carrito_<?php //traer salon id ?>">
+                  <form  action="/carrito/{{ $servicio->id }}" method="post" id="agregar_carrito_{{ $servicio->id }}">
+                    @csrf
                     <input type="hidden" name="id" value="{{ $servicio->id }}">
                     <input type="hidden" name="producto" value="{{ $servicio->Name }}">
                     <input type="hidden" name="precio" value="{{ $servicio->price }}">
-                <!--<button onclick="agregar_carrito({{ $servicio->id }})" class="btn btn-link btn-link-custom">
-                  <i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i>
+                <button onclick="agregar_carrito({{ $servicio->id }})" class="btn btn-link btn-link-custom">
+                  <span class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></span>
                 </button>
-                input type="submit" name="" value="carrito"-->
+                <!--input type="submit" name="" value="carrito"-->
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <a class="btn btn-sm btn-outline-secondary" href="producto/{{ $servicio->id }}">Ver</a>
