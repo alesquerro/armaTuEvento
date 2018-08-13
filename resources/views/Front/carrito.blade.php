@@ -13,6 +13,7 @@
           </ul>
         </div>
       @endif
+      <h1 class="tituloh1carrito">Carrito de compras</h1>
       <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2" >
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -21,9 +22,13 @@
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active text-center" id="seleccionados" role="tabpanel" aria-labelledby="seleccionados-tab">
+          <form  action="" method="post" id="guardar_carrito">
+            <input type="hidden" name="guardar_carrito" value="1">
+            <label for="fecha_evento">Fecha Evento</label>
+            <input type="date" name="fecha_evento" value="" id="fecha_evento" >
+          </form>
+          <table class="table-striped tabla-carrito">
           @forelse ($carrito as $posicion => $producto)
-              <table class="table-striped tabla-carrito">
-
                 <?php $productosSumar[]= (float) $producto->precio; ?>
               <form  action="" method="post" id="sacar_producto_{{ $posicion }}">
                 <tr>
@@ -33,15 +38,12 @@
                 </tr>
                 <input type="hidden" name="sacar_producto" value="{{ $posicion }}">
               </form>
-            </table>
-
-
             <h3> Total: </h3>
-
           @empty
             <h2 class="titulos-carrito text-center mt-5 mb-5" > <?php echo "Tu carrito está vacío"; ?> </h2>
             <h2 class="bajada-carrito" > <?php echo "¿No sabés qué seleccionar? ¡Miles de salones y servicios te esperan!"; ?> </h2>
           @endforelse
+          </table>
         </div>
 
       </div>
