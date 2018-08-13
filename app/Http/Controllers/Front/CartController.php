@@ -94,6 +94,7 @@ class CartController extends Controller
       $purchase->total_amount = $total;
       $purchase->remainder = $total;
       $purchase->save();
+      $request->session()->forget('carrito');
       return 'todo ok';
     }
 

@@ -7,5 +7,7 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    //
+    public function show_purchases(Request $request){
+      $user = $request->session()->get('user');
+    }
 }
