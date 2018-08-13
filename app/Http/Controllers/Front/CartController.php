@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Product;
 
 class CartController extends Controller
 {
@@ -22,11 +23,16 @@ class CartController extends Controller
     public function show()
     {
       $products = [];
+      $errores = [];
       //dd(session()->get('carrito'));
       if(session()->has('carrito')){
-        $products = session()->get('carrito');
+        $product_ids = session()->get('carrito');
+        $products = Product::where('id',$product_ids)->get();
+
       }
-      return view('Front/carrito', ['carrito' => $products]);
+      return view('Front/carrito', ['carrito' => $products,
+                                    'errores' => $errores,
+                                  ]);
 
     }
 }

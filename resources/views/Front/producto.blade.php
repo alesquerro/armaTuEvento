@@ -83,9 +83,9 @@
                 </p>
               </div><!-- <div class="d-flex justify-content align-items-left"> -->
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary"  href="contacto.php?producto={{ $producto->id }}">Consultar</a>
+                  <a class="btn btn-sm btn-outline-secondary"  href="contacto/{{ $producto->id }}">Consultar</a>
                   <!--<a class="btn btn-sm btn-outline-secondary"  href="carrito.php?producto=<?php //echo $producto['id'];  ?>">Agregar a carrito</a>-->
-                  <a class="btn btn-sm btn-outline-secondary"  onclick="agregar_carrito()"><i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i><span class="carrito_boton">Agregar a carrito</span></a>
+                  <a class="btn btn-sm btn-outline-secondary"  onclick="agregar_carrito()"><span class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></span><span class="carrito_boton">Agregar a carrito</span></a>
                 </div><!-- <div class="btn-group"> -->
                 </div><!-- <div class="corazon"> -->
                   <div class="card-body select">
@@ -106,14 +106,15 @@
                   </div><!-- <div class="row card_row"> -->
                   </div><!-- <div class="contenido_thumbnail"> -->
 
-                <form  action="agregar_producto.php" method="post" id="agregar_carrito">
+                <form  action="/carrito/{{ $producto->id }}" method="post" id="agregar_carrito">
+                  @csrf
                   <input type="hidden" name="id" value="{{ $producto->id }}">
                   <input type="hidden" name="producto" value="{{ $producto->nombre }}">
                   <input type="hidden" name="precio" value="{{ $producto->precio }}">
                 </form>
                 <!--Footer-->
                 @include('Components.footer')
-                <!--/Footer-
+                <!--/Footer-->
                   <script type="text/javascript">
                     function agregar_carrito(){
                       $( "#agregar_carrito" ).submit();
