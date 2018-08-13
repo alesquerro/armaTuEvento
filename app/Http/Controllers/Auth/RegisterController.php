@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'respuesta1' => 'integer',
             'respuesta2' => 'integer',
             'terms_conditions_date' => 'required',
-            'active' => 'integer',            
+            'active' => 'integer',
         ]);
     }
 
@@ -89,11 +89,16 @@ class RegisterController extends Controller
         ]);
     }
 
+
     public function showOptions()
     {
-        $options1 = Answer::all()->limit(4)->get();
-        $options2 = Answer::all()->offset(4)->limit(4)->get();
-
-        return view('auth.register', ['options1' => $options1, 'options2' => $options2]);
+        $options1 = Answer::limit(4)->get();
+        $options2 = Answer::offset(4)->limit(4)->get();
+        //dd($options1);
+        return view('auth.registro', ['options1' => $options1, 'options2' => $options2]);
+    }
+    public function getRegister()
+    {
+       return view('auth/registro');
     }
 }

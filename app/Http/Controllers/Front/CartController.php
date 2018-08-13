@@ -10,14 +10,10 @@ class CartController extends Controller
 {
     public function add($id)
     {
-      //dd(session()->get('carrito'));
       if(! session()->has('carrito') || ! in_array($id, session()->get('carrito'))){
         session()->push('carrito',$id);
-
       }
-      //dd(session()->get('carrito'));
       return redirect('carrito');
-
     }
 
     public function show()
@@ -25,10 +21,8 @@ class CartController extends Controller
       $products = [];
       $errores = [];
       $total = 0.0;
-      //session()->flush();
       if(session()->has('carrito')){
         $product_ids = session()->get('carrito');
-        //dd($product_ids);
         if($product_ids){
           $ids = implode(',',$product_ids);
           $products = Product::whereIn('id',$product_ids)->get();
