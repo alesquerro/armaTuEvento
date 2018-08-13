@@ -30,9 +30,12 @@ Route::get('carrito','Front\CartController@show');
 Route::post('carrito/{id}','Front\CartController@add');
 Route::post('vaciar_carrito','Front\CartController@clear');
 Route::post('sacar_producto/{id}','Front\CartController@pop');
+Route::post('guardar_carrito','Front\CartController@save');
 
 Route::get('producto/{id}','Front\ProductController@show');
 Route::get('listado','Front\ProductController@list');
 Route::get('/','Front\ProductController@index');
+
+Route::get('mis_compras','Front\UserController@show_purchases');
 
 Route::get('Admin/','Admin\ProductController@index');

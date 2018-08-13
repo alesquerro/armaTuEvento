@@ -2,7 +2,7 @@
 
 //van en plural, en minúscula y con guion bajo!!!
 
-/* 
+/*
 
 ------------------------
 Los tinyInt como por ejemplo:
@@ -141,7 +141,7 @@ class CreateTables extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('product_purchase', function (Blueprint $table) {
+        Schema::create('product_purchases', function (Blueprint $table) {
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             $table->increments('id');

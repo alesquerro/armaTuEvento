@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Purchase;
+use App\ProductPurchase;
 
 class CartController extends Controller
 {
@@ -48,6 +50,51 @@ class CartController extends Controller
       $request->session()->put('carrito', array_diff($products, [$product_id]));
 
       return redirect('carrito');
+    }
+
+    //FIXME falta controlar logueo cuando este listo!!
+    public function save(Request $request){
+      //dd(request()->input('fecha_evento'));
+      //FIXME falta mostrar errores
+      $errores = $request->validate([
+        'fecha_evento'=> 'required',
+      ],[
+        'fecha_evento.required' => 'La fecha del evento es obligatorio',
+      ]);
+      $product_ids = $request->session()->get('carrito');
+      $products = Product::whereIn('id',$product_ids)->get();
+      //dd($products);
+      $purchase = Purchase::create([
+        'name' => 'Compra '.date('Y-m-d'),
+        'purchase_date'=> date('Y-m-d'),
+        'total_amount'=> 0.0,
+        'remainder'=> 0.0,
+        'booking'=> 0.0,
+        'state' => 'en espera',
+        'event_date'=>request()->input('fecha_evento'),
+        'active' => 1,
+        //'user_id'=> $request->session()->get('usuario'),
+        'user_id' => 1,
+        //FIXME falta direcciones!!!
+        'address_id' => 1,
+      ]);
+      $total = 0.0;
+      foreach ($products as $product) {
+        //dd($product);
+        $total += $product->price;
+        $purchaseLine = ProductPurchase::create([
+          'price'=> $product->price,
+          'purchase_id'=> $purchase->id,
+          'description'=> $product->name,
+          'product_id'=> $product->id,
+          'active' => 1
+        ]);
+        $purchaseLine->save();
+      }
+      $purchase->total_amount = $total;
+      $purchase->remainder = $total;
+      $purchase->save();
+      return 'todo ok';
     }
 
 }

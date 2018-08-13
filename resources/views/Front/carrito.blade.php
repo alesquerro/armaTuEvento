@@ -4,10 +4,10 @@
   <body>
     @include('Components.header')
     <div class="contenido container" id="contenido-principal">
-      @if ($errores)
+      @if (count($errors))
         <div class="alert alert-danger">
           <ul style="margin-top: 35px;">
-            @foreach ($iterable as $key => $value)
+            @foreach ($errors as $error)
               <li>{{ $error }}</li>
             @endforeach
           </ul>
@@ -22,11 +22,11 @@
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active text-center" id="seleccionados" role="tabpanel" aria-labelledby="seleccionados-tab">
-          <form  action="" method="post" id="guardar_carrito">
+          <form  action="guardar_carrito" method="post" id="guardar_carrito">
             @csrf
             <input type="hidden" name="guardar_carrito" value="1">
             <label for="fecha_evento">Fecha Evento</label>
-            <input type="date" name="fecha_evento" value="" id="fecha_evento" >
+            <input type="date" name="fecha_evento" value="" id="fecha_evento"  >
           </form>
           <table class="table-striped tabla-carrito">
           @forelse ($carrito as $posicion => $producto)
