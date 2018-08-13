@@ -20,7 +20,6 @@ Auth::routes();
 Route::get('register', 'RegisterController@showOptions');
 
 Route::get('/','Front\StaticController@showIndex');
-Route::get('/','Front\ProductController@index');
 // Route::get('/','Front\StaticController@showIndex');
 Route::get('FAQs','Front\StaticController@showFAQs');
 Route::get('contacto','Front\StaticController@showContacto');
@@ -33,4 +32,6 @@ Route::post('sacar_producto/{id}','Front\CartController@pop');
 
 Route::get('producto/{id}','Front\ProductController@show');
 Route::get('listado','Front\ProductController@list');
+Route::get('/','Front\ProductController@index');
+
 Route::get('Admin/','Admin\ProductController@index');
