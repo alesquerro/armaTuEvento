@@ -23,6 +23,7 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active text-center" id="seleccionados" role="tabpanel" aria-labelledby="seleccionados-tab">
           <form  action="" method="post" id="guardar_carrito">
+            @csrf
             <input type="hidden" name="guardar_carrito" value="1">
             <label for="fecha_evento">Fecha Evento</label>
             <input type="date" name="fecha_evento" value="" id="fecha_evento" >
@@ -30,13 +31,14 @@
           <table class="table-striped tabla-carrito">
           @forelse ($carrito as $posicion => $producto)
                 <?php $productosSumar[]= (float) $producto->precio; ?>
-              <form  action="" method="post" id="sacar_producto_{{ $posicion }}">
+              <form  action="sacar_producto/{{ $producto->id }}" method="post" id="sacar_producto_{{ $producto->id }}">
+                @csrf
                 <tr>
                   <td>{{ $producto->name }}</td>
                   <td>$ {{ $producto->price }}</td>
-                  <td><button class="btn btn-sm btn-danger carrito_boton"  onclick="sacar_producto({{ $posicion }})"><span class="fa fa-trash"></span></button></td>
+                  <td><button class="btn btn-sm btn-danger carrito_boton"  onclick="sacar_producto({{ $producto->id }})"><span class="fa fa-trash"></span></button></td>
                 </tr>
-                <input type="hidden" name="sacar_producto" value="{{ $posicion }}">
+                <input type="hidden" name="sacar_producto" value="{{ $producto->id }}">
               </form>
 
           @empty
@@ -55,7 +57,8 @@
       </div>
     </div>
     <div class="form-group  text-center">
-      <form  action="" method="post" id="vaciar_carrito">
+      <form  action="vaciar_carrito" method="post" id="vaciar_carrito">
+        @csrf
         <input type="hidden" name="vaciar" value="1">
         <button class="btn btn-sm btn-danger"  onclick="vaciar_carrito()">vaciar carrito</button>
       </form>

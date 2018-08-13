@@ -25,10 +25,14 @@ class CartController extends Controller
       $products = [];
       $errores = [];
       $total = 0.0;
+      //session()->flush();
       if(session()->has('carrito')){
         $product_ids = session()->get('carrito');
-        $ids = implode(',',$product_ids);
-        $products = Product::whereIn('id',$product_ids)->get();
+        //dd($product_ids);
+        if($product_ids){
+          $ids = implode(',',$product_ids);
+          $products = Product::whereIn('id',$product_ids)->get();
+        }
       }
       foreach ($products as $product) {
         $total += $product->price;
@@ -39,4 +43,17 @@ class CartController extends Controller
                                   ]);
 
     }
+
+    public function clear(Request $request){
+      $request->session()->forget('carrito');
+      return redirect('carrito');
+    }
+
+    public function pop($product_id, Request $request){
+      $products = $request->session()->get('carrito');
+      $request->session()->put('carrito', array_diff($products, [$product_id]));
+
+      return redirect('carrito');
+    }
+
 }
