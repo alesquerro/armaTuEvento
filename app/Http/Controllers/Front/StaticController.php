@@ -16,6 +16,11 @@ class StaticController extends Controller
     {
       return view('Front.contacto');
     }
+    public function showContactoProducto($id)
+    {
+      $product = \App\Product::find($id);
+      return view('Front.contacto',['product' => $product]);
+    }
      public function showIndex()
     {
       return view('Front.index');
@@ -23,7 +28,7 @@ class StaticController extends Controller
      public function showOptions()
     {
       $options1 = [ 1 => 'Mexicana',  2 => 'Pizza',  3 => 'Arabe', 4 =>  'Pastas'];
-      $options2 = [ 1 => 'Rock',  2 => 'Reggae',  3 => 'Funk',  4 => 'Pop'];      
+      $options2 = [ 1 => 'Rock',  2 => 'Reggae',  3 => 'Funk',  4 => 'Pop'];
       return view('Auth.register', compact('options1', 'options2'));
     }
 

@@ -69,7 +69,7 @@ $asunto="";
                     <label for="inputAsunto" class="col-form-label h4">Asunto (*)</label>
                     <div>
 
-                      <input type="text" class="form-control" name="asunto" id="inputAsunto" placeholder="Asunto" required value="<?php echo $asunto;  ?>" >
+                      <input type="text" class="form-control" name="asunto" id="inputAsunto" placeholder="Asunto" required value="{{ $product ? 'Consulta sobre '.$product->name : ''}}" >
                     </div>
 
                   </div>

@@ -24,6 +24,7 @@ Route::get('/','Front\StaticController@showIndex');
 // Route::get('/','Front\StaticController@showIndex');
 Route::get('FAQs','Front\StaticController@showFAQs');
 Route::get('contacto','Front\StaticController@showContacto');
+Route::get('contacto/{id}','Front\StaticController@showContactoProducto');
 Route::get('register','Front\StaticController@showOptions');
 
 Route::get('carrito','Front\CartController@show');
