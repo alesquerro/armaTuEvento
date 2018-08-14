@@ -50,12 +50,17 @@ class ProductController extends Controller
     public function list()
     {
         $productos = Product::get();
+        $favoritos = [];
+        if(auth()->check()){
+          foreach (auth()->user()->products as $product) {
+            $favoritos[] = $product->id;
+          }
 
-        // $tipoEventos = EventType::all();
-        // dd($tipoEventos);
+        }
 
         return view('Front.listado', [
             'productos' => $productos,
+            'favoritos' => $favoritos,
             // 'servicios' => $servicios,
             // 'tipoEventos' => $tipoEventos,
         ]);

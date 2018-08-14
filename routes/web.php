@@ -37,6 +37,8 @@ Route::get('producto/{id}','Front\ProductController@show');
 Route::get('listado','Front\ProductController@list');
 Route::get('/','Front\ProductController@index');
 
-Route::get('mis_compras','Front\UserController@show_purchases')->middleware('auth');;
+Route::get('mis_compras','Front\UserController@show_purchases')->middleware('auth');
+Route::post('add_favourites/{id}','Front\UserController@add_favourites')->middleware('auth');
+Route::post('remove_favourites/{id}','Front\UserController@remove_favourites')->middleware('auth');
 
 Route::get('Admin/','Admin\ProductController@index');

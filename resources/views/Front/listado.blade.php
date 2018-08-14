@@ -8,11 +8,7 @@
     @include('Components.header')
     <!-- FIN NAV -->
 
-
-
     <div class="listado contenido">
-
-
       <main class="list_prod">
         <div class="row card_row">
           @foreach ($productos as $producto)
@@ -27,19 +23,23 @@
                   <p class="card-text">Consultar disponibilidad y precio</p>
                   <div class="corazon card-body">
 
-                    @if ($producto->id == 1)
-                      <a href="#" id="likes">
+                    @if (Auth::check() && in_array($producto->id,$favoritos) )
+                      <form id="remove_favourites_{{$producto->id}}" action="remove_favourites/{{$producto->id}}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $producto->id }}">
+                      </form>
+                      <a href="#" onclick="remove_favourites({{$producto->id}})">
                         <span class="fa fa-heart" style="font-size:24px;color:#B21917"></span>
                       </a>
                       @else
-
-                      <a href="#" id="likes">
+                      <form id="add_favourites_{{$producto->id}}" action="add_favourites/{{$producto->id}}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $producto->id }}">
+                      </form>
+                      <a href="#" onclick="add_favourites({{$producto->id}})" >
                         <span class="fa fa-heart-o" style="font-size:24px;color:#B21917"></span>
                       </a>
-
                     @endif
-
-
                     <a href="#" id="likes">
                       <span class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></span>
                     </a>
@@ -95,7 +95,12 @@
       function mostrar_orden(){
         $("#orden_filtro").toggle(1000);
       }
-
+      function add_favourites(prod){
+        $("#add_favourites_"+prod).submit();
+      }
+      function remove_favourites(prod){
+        $("#remove_favourites_"+prod).submit();
+      }
 
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
