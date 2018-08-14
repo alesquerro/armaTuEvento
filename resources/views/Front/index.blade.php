@@ -12,8 +12,6 @@
     <!-- FIN NAV -->
 
 
-
-
     <!-- INICIO CAROUSEL -->
     <div class="container-fluid">
       <div id="carouselExampleIndicators" class="carousel slide contenido" data-ride="carousel">
@@ -96,12 +94,23 @@
               </div>
               <div class="corazon" style="justify-content: flex-end; padding: 15px;">
 
-                <a href="#" id="likes">
-                  <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
-                </a>
-
-                {{-- FALTA QUE, SI EL USUARIO ESTÁ LOGUEADO, QUE LE MOSTREMOS SUS FAVORITOS Y USEMOS EL CORAZON DE LOS SELECCIONADOS--}}
-
+                @if (Auth::check() && in_array($salon->id,$favoritos) )
+                  <form id="remove_favourites_{{$salon->id}}" action="remove_favourites/{{$salon->id}}" method="post">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $salon->id }}">
+                  </form>
+                  <a href="#" onclick="remove_favourites({{$salon->id}})">
+                    <span class="fa fa-heart" style="font-size:24px;color:#B21917"></span>
+                  </a>
+                  @else
+                  <form id="add_favourites_{{$salon->id}}" action="add_favourites/{{$salon->id}}" method="post">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $salon->id }}">
+                  </form>
+                  <a href="#" onclick="add_favourites({{$salon->id}})" >
+                    <span class="fa fa-heart-o" style="font-size:24px;color:#B21917"></span>
+                  </a>
+                @endif
                 <form  action="/carrito/{{ $salon->id }}" method="post" id="agregar_carrito_{{ $salon->id }}">
                   @csrf
                   <input type="hidden" name="id" value="{{ $salon->id }}">
@@ -150,9 +159,23 @@
                   <p class="card-text">Consultar disponibilidad y precio</p>
                 </div>
                 <div class="corazon" style="justify-content: flex-end; padding: 15px;">
-                  <a href="#" id="likes">
-                    <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
-                  </a>
+                  @if (Auth::check() && in_array($servicio->id,$favoritos) )
+                    <form id="remove_favourites_{{$servicio->id}}" action="remove_favourites/{{$servicio->id}}" method="post">
+                      @csrf
+                      <input type="hidden" name="id" value="{{ $servicio->id }}">
+                    </form>
+                    <a href="#" onclick="remove_favourites({{$servicio->id}})">
+                      <span class="fa fa-heart" style="font-size:24px;color:#B21917"></span>
+                    </a>
+                    @else
+                    <form id="add_favourites_{{$servicio->id}}" action="add_favourites/{{$servicio->id}}" method="post">
+                      @csrf
+                      <input type="hidden" name="id" value="{{ $servicio->id }}">
+                    </form>
+                    <a href="#" onclick="add_favourites({{$servicio->id}})" >
+                      <span class="fa fa-heart-o" style="font-size:24px;color:#B21917"></span>
+                    </a>
+                  @endif
                   <a href="#" id="likes">
                     <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
                   </a>
@@ -182,7 +205,14 @@
 
     <!-- FIN CONTENIDO GENERICO -->
 
-
+    <script>
+    function add_favourites(prod){
+      $("#add_favourites_"+prod).submit();
+    }
+    function remove_favourites(prod){
+      $("#remove_favourites_"+prod).submit();
+    }
+    </script>
 
 
     <!--Footer-->

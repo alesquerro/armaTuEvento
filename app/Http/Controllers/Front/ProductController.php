@@ -15,6 +15,12 @@ class ProductController extends Controller
    {
         $salones = Product::where('type', '=', 'salon')->limit(3)->get();
         $servicios = Product::where('type', '=', 'servicio')->limit(3)->get();
+        $favoritos = [];
+        if(auth()->check()){
+          foreach (auth()->user()->products as $product) {
+            $favoritos[] = $product->id;
+          }
+        }
 
         $tipoEventos = EventType::all();
         // dd($tipoEventos);
@@ -23,6 +29,7 @@ class ProductController extends Controller
             'salones' => $salones,
             'servicios' => $servicios,
             'tipoEventos' => $tipoEventos,
+            'favoritos' => $favoritos,
         ]);
 
 
@@ -55,7 +62,6 @@ class ProductController extends Controller
           foreach (auth()->user()->products as $product) {
             $favoritos[] = $product->id;
           }
-
         }
 
         return view('Front.listado', [

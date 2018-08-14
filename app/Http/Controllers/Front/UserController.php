@@ -25,14 +25,21 @@ class UserController extends Controller
       $user = auth()->user();
       $prod = Product::find($prod_id);
       $user->products()->save($prod);
-      return redirect('listado');
+      $pagina_anterior = url()->previous();
+      if(! $pagina_anterior){
+          $pagina_anterior = '/listado';
+      }
+      return redirect($pagina_anterior);
     }
 
     public function remove_favourites($prod_id){
-
       $user = auth()->user();
       $user->products()->detach($prod_id);
-      return redirect('listado');
+      $pagina_anterior = url()->previous();
+      if(! $pagina_anterior){
+          $pagina_anterior = '/listado';
+      }
+      return redirect($pagina_anterior);
     }
 
 }
