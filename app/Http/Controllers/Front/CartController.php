@@ -54,16 +54,14 @@ class CartController extends Controller
 
     //FIXME falta controlar logueo cuando este listo!!
     public function save(Request $request){
-      //dd(request()->input('fecha_evento'));
-      //FIXME falta mostrar errores
+
       $errores = $request->validate([
         'fecha_evento'=> 'required',
       ],[
-        'fecha_evento.required' => 'La fecha del evento es obligatorio',
+        'fecha_evento.required' => 'La fecha del evento es obligatoria',
       ]);
       $product_ids = $request->session()->get('carrito');
       $products = Product::whereIn('id',$product_ids)->get();
-      //dd($products);
       $purchase = Purchase::create([
         'name' => 'Compra '.date('Y-m-d'),
         'purchase_date'=> date('Y-m-d'),
@@ -73,6 +71,7 @@ class CartController extends Controller
         'state' => 'en espera',
         'event_date'=>request()->input('fecha_evento'),
         'active' => 1,
+        //FIXME falta agregar usuario logeado cuando este
         //'user_id'=> $request->session()->get('usuario'),
         'user_id' => 1,
         //FIXME falta direcciones!!!
@@ -80,7 +79,6 @@ class CartController extends Controller
       ]);
       $total = 0.0;
       foreach ($products as $product) {
-        //dd($product);
         $total += $product->price;
         $purchaseLine = ProductPurchase::create([
           'price'=> $product->price,
@@ -95,6 +93,7 @@ class CartController extends Controller
       $purchase->remainder = $total;
       $purchase->save();
       $request->session()->forget('carrito');
+      //TODO redirigir a pagina mis_compras
       return 'todo ok';
     }
 
