@@ -11,8 +11,9 @@ use App\Purchase;
 class UserController extends Controller
 {
     public function show_purchases(Request $request){
-      $user = $request->session()->get('user');
-      //FIXME falta buscar usuario de sesion cuando este el login
+
+      $user = auth()->user()->id;
+
       $purchases = Purchase::where([['user_id',1],
                        ['state','en espera']
                      ])->get();
