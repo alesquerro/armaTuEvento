@@ -94,7 +94,7 @@ class CartController extends Controller
       $purchase->save();
       $request->session()->forget('carrito');
       //TODO redirigir a pagina mis_compras
-      return 'todo ok';
+      return redirect('mis_compras');
     }
 
 }
