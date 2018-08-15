@@ -41,4 +41,6 @@ Route::get('mis_compras','Front\UserController@show_purchases')->middleware('aut
 Route::post('add_favourites/{id}','Front\UserController@add_favourites')->middleware('auth');
 Route::post('remove_favourites/{id}','Front\UserController@remove_favourites')->middleware('auth');
 
-Route::get('Admin/','Admin\ProductController@index');
+Route::get('Admin/listar_productos','Admin\ProductController@index');
+
+Route::get('Admin/dashboard','Admin\StaticController@dashboard');
