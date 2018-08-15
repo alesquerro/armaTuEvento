@@ -12,17 +12,17 @@
         <div>
 
           <h1>Panel de administración</h1>
-          <a href="nuevoProducto.php" class=" btn btn-lg btn-success" role="button">Crear Producto</a>
+          <a href="/Admin/nuevoProducto" class=" btn btn-lg btn-success" role="button">Crear Producto</a>
           </div>
         <div id="header-container">
 
           <div>
 
             <ul>
-              <li><a href="Admin/listar_usuarios"  class="listado-panel">Modificar Usuarios</a></li>
-              <li><a href="Admin/listar_productos"  class="listado-panel">Modificar Productos</a></li>
-              <li><a href="Admin/nuevoProducto"  class="listado-panel">Nuevo Producto</a></li>
-              <li><a href="Admin/ventas"  class="listado-panel">Ventas</a></li>
+              <li><a href="/Admin/listar_usuarios"  class="listado-panel">Modificar Usuarios</a></li>
+              <li><a href="/Admin/listar_productos"  class="listado-panel">Modificar Productos</a></li>
+              <li><a href="/Admin/nuevoProducto"  class="listado-panel">Nuevo Producto</a></li>
+              <li><a href="/Admin/ventas"  class="listado-panel">Ventas</a></li>
             </ul>
 
           </div>

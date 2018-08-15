@@ -43,4 +43,4 @@ Route::post('remove_favourites/{id}','Front\UserController@remove_favourites')->
 
 Route::get('Admin/listar_productos','Admin\ProductController@index');
 
-Route::get('Admin/dashboard','Admin\StaticController@dashboard');
+Route::get('Admin/dashboard','Admin\StaticController@dashboard')->middleware('auth');
