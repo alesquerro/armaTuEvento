@@ -38,13 +38,14 @@ class ProductController extends Controller
     public function show($id)
     {
         $producto = Product::find($id);
+        $favoritos = $this->get_favourites();
         $pagina_anterior = url()->previous();
         if(! $pagina_anterior){
             $pagina_anterior = '/';
         }
         return view('Front.producto', ['producto' => $producto,
                                        'pagina_anterior' => $pagina_anterior,
-                                       'favorito' => false,
+                                       'favoritos' => $favoritos,
                                      ]);
     }
 
@@ -70,5 +71,15 @@ class ProductController extends Controller
             // 'servicios' => $servicios,
             // 'tipoEventos' => $tipoEventos,
         ]);
+    }
+
+    private function get_favourites(){
+      $favoritos = [];
+      if(auth()->check()){
+        foreach (auth()->user()->products as $product) {
+          $favoritos[] = $product->id;
+        }
+      }
+      return $favoritos;
     }
 }

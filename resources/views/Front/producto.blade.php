@@ -64,16 +64,25 @@
             <div class="corazon card-body">
               <p class="card-text"> <!-- botones favorito y compartir -->
                 <div class="d-flex justify-content align-items-left">
-                  <?php if($favorito){ ?>
-                  <a href="#" id="likes">
-                    <i class="fa fa-heart" style="font-size:24px;color:#B21917"></i>
-                  </a>
-                <?php }
-                    else{ ?>
-                  <a href="#" id="likes">
-                    <i class="fa fa-heart-o" style="font-size:24px;color:#B21917"></i>
-                  </a>
-                <?php } ?>
+                
+                      @if (Auth::check() && in_array($producto->id,$favoritos) )
+                        <form id="remove_favourites_{{$producto->id}}" action="/remove_favourites/{{$producto->id}}" method="post">
+                          @csrf
+                          <input type="hidden" name="id" value="{{ $producto->id }}">
+                        </form>
+                        <a href="#" onclick="remove_favourites({{$producto->id}})">
+                          <span class="fa fa-heart" style="font-size:24px;color:#B21917"></span>
+                        </a>
+                        @else
+                        <form id="add_favourites_{{$producto->id}}" action="/add_favourites/{{$producto->id}}" method="post">
+                          @csrf
+                          <input type="hidden" name="id" value="{{ $producto->id }}">
+                        </form>
+                        <a href="#" onclick="add_favourites({{$producto->id}})" >
+                          <span class="fa fa-heart-o" style="font-size:24px;color:#B21917"></span>
+                        </a>
+                      @endif
+
                   <a href="#" id="likes">
                     <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
                   </a>
@@ -118,6 +127,12 @@
                   <script type="text/javascript">
                     function agregar_carrito(){
                       $( "#agregar_carrito" ).submit();
+                    }
+                    function add_favourites(prod){
+                      $("#add_favourites_"+prod).submit();
+                    }
+                    function remove_favourites(prod){
+                      $("#remove_favourites_"+prod).submit();
                     }
                   </script>
                   </div><!-- FIN CONTAINER BOOTSTRAP -->
