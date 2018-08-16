@@ -61,7 +61,17 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $producto = Product::find($id);
+        $favoritos = $this->get_favourites();
+        $pagina_anterior = url()->previous();
+        if(! $pagina_anterior){
+            $pagina_anterior = '/';
+        }
+        return view('Admin.Product.producto', [
+            'producto' => $producto, 
+            'pagina_anterior' => $pagina_anterior,
+            'favoritos' => $favoritos,
+        ]);
     }
 
     /**
@@ -72,7 +82,14 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+    
+
+        return view('Admin.Product.edit', [
+            'product' => $product
+            // 'servicios' => $servicios,
+            // 'tipoEventos' => $tipoEventos, 
+        ]);
     }
 
     /**
@@ -96,5 +113,16 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    private function get_favourites(){
+      $favoritos = [];
+      if(auth()->check()){
+        foreach (auth()->user()->products as $product) {
+          $favoritos[] = $product->id;
+        }
+      }
+      return $favoritos;
     }
 }
