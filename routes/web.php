@@ -45,13 +45,8 @@ Route::get('Admin/listar_productos','Admin\ProductController@index');
 
 Route::get('Admin/dashboard','Admin\StaticController@dashboard')->middleware('auth');
 
-
-
 Route::get('Admin/Producto/edit/{id}','Admin\ProductController@edit');
 Route::get('Admin/producto/{id}','Admin\ProductController@show');
 
-
-
-
-
-
+Route::get('Admin/reservas','Admin\PurchaseController@reservation_list')->middleware('auth');
+Route::get('Admin/reserva_admin/{id}','Admin\PurchaseController@reservation_admin')->middleware('auth');

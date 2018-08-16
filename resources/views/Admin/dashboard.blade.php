@@ -22,7 +22,7 @@
               <li><a href="/Admin/listar_usuarios"  class="listado-panel">Modificar Usuarios</a></li>
               <li><a href="/Admin/listar_productos"  class="listado-panel">Modificar Productos</a></li>
               <li><a href="/Admin/nuevoProducto"  class="listado-panel">Nuevo Producto</a></li>
-              <li><a href="/Admin/ventas"  class="listado-panel">Ventas</a></li>
+              <li><a href="/Admin/reservas"  class="listado-panel">Reservas</a></li>
             </ul>
 
           </div>
