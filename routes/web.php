@@ -50,3 +50,5 @@ Route::get('Admin/producto/{id}','Admin\ProductController@show');
 
 Route::get('Admin/reservas','Admin\PurchaseController@reservation_list')->middleware('auth');
 Route::get('Admin/reserva_admin/{id}','Admin\PurchaseController@reservation_admin')->middleware('auth');
+
+Route::get('dashboard', 'Admin\AdminController@index')->middleware('IsAdmin');
