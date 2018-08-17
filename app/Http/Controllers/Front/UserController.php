@@ -22,13 +22,18 @@ class UserController extends Controller
     }
 
     public function add_favourites($prod_id){
+
       $user = auth()->user();
+
       $prod = Product::find($prod_id);
       $user->products()->save($prod);
       $pagina_anterior = url()->previous();
+
       if(! $pagina_anterior){
           $pagina_anterior = '/listado';
       }
+
+      $pagina_anterior .= '#remove_favourites_'.$prod_id;
       return redirect($pagina_anterior);
     }
 
@@ -39,6 +44,7 @@ class UserController extends Controller
       if(! $pagina_anterior){
           $pagina_anterior = '/listado';
       }
+      $pagina_anterior .= '#add_favourites_'.$prod_id;
       return redirect($pagina_anterior);
     }
 
