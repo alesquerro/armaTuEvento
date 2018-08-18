@@ -38,37 +38,34 @@ $usuario = false;
     </form>
   </div>
   <ul class="navbar menu_lista">
-      <?php if(!$usuario){ ?>
+      @if (! Auth::check())
+
     <li class="">
       <a class="" href="/login">Ingresar</a>
     </li>
     <li class="">
       <a class="" href="/registro">Registrarme</a>
     </li>
-  <?php }
-        else {
-
-  ?>
+        @else
   <div class="header_usuario">
 
     <div class="avatar">
-      <img src="<?php echo $avatar; ?>" alt="">
+      <img src="{{Auth::user()->avatar}}" alt="">
     </div>
 
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><?php echo 'Hola ' . $usuario['nombre'] . '!'; ?></a>
       <div class="dropdown-menu">
         <a class="" href="perfil">Mi cuenta</a><br>
-        <?php if (isset($usuario['admin']) && $usuario['admin']) {
-        ?>   <a class="" href="dashboard">Administrar</a>
-      <?php  } ?>
+        <a class="" href="mis_compras">Mis reservas</a><br>
+        @if (Auth::user()->admin)
+         <a class="" href="dashboard">Administrar</a>
+       @endif
         <a class="" href="logout">Cerrar sesión</a>
-
       </div>
     </div>
   </li>
-
-  <?php  } ?>
+  @endif
 
     <li class="">
       <a class="" href="/FAQs">FAQs</a>

@@ -73,6 +73,58 @@ class ProductController extends Controller
         ]);
     }
 
+    //FIXME falta seguir esto!!!!!
+    public function listParameters($tipo, $tipo_evento,$fecha,$tipo_producto,$texto){
+      //$condition = ' where ';
+      $query = Product::query();
+      //dd($query);
+      if($tipo == 'salon' || $tipo == 'servicio'){
+          $query->where('type',$tipo);
+      }
+      // if($tipo_evento != 'todo'){
+      //   //dd($tipo_evento);
+      //   $te_list =  explode('=',$tipo_evento);
+      //   //dd($te_list);
+      //   $tes = explode('_',$te_list[1]);
+      //   $first = true;
+      //   foreach ($tes as $te) {
+      //     if($first ){
+      //       $query->where('event_type_id',$te);
+      //       $first = false;
+      //     }
+      //     else{
+      //       $query->orWhere('event_type_id',$te);
+      //     }
+      //   }
+      // }
+      if($tipo_producto){
+
+        if($tipo_producto != 'todo'){
+          dd('aca1');
+          $query->where('product_type_id',$tipo_producto);
+        }
+      }
+      if($texto){
+          if($texto != 'todo'){
+            dd('aca2');
+            $query->where('name','like',$texto);
+            $query->where('description','like',$texto);
+          }
+      }
+      $productos = $query->get();
+      dd($productos);
+      $favoritos = [];
+      if(auth()->check()){
+        foreach (auth()->user()->products as $product) {
+          $favoritos[] = $product->id;
+        }
+      }
+      return view('Front.listado', [
+          'productos' => $productos,
+          'favoritos' => $favoritos,
+        ]);
+    }
+
     private function get_favourites(){
       $favoritos = [];
       if(auth()->check()){

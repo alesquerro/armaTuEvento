@@ -21,7 +21,7 @@ Route::get('registro', 'Auth\RegisterController@showOptions')->name('register');
 //Route::get('registro', 'Auth\RegisterController@getRegister');
 
 Route::get('/','Front\StaticController@showIndex');
-// Route::get('/','Front\StaticController@showIndex');
+//Route::get('/','Front\StaticController@showIndex');
 Route::get('FAQs','Front\StaticController@showFAQs');
 Route::get('contacto','Front\StaticController@showContacto');
 Route::get('contacto/{id}','Front\StaticController@showContactoProducto');
@@ -35,6 +35,7 @@ Route::post('guardar_carrito','Front\CartController@save')->middleware('auth');
 
 Route::get('producto/{id}','Front\ProductController@show');
 Route::get('listado','Front\ProductController@list');
+Route::get('listado/{tipo}/{tipo_evento}/{fecha}/{tipo_producto}/{texto}','Front\ProductController@listParameters');
 Route::get('/','Front\ProductController@index');
 
 Route::get('mis_compras','Front\UserController@show_purchases')->middleware('auth');
