@@ -17,8 +17,9 @@
 
 Auth::routes();
 
-Route::get('registro', 'App\Http\Controllers\Auth\RegisterController@register')->name('register');
+//Route::get('registro', 'App\Http\Controllers\Auth\RegisterController@register')->name('register');
 Route::get('registro', 'Auth\RegisterController@showOptions')->name('register');
+Route::post('registro', 'Auth\RegisterController@getRegister')->name('register');
 
 Route::get('/','Front\StaticController@showIndex');
 //Route::get('/','Front\StaticController@showIndex');

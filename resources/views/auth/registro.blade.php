@@ -29,12 +29,6 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputAlias" class="col-form-label h4">Alias (*)</label>
-                <div>
-                  <input type="text" class="form-control" name="alias" id="inputAlias" placeholder="Alias" required value="{{old('alias')}}">
-                </div>
-              </div>
-              <div class="form-group">
                 <label for="inputEmail3" class="col-form-label h4">Email (*)</label>
                 <div>
                   <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email" required value="{{old('email')}}">
@@ -66,7 +60,7 @@
                  <label class="col-form-label"><strong>Pregunta 2 de recuperación de cuenta (*)</strong></label>
                  <div>
                    <label>¿Nombre de su música favorita?</label>
-                   <select class="form-control col-sm-4" name="respuesta1" style="max-width: 98%;">
+                   <select class="form-control col-sm-4" name="respuesta2" style="max-width: 98%;">
                    @foreach($options2 as $option2)
                        <option value="{{$option2->id}}"> {{$option2->name}} </option>
                    @endforeach
