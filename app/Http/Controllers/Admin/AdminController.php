@@ -13,16 +13,6 @@ class AdminController extends Controller
         //$this->middleware('IsAdmin');
     }
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-      //$this->middleware('IsAdmin');
-      return view('Admin.dashboard');
-    }
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

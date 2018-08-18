@@ -49,9 +49,16 @@ $usuario = false;
         @else
   <div class="header_usuario">
 
-    <div class="avatar">
-      <img src="{{Auth::user()->avatar}}" alt="">
-    </div>
+
+  @if (Auth::user()->avatar == null)
+      <div class="avatar">
+        <img src="/imagenes/default_avatar.png" alt="">
+      </div>
+  @else
+      <div class="avatar">
+        <img src="{{Auth::user()->avatar}}" alt="">
+      </div>  
+  @endif
 
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->email }}</a>
@@ -61,7 +68,7 @@ $usuario = false;
         @if (Auth::user()->admin)
          <a class="" href="/Admin/dashboard">Administrar</a>
        @endif
-        <a class="" href="logout">Cerrar sesión</a>
+        <a class="" href="/logout">Cerrar sesión</a>
       </div>
     </div>
   </li>
