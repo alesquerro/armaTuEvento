@@ -34,8 +34,7 @@
         <div class="form-group col-lg-8 offset-lg-2 col-md-8 offset-md-2">
           <div class="form-check form-check-inline ">
             <input type="checkbox" name="recordarme"
-                   class="form-check-input" id="recordar_usuario"
-                   <?php  echo isset($_POST['recordarme']) ? 'checked': ''; ?> >
+                   class="form-check-input" id="recordar_usuario">
             <label class="form-check-label" for="recordar_usuario">Recordarme</label>
           </div>
         </div>

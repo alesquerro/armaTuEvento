@@ -49,9 +49,16 @@ $usuario = false;
         @else
   <div class="header_usuario">
 
-    <div class="avatar">
-      <img src="{{Auth::user()->avatar}}" alt="">
-    </div>
+
+  @if (Auth::user()->avatar == null)
+      <div class="avatar">
+        <img src="/imagenes/default_avatar.png" alt="">
+      </div>
+  @else
+      <div class="avatar">
+        <img src="/storage/{{Auth::user()->avatar}}" alt="">
+      </div>  
+  @endif
 
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->email }}</a>
@@ -61,7 +68,7 @@ $usuario = false;
         @if (Auth::user()->admin)
          <a class="" href="/Admin/dashboard">Administrar</a>
        @endif
-        <a class="" href="logout">Cerrar sesión</a>
+        <a class="" href="/logout">Cerrar sesión</a>
       </div>
     </div>
   </li>
@@ -115,71 +122,51 @@ function mostrar_menu_md(){
     </form>
   </div>
   <ul class="menu_lista-sm" id="menu_lista-sm">
+      @if (! Auth::check())
 
-    <?php if(! $usuario){ ?>
-    <a class="" href="login.blade.php">
-      <li class="opciones_menu">
-      Ingresar
-      </li>
-    </a>
-    <a class="" href="registro">
-      <li class="opciones_menu">
-      Registrarme
-    </li>
-    </a>
-  <?php }
-        else {
-  ?>
     <li class="">
-      <?php
-      if($avatar){ ?>
-        <a class="" href="perfil">
-          <?php
-          if(! $usuario['avatar']){
-            echo 'Hola '.$usuario['nombre'].'!';
-          }
-           ?>
-        <div class="avatar">
-          <img src="<?php echo $avatar; ?>" alt="">
-        </div>
+      <a class="" href="/login">Ingresar</a>
+    </li>
+    <li class="">
+      <a class="" href="/registro">Registrarme</a>
+    </li>
+        @else
+  <div class="header_usuario">
 
-      </a>
-      <?php }
-      else{
-        echo 'Hola '.$usuario['nombre'].'!';
-      }
-      ?>
 
+  @if (Auth::user()->avatar == null)
+      <div class="avatar">
+        <img src="/imagenes/default_avatar.png" alt="">
+      </div>
+  @else
+      <div class="avatar">
+        <img src="/storage/{{Auth::user()->avatar}}" alt="">
+      </div>  
+  @endif
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->email }}</a>
+      <div class="dropdown-menu">
+        <a class="" href="perfil">Mi cuenta</a><br>
+        <a class="" href="mis_compras">Mis reservas</a><br>
+        @if (Auth::user()->admin)
+         <a class="" href="/Admin/dashboard">Administrar</a>
+       @endif
+        <a class="" href="/logout">Cerrar sesión</a>
+      </div>
+    </div>
+  </li>
+  @endif
+
+    <li class="">
+      <a class="" href="/FAQs">FAQs</a>
     </li>
-    <a class="" href="perfil">
-    <li class="opciones_menu">
-      Mi cuenta
+    <li class="">
+      <a class="" href="/contacto">Contacto</a>
     </li>
-    </a>
-    <?php if (isset($usuario['admin']) && $usuario['admin']) {
-    ?>   <a class="" href="dashboard">Administrar</a>
-  <?php  } ?>
-    <a class="" href="logout">
-    <li class="opciones_menu">
-      Cerrar sesión
+    <li class="">
+      <a class="" href="/carrito"><img id="carrito" src="/imagenes/w-shop.png"></a>
     </li>
-    </a>
-  <?php  } ?>
-  <a class="" href="FAQs">
-    <li class="opciones_menu">
-      FAQs
-    </li>
-    </a>
-    <a class="" href="#">
-    <li class="opciones_menu">
-      Contacto
-    </li>
-    </a>
-    <a class="" href="#">
-    <li class="opciones_menu">
-      <img id="carrito" src="/imagenes/w-shop.png">
-    </li>
-    </a>
   </ul>
 </nav>
 
@@ -208,64 +195,51 @@ function mostrar_menu_md(){
     </div>
   </div>
   <ul class="menu_lista-md" id="menu_lista-md">
-    <?php if(! $usuario){ ?>
-    <a class="" href="login">
-    <li class="opciones_menu">
-      Ingresar
+      @if (! Auth::check())
+
+    <li class="">
+      <a class="" href="/login">Ingresar</a>
     </li>
-    </a>
-    <a class="" href="registro">
-    <li class="opciones_menu">
-      Registrarme
+    <li class="">
+      <a class="" href="/registro">Registrarme</a>
     </li>
-    </a>
-  <?php }
-        else {
-            if($avatar){ ?>
-        <a class="" href="perfil">
-          <?php
-          if(! $usuario['avatar']){
-            echo 'Hola '.$usuario['nombre'].'!';
-          }
-           ?>
-          <div class="avatar">
-            <img src="<?php echo $avatar; ?>" alt="">
-          </div>
-        </a>
-       <?php  }
-        else{
-          echo 'Hola '.$usuario['nombre'].'!';
-        } ?>
+        @else
+  <div class="header_usuario">
+
+
+  @if (Auth::user()->avatar == null)
+      <div class="avatar">
+        <img src="/imagenes/default_avatar.png" alt="">
+      </div>
+  @else
+      <div class="avatar">
+        <img src="/storage/{{Auth::user()->avatar}}" alt="">
+      </div>  
+  @endif
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->email }}</a>
+      <div class="dropdown-menu">
+        <a class="" href="perfil">Mi cuenta</a><br>
+        <a class="" href="mis_compras">Mis reservas</a><br>
+        @if (Auth::user()->admin)
+         <a class="" href="/Admin/dashboard">Administrar</a>
+       @endif
+        <a class="" href="/logout">Cerrar sesión</a>
+      </div>
+    </div>
+  </li>
+  @endif
+
+    <li class="">
+      <a class="" href="/FAQs">FAQs</a>
     </li>
-    <a class="" href="perfil">
-    <li class="opciones_menu">
-      Mi cuenta
+    <li class="">
+      <a class="" href="/contacto">Contacto</a>
     </li>
-    </a>
-    <?php if (isset($usuario['admin']) && $usuario['admin']) {
-    ?>   <a class="" href="dashboard">Administrar</a>
-  <?php  } ?>
-    <a class="" href="logout">
-    <li class="opciones_menu">
-      Cerrar sesión
+    <li class="">
+      <a class="" href="/carrito"><img id="carrito" src="/imagenes/w-shop.png"></a>
     </li>
-    </a>
-<?php  } ?>
-    <a class="" href="FAQs">
-    <li class="opciones_menu">
-      FAQs
-    </li>
-    </a>
-    <a class="" href="#">
-    <li class="opciones_menu">
-      Contacto
-    </li>
-    </a>
-    <a class="" href="#">
-    <li class="opciones_menu">
-      <img id="carrito" src="/imagenes/w-shop.png">
-    </li>
-    </a>
   </ul>
 </nav>
 <script type="text/javascript">
