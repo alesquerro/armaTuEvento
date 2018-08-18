@@ -35,6 +35,7 @@ Route::post('guardar_carrito','Front\CartController@save')->middleware('auth');
 
 Route::get('producto/{id}','Front\ProductController@show');
 Route::get('listado','Front\ProductController@list');
+Route::post('listado','Front\ProductController@list_post');
 Route::get('listado/{tipo}/{tipo_evento}/{fecha}/{tipo_producto}/{texto}','Front\ProductController@listParameters');
 Route::get('/','Front\ProductController@index');
 

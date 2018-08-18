@@ -78,8 +78,11 @@ class ProductController extends Controller
       //$condition = ' where ';
       $query = Product::query();
       //dd($query);
-      if($tipo == 'salon' || $tipo == 'servicio'){
-          $query->where('type',$tipo);
+      $tipo_list =  explode('=',$tipo);
+      //dd($tipo_list);
+      if(count($tipo_list) == 2 && $tipo_list[1] == 'salon' || $tipo_list[1] == 'servicio'){
+          //dd($tipo_list[1]);
+          $query->where('type',$tipo_list[1]);
       }
       // if($tipo_evento != 'todo'){
       //   //dd($tipo_evento);
@@ -99,20 +102,25 @@ class ProductController extends Controller
       // }
       if($tipo_producto){
 
-        if($tipo_producto != 'todo'){
-          dd('aca1');
-          $query->where('product_type_id',$tipo_producto);
+        $tp_list =  explode('=',$tipo_producto);
+        //dd($tp_list);
+        if(count( $tp_list ) == 2 && $tp_list[1] != 'todo'){
+          $query->where('product_type_id',$tp_list[1]);
         }
       }
       if($texto){
-          if($texto != 'todo'){
-            dd('aca2');
-            $query->where('name','like',$texto);
-            $query->where('description','like',$texto);
+          $txt_list =  explode('=',$texto);
+          //dd($txt_list);
+          if(count($txt_list) == 2 && $txt_list[1] != 'todo'){
+            $query->where('name','like',"%{$txt_list[1]}%");
+            $query->orWhere('description','like',"%{$txt_list[1]}%");
           }
+
+            //dd($query);
       }
+      //dd($query);
       $productos = $query->get();
-      dd($productos);
+      //dd($productos);
       $favoritos = [];
       if(auth()->check()){
         foreach (auth()->user()->products as $product) {
