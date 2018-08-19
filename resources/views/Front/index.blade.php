@@ -45,7 +45,8 @@
       <!-- BUSCADOR -->
 
       <section class="section-index-buttons">
-        <form method="get" class="contenedor_form" action="listado" enctype="multipart/form-data">
+        <form method="post" class="contenedor_form" action="/listado" enctype="multipart/form-data">
+          @csrf
           <p class="h3">Buscá salon y/o servicios para tu evento</p>
           <div class="form-group row">
             <label for="fecha" class="col-form-label col-sm-2 col-md-2 col-lg-2">Fecha</label>
@@ -53,7 +54,7 @@
             <div class="form-check form-check-inline col-sm-5 col-md-5 col-lg-2">
               <input class="form-check-input" type="checkbox" id="buscar_salon" name="tipo[]" value="salon" checked>
               <label class="form-check-label" for="buscar_salon">Salón</label>
-              <input class="form-check-input" type="checkbox" id="buscar_servicio" name="tipo[]" value="servicios" checked>
+              <input class="form-check-input" type="checkbox" id="buscar_servicio" name="tipo[]" value="servicio" checked>
               <label class="form-check-label" for="buscar_servicio">Servicios</label>
             </div>
           </div>
@@ -65,7 +66,7 @@
               <pre>
                 @foreach ($tipoEventos as $tipoEvento)
               </pre>
-              <option value="{{ key($tipoEvento) }}">{{ $tipoEvento->id }}</option>
+              <option value="{{ $tipoEvento->id }}">{{ $tipoEvento->name }}</option>
               @endforeach
             </select>
           </div>

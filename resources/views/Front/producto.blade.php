@@ -28,7 +28,7 @@
                </ol>
                <div class="carousel-inner">
                  <div class="carousel-item active ">
-                   <img class="d-block w-100" src="subidos/productos/{{ $producto->portada }}" alt="First slide">
+                   <img class="d-block w-100" src="/subidos/productos/{{ $producto->cover }}" alt="First slide">
                  </div>
                  @foreach ($producto->photos as $key => $photo)
                    @if ($key == 0)
@@ -64,7 +64,7 @@
             <div class="corazon card-body">
               <p class="card-text"> <!-- botones favorito y compartir -->
                 <div class="d-flex justify-content align-items-left">
-                
+
                       @if (Auth::check() && in_array($producto->id,$favoritos) )
                         <form id="remove_favourites_{{$producto->id}}" action="/remove_favourites/{{$producto->id}}" method="post">
                           @csrf
@@ -123,7 +123,7 @@
                 </form>
                 <!--Footer-->
                 @include('Components.footer')
-                <!--/Footer-->
+                <!--Footer-->
                   <script type="text/javascript">
                     function agregar_carrito(){
                       $( "#agregar_carrito" ).submit();
@@ -135,10 +135,7 @@
                       $("#remove_favourites_"+prod).submit();
                     }
                   </script>
-                  </div><!-- FIN CONTAINER BOOTSTRAP -->
-                  <!-- Los scripts aca es momentaneo para que ande el carousel, hay que ver donde va-->
-                  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-                  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    </div><!-- FIN CONTAINER BOOTSTRAP -->
+
   </body>
 </html>

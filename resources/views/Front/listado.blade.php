@@ -9,8 +9,11 @@
     <!-- FIN NAV -->
 
     <div class="listado contenido">
+      @include('Front.filtros',['tipo_eventos' => $tipo_eventos,'tipo_salon'=>$tipo_salon, 'tipo_servicio'=>$tipo_servicio, 'tipo' => $tipo])
+
       <main class="list_prod">
         <div class="row card_row">
+
           @foreach ($productos as $producto)
             <div class="col-sm-12 col-md-6 col-lg-4 card_margin">
               <div class="card mb-4 box-shadow">
@@ -24,7 +27,7 @@
                   <div class="corazon card-body">
 
                     @if (Auth::check() && in_array($producto->id,$favoritos) )
-                      <form id="remove_favourites_{{$producto->id}}" action="remove_favourites/{{$producto->id}}" method="post">
+                      <form id="/remove_favourites_{{$producto->id}}" action="remove_favourites/{{$producto->id}}" method="post">
                         @csrf
                         <input type="hidden" name="id" value="{{ $producto->id }}">
                       </form>
@@ -32,7 +35,7 @@
                         <span class="fa fa-heart" style="font-size:24px;color:#B21917"></span>
                       </a>
                       @else
-                      <form id="add_favourites_{{$producto->id}}" action="add_favourites/{{$producto->id}}" method="post">
+                      <form id="/add_favourites_{{$producto->id}}" action="add_favourites/{{$producto->id}}" method="post">
                         @csrf
                         <input type="hidden" name="id" value="{{ $producto->id }}">
                       </form>
@@ -56,8 +59,8 @@
                   </div><!-- <div class="d-flex justify-content align-items-left"> -->
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <a class="btn btn-sm btn-outline-secondary" href="producto/{{ $producto->id }}">Ver</a>
-                        <a class="btn btn-sm btn-outline-secondary" href="contacto/{{ $producto->id }}">Consultar</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="/producto/{{ $producto->id }}">Ver</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="/contacto/{{ $producto->id }}">Consultar</a>
                       </div>
 
                     </div>
