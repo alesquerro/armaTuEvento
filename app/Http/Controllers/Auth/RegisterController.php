@@ -117,10 +117,19 @@ class RegisterController extends Controller
         return view('Front.index');
 
     }
-    public function getUserEdit()
-    {
-        $this->validator(request()->all());
-        $this->create(request()->all());
-        return view('Admin.listar_usuarios');
+
+    public function updateUser(User $user, Request $request)
+    { 
+        $data = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users',
+        ]);
+
+        $user->fill($data);
+        $user->save();
+        Flash::message('El usuario ha sido modificado!');
+        return back();
     }
+
 }

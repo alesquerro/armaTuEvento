@@ -20,7 +20,7 @@
      <div class="mt-5 container" >
        <ul>
            <li class="modificar">
-             <form action="/Admin/listar_usuarios" method="post">
+             <form action="/Admin/listar_usuarios" method="put">
              @csrf
                <input type="hidden" name="usuario" value="{{$user->id}}">
                <input type="hidden" name="accion" value="modificar">
@@ -44,13 +44,13 @@
                <div class="form-group">
                 <label for="inputActivo" class="col-form-label h4">Activo</label>
                  <div>
-                   <input type="checkbox" name="activo" value="1" checked>
+                   <input type="checkbox" name="activo" value="{{$user->active}}" checked>
                  </div>
                </div>
                <div class="form-group">
                 <label for="inputAdmin" class="col-form-label h4">Admin</label>
                  <div>
-                   <input type="checkbox" name="admin" value="1" >
+                   <input type="checkbox" name="admin" value="{{$user->admin}}" >
                  </div>
                </div>
                <input type="submit" name="" value="Modificar" class="btn btn-success moficar_item">
