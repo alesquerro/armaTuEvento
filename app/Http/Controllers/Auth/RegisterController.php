@@ -106,4 +106,12 @@ class RegisterController extends Controller
         return redirect('/');
 
     }
+
+    public function getRegisterEdit()
+    {
+        $this->validator(request()->all());
+        $this->create(request()->all());
+        return view('Front.index');
+
+    }
 }

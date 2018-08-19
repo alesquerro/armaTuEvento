@@ -17,18 +17,15 @@
 
 Auth::routes();
 
-//Route::get('registro', 'App\Http\Controllers\Auth\RegisterController@register')->name('register');
 Route::get('registro', 'Auth\RegisterController@showOptions')->name('register');
 Route::post('registro', 'Auth\RegisterController@getRegister')->name('register');
 Route::get('perfil', 'Front\UserController@showOptions')->name('perfil');
-Route::post('perfil', 'Auth\RegisterController@getRegister')->name('perfil');
+Route::post('perfil', 'Auth\RegisterController@getRegisterEdit')->name('perfil');
 
 Route::get('/','Front\StaticController@showIndex');
-//Route::get('/','Front\StaticController@showIndex');
 Route::get('FAQs','Front\StaticController@showFAQs');
 Route::get('contacto','Front\StaticController@showContacto');
 Route::get('contacto/{id}','Front\StaticController@showContactoProducto');
-//Route::get('register','Front\StaticController@showOptions');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 

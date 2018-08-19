@@ -66,7 +66,7 @@ $usuario = false;
         <a class="" href="/perfil">Mi cuenta</a><br>
         <a class="" href="mis_compras">Mis reservas</a><br>
         @if (Auth::user()->admin)
-         <a class="" href="/Admin/dashboard">Administrar</a>
+         <a class="" href="/Admin/dashboard">Administrar</a><br>
        @endif
         <a class="" href="/logout">Cerrar sesión</a>
       </div>
@@ -150,7 +150,7 @@ function mostrar_menu_md(){
         <a class="" href="perfil">Mi cuenta</a><br>
         <a class="" href="mis_compras">Mis reservas</a><br>
         @if (Auth::user()->admin)
-         <a class="" href="/Admin/dashboard">Administrar</a>
+         <a class="" href="/Admin/dashboard">Administrar</a><br>
        @endif
         <a class="" href="/logout">Cerrar sesión</a>
       </div>
@@ -223,7 +223,7 @@ function mostrar_menu_md(){
         <a class="" href="perfil">Mi cuenta</a><br>
         <a class="" href="mis_compras">Mis reservas</a><br>
         @if (Auth::user()->admin)
-         <a class="" href="/Admin/dashboard">Administrar</a>
+         <a class="" href="/Admin/dashboard">Administrar</a><br>
        @endif
         <a class="" href="/logout">Cerrar sesión</a>
       </div>
