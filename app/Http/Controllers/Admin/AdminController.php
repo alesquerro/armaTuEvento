@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,6 +14,17 @@ class AdminController extends Controller
         $this->middleware('auth');
         //$this->middleware('IsAdmin');
     }
+    /**
+     * Show users
+     * @return \Illuminate\Http\Response
+     */
+    public function indexUsers()
+    {
+        $users = User::limit(5)->get();
+        //dd($users);
+        return view('Admin.listar_usuarios', compact('users'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
