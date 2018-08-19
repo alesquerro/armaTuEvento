@@ -42,7 +42,7 @@
 
       </header>
 
-      <section>
+      <section class="mt-5 pb-5">
 
         <div class="section-container">
 
@@ -62,7 +62,7 @@
 
         </div>
 
-        <div class="section-container">
+        <div class="section-container mb-5 mt-5 pt-5">
 
           <div>
 
@@ -84,7 +84,56 @@
 
     </main>
 
+
+
     @include('/Components/footer')
     </div>
+
+     <script type="text/javascript">
+
+      var chart;
+      var chartData = [  
+        ['Salones',534],
+        ['Servicios' ,32],
+        ['Catering' ,34],
+        ['Amoblamiento',45],
+        ['Cotillon' , 7],
+     ];
+      var chart2;
+        var chartData2 = [  
+          ['Salones', 434],
+          ['Servicios' , 532],
+          ['Catering' , 734],
+          ['Amoblamiento',455],
+          ['Cotillon' , 723],
+        ];
+
+    $(document).ready(function(){
+
+      addChart();
+
+    });
+
+
+    addChart = function(){
+      chart = c3.generate({
+        bindto: '#bar-chart-one',
+        data: {
+          type: 'bar',
+          columns: chartData,      
+        }
+
+      });
+      chart2 = c3.generate({
+        bindto: '#bar-chart-two',
+        data: {
+          type: 'bar',
+          columns: chartData2,      
+        }
+
+      });
+    }
+
+    </script>
   </body>
 </html>
