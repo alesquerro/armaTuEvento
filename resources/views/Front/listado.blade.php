@@ -16,18 +16,18 @@
 
           @foreach ($productos as $producto)
             <div class="col-sm-12 col-md-6 col-lg-4 card_margin">
-              <div class="card mb-4 box-shadow">
+              <div class="card mb-4 box-shadow" id="prod{{$producto->id}}">
                 <div class="img_thumb">
                   <img class="card-img-top" src="/subidos/productos/{{ $producto->cover }}" alt="Foto producto">
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="prod{{$producto->name}}">
                   <p class="h4">{{ $producto->name }}</p>
                   <p class="card-text">{{ $producto->description }}</p>
                   <p class="card-text">Consultar disponibilidad y precio</p>
                   <div class="corazon card-body">
 
                     @if (Auth::check() && in_array($producto->id,$favoritos) )
-                      <form id="/remove_favourites_{{$producto->id}}" action="remove_favourites/{{$producto->id}}" method="post">
+                      <form id="remove_favourites_{{$producto->id}}" action="/remove_favourites/{{$producto->id}}" method="post">
                         @csrf
                         <input type="hidden" name="id" value="{{ $producto->id }}">
                       </form>
@@ -35,7 +35,7 @@
                         <span class="fa fa-heart" style="font-size:24px;color:#B21917"></span>
                       </a>
                       @else
-                      <form id="/add_favourites_{{$producto->id}}" action="add_favourites/{{$producto->id}}" method="post">
+                      <form id="add_favourites_{{$producto->id}}" action="/add_favourites/{{$producto->id}}" method="post">
                         @csrf
                         <input type="hidden" name="id" value="{{ $producto->id }}">
                       </form>
@@ -105,7 +105,7 @@
         $("#remove_favourites_"+prod).submit();
       }
 
-</script>
+    </script>
 
 </div>
 </body>
