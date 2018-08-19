@@ -117,4 +117,10 @@ class RegisterController extends Controller
         return view('Front.index');
 
     }
+    public function getUserEdit()
+    {
+        $this->validator(request()->all());
+        $this->create(request()->all());
+        return view('Admin.listar_usuarios');
+    }
 }

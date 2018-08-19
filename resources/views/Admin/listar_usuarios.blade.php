@@ -23,7 +23,7 @@
                
                  <li class="modificar">
                  <p class="mr-5 mt-2 mb-3">{{$user->first_name}}</p>
-                   <form action="/modificar_usuario" method="post">
+                   <form action="/Admin/modificar_usuario/{{$user->id}}" method="post"> 
                      <input type="hidden" name="usuario" value="{{$user->id}}">
                      <input type="submit" name="" value="Modificar usuario {{$user->first_name}}" class="btn moficar_item">
                    </form>

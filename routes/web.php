@@ -54,3 +54,5 @@ Route::get('Admin/producto/{id}','Admin\ProductController@show')->middleware('Is
 Route::get('Admin/reservas','Admin\PurchaseController@reservation_list')->middleware('IsAdmin');
 Route::get('Admin/reserva_admin/{id}','Admin\PurchaseController@reservation_admin')->middleware('IsAdmin');
 Route::get('Admin/listar_usuarios', 'Admin\AdminController@indexUsers')->middleware('IsAdmin');
+Route::get('Admin/modificar_usuario/{id}', 'Admin\AdminController@show')->middleware('IsAdmin');
+Route::post('Admin/modificar_usuario/{id}', 'Auth\RegisterController@getUserEdit')->middleware('IsAdmin');
