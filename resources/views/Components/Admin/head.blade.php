@@ -14,5 +14,16 @@
   <title></title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 
+  <!-- Gráfica -->  
+  <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+  <!-- Load c3.css -->
+  <link href="/css/c3.css" rel="stylesheet">
+  <!-- Load d3.js and c3.js -->
+  <script src="/js/d3-5.4.0.min.js" charset="utf-8"></script>
+  <script src="/js/c3.min.js"></script>
+
   <link rel="stylesheet" type="text/css" href="/css/estilosDashboard.css">
 </head>

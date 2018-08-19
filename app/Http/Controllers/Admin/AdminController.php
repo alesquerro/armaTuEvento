@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -12,6 +19,31 @@ class AdminController extends Controller
         $this->middleware('auth');
         //$this->middleware('IsAdmin');
     }
+    /**
+     * Show users
+     * @return \Illuminate\Http\Response
+     */
+    public function indexUsers()
+    {
+        $users = User::limit(5)->get();
+        //dd($users);
+        return view('Admin.listar_usuarios', compact('users'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $user = User::find($id);
+
+        return view('Admin.modificar_usuario', compact('user'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,16 +65,6 @@ class AdminController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

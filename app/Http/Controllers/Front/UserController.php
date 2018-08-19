@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Product;
 use App\Purchase;
+use App\Answer;
+
 
 class UserController extends Controller
 {
@@ -48,4 +50,12 @@ class UserController extends Controller
       return redirect($pagina_anterior);
     }
 
+    public function showOptions()
+    {
+        $options1 = Answer::limit(4)->get();
+        $options2 = Answer::offset(4)->limit(4)->get();
+        //dd($options1);
+        return view('Front.perfil', ['options1' => $options1, 'options2' => $options2]);
+    }
+    
 }

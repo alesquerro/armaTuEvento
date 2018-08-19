@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 class RegisterController extends Controller
 {
     /*
@@ -102,8 +103,33 @@ class RegisterController extends Controller
     public function getRegister()
     {
         $this->validator(request()->all());
-        $this->create(request()->all());
+        $user = $this->create(request()->all());
+
+        Auth::login($user);
         return redirect('/');
 
     }
+
+    public function getRegisterEdit()
+    {
+        $this->validator(request()->all());
+        $this->create(request()->all());
+        return view('Front.index');
+
+    }
+
+    public function updateUser(User $user, Request $request)
+    { 
+        $data = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users',
+        ]);
+
+        $user->fill($data);
+        $user->save();
+        Flash::message('El usuario ha sido modificado!');
+        return back();
+    }
+
 }

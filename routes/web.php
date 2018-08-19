@@ -17,16 +17,15 @@
 
 Auth::routes();
 
-//Route::get('registro', 'App\Http\Controllers\Auth\RegisterController@register')->name('register');
 Route::get('registro', 'Auth\RegisterController@showOptions')->name('register');
 Route::post('registro', 'Auth\RegisterController@getRegister')->name('register');
+Route::get('perfil', 'Front\UserController@showOptions')->name('perfil');
+Route::post('perfil', 'Auth\RegisterController@getRegisterEdit')->name('perfil');
 
 Route::get('/','Front\StaticController@showIndex');
-//Route::get('/','Front\StaticController@showIndex');
 Route::get('FAQs','Front\StaticController@showFAQs');
 Route::get('contacto','Front\StaticController@showContacto');
 Route::get('contacto/{id}','Front\StaticController@showContactoProducto');
-//Route::get('register','Front\StaticController@showOptions');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 
@@ -53,5 +52,8 @@ Route::get('Admin/dashboard','Admin\StaticController@dashboard')->middleware('Is
 Route::get('Admin/Producto/edit/{id}','Admin\ProductController@edit')->middleware('IsAdmin');
 Route::get('Admin/producto/{id}','Admin\ProductController@show')->middleware('IsAdmin');
 
-Route::get('Admin/reservas','Admin\PurchaseController@reservation_list')->middleware('auth')->middleware('IsAdmin');
+Route::get('Admin/reservas','Admin\PurchaseController@reservation_list')->middleware('IsAdmin');
 Route::get('Admin/reserva_admin/{id}','Admin\PurchaseController@reservation_admin')->middleware('IsAdmin');
+Route::get('Admin/listar_usuarios', 'Admin\AdminController@indexUsers')->middleware('IsAdmin');
+Route::get('Admin/modificar_usuario/{id}', 'Admin\AdminController@show')->middleware('IsAdmin');
+Route::put('Admin/modificar_usuario/{id}', 'Auth\RegisterController@updateUser')->middleware('IsAdmin');

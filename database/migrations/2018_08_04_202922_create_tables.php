@@ -43,7 +43,7 @@ class CreateTables extends Migration
             $table->smallInteger('product_type_id')->unsigned()->nullable();
             $table->tinyInteger('company_id')->unsigned();
             $table->string('type', 10);
-            $table->string('cover', 45);
+            $table->string('cover', 250);
             $table->string('active', 45)->default(1);
             $table->string('price_type', 20)->nullable()->default('por hora');
             $table->decimal('minimum_reservation', 10,2)->nullable();
@@ -174,7 +174,7 @@ class CreateTables extends Migration
             //product_id le deje NOT NULL porque es FK
             $table->smallInteger('product_id')->unsigned();
             //'path' le saqué el nullable porque no tiene sentido cargar en esta tabla un producto sin foto
-            $table->string('path', 150);
+            $table->string('path', 250);
             $table->timestamps();
             $table->softDeletes();
         });
