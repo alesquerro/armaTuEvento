@@ -63,7 +63,7 @@ $usuario = false;
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->email }}</a>
       <div class="dropdown-menu">
-        <a class="" href="perfil">Mi cuenta</a><br>
+        <a class="" href="/perfil">Mi cuenta</a><br>
         <a class="" href="mis_compras">Mis reservas</a><br>
         @if (Auth::user()->admin)
          <a class="" href="/Admin/dashboard">Administrar</a>
