@@ -58,7 +58,6 @@ class ProductController extends Controller
 
     public function list()
     {
-        dd('aca');
         $productos = Product::get();
         $favoritos = [];
         if(auth()->check()){
@@ -66,12 +65,16 @@ class ProductController extends Controller
             $favoritos[] = $product->id;
           }
         }
-
+        $tipo_eventos = EventType::all();
+        $tipo_salon = ProductType::where('product_type','salon')->get();
+        $tipo_servicio = ProductType::where('product_type','servicio')->get();
         return view('Front.listado', [
             'productos' => $productos,
             'favoritos' => $favoritos,
-            // 'servicios' => $servicios,
-            // 'tipoEventos' => $tipoEventos,
+            'tipo_eventos' => $tipo_eventos,
+            'tipo_salon' => $tipo_salon,
+            'tipo_servicio' => $tipo_servicio,
+            'tipo' => 'todo',
         ]);
     }
     public function list_post(Request $request){

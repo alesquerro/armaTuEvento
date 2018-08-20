@@ -38,16 +38,17 @@
               <p>{{ 'Precio Final $: '.$reserva->total_amount }}</p>
               <p><strong>{{ 'Saldo a pagar $: '.$reserva->remainder }}</strong></p>
               <p class="texto_color"><strong >{{ 'Estado de la reserva: En Espera' }}</strong></p>
-                <div class="botones-admin">
-                  <form action="/Admin/reserva_admin/{{$reserva->id}}" method="post">
+                <div class="reservas-admin">
+                  <form action="/Admin/reserva_admin/{{$reserva->id}}" method="post" class="botones-admin">
                   @csrf
                   <input type="hidden" name="tipo" value="aceptar">
+                  
                   <button type="submit" name="button"><span class="fa fa-check"></span>Aceptar</button>
                   </form>
-                  <form action="/Admin/reserva_admin/{{$reserva->id}}" method="post">
+                  <form action="/Admin/reserva_admin/{{$reserva->id}}" method="post" class="botones-admin">
                   @csrf
                   <input type="hidden" name="tipo" value="rechazar">
-                  <button type="submit" name="button"><span class="fa fa-remove"></span>Rechazar</button>
+                  <button type="submit" name="button" ><span class="fa fa-remove"></span>Rechazar</button>
                   </form>
 
                 </div>
