@@ -40,11 +40,16 @@
               <p class="texto_color"><strong >{{ 'Estado de la reserva: En Espera' }}</strong></p>
                 <div class="botones-admin">
                   <form action="/Admin/reserva_admin/{{$reserva->id}}" method="post">
-                    @csrf
+                  @csrf
                   <input type="hidden" name="tipo" value="aceptar">
                   <button type="submit" name="button"><span class="fa fa-check"></span>Aceptar</button>
                   </form>
+                  <form action="/Admin/reserva_admin/{{$reserva->id}}" method="post">
+                  @csrf
+                  <input type="hidden" name="tipo" value="rechazar">
                   <button type="submit" name="button"><span class="fa fa-remove"></span>Rechazar</button>
+                  </form>
+
                 </div>
               </div>
             @endforeach
