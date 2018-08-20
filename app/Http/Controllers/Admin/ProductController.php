@@ -25,7 +25,7 @@ class ProductController extends Controller
         $tipoEventos = EventType::all();
         // dd($tipoEventos);
 
-        return view('Admin.index', [
+        return view('Admin.Product.index', [
             'products' => $products, 
             'servicios' => $servicios,
             'tipoEventos' => $tipoEventos, 
