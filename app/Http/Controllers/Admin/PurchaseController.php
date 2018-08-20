@@ -13,18 +13,21 @@ class PurchaseController extends Controller
       $reservations = Purchase::where('state','en espera')->get();
       return view('Admin/Purchase/reservas',['reservas'=> $reservations]);
     }
-    
-    public function reservation_admin($id){
-      dd($id);
-      $reservation = Purchase::find($id);
 
+    public function reservation_admin($id){
+
+      $reservation = Purchase::find($id);
       $action = request()->input('tipo');
-      dd($action);
       $url = '/Admin/reservas';
-      if($reservation && $action == 'accept'){
+      if($reservation && $action == 'aceptar'){
         $reservation->state = 'aceptada';
-        $resevation->save();
-        redirect($url);
+        $reservation->save();
+        return redirect($url);
       }
+      if($reservation && $action == 'rechazar'){
+        $reservation->state = 'rechazada';
+        $reservation->save();
+      }
+      return redirect($url);
     }
 }

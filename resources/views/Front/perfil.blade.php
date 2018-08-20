@@ -13,25 +13,25 @@
               @endforeach
             </div>
         @endif
-        <h1>Registro</h1>
-        <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Registro') }}"  class="col-lg-8 offset-lg-2 col-md-8 offset-md-2" enctype="multipart/form-data">
+        <h1>Editar perfil</h1>
+        <form method="POST" action="{{ route('perfil') }}" aria-label="{{ __('Editar perfil') }}"  class="col-lg-8 offset-lg-2 col-md-8 offset-md-2" enctype="multipart/form-data">
           @csrf
               <div class="form-group">
                   <label for="inputNombre" class="col-form-label h4">Nombre (*)</label>
                 <div>
-                  <input type="text" class="form-control" name="first_name" id="inputNombre" placeholder="Nombre" required value="{{old('first_name')}}">
+                  <input type="text" class="form-control" name="first_name" id="inputNombre" placeholder="Nombre" required value="{{Auth::user()->first_name}}">
                 </div>
               </div>
               <div class="form-group">
                 <label for="inputApellido" class="col-form-label h4" >Apellido (*)</label>
                 <div>
-                  <input type="text" class="form-control" name="last_name" id="inputApellido" placeholder="Apellido" required value="{{old('last_name')}}">
+                  <input type="text" class="form-control" name="last_name" id="inputApellido" placeholder="Apellido" required value=" {{Auth::user()->last_name}}">
                 </div>
               </div>
               <div class="form-group">
                 <label for="inputEmail3" class="col-form-label h4">Email (*)</label>
                 <div>
-                  <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email" required value="{{old('email')}}">
+                  <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email" required value="{{Auth::user()->email}}">
                 </div>
               </div>
               <div class="form-group">

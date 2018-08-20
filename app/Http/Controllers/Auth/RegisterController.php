@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 class RegisterController extends Controller
 {
     /*
@@ -56,11 +57,9 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'avatar' => 'required',
-            'admin' => 'integer',
             'respuesta1' => 'integer',
             'respuesta2' => 'integer',
             'terms_conditions_date' => 'required',
-            'active' => 'integer',
         ]);
     }
 
@@ -72,21 +71,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //dd($data);
         $path = request()->file('avatar')->store('images');
 
         return User::create([
-            'first_name' => $data['name'],
-            'last_name' => $data['name'],
-            'alias' => $data['name'],
+
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'avatar' => $path,
-            'admin' => $data['admin'],
             'respuesta1' => $data['respuesta1'],
             'respuesta2' => $data['respuesta2'],
             'terms_conditions_date' => $data['terms_conditions_date'],
-            'active' => $data['active'],
+            'active' => 1,
+            'admin' => 0,
         ]);
+
+
     }
 
 
@@ -97,8 +99,37 @@ class RegisterController extends Controller
         //dd($options1);
         return view('auth.registro', ['options1' => $options1, 'options2' => $options2]);
     }
+
     public function getRegister()
     {
-       return view('auth/registro');
+        $this->validator(request()->all());
+        $user = $this->create(request()->all());
+
+        Auth::login($user);
+        return redirect('/');
+
     }
+
+    public function getRegisterEdit()
+    {
+        $this->validator(request()->all());
+        $this->create(request()->all());
+        return view('Front.index');
+
+    }
+
+    public function updateUser(User $user, Request $request)
+    { 
+        $data = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users',
+        ]);
+
+        $user->fill($data);
+        $user->save();
+        Flash::message('El usuario ha sido modificado!');
+        return back();
+    }
+
 }

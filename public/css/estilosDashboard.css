@@ -267,7 +267,14 @@ section .section-container #green {
 
 .botones-admin{
   padding: 5px;
-  margin: 5px;  
+  margin: 5px;
+  width: 50%;
+}
+.reservas-admin{
+  margin:auto;
+  display: flex;
+  align-items: center;
+
 }
 
 /* media rules for 1050px and below */

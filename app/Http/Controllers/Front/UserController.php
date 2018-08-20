@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Product;
 use App\Purchase;
+use App\Answer;
+
 
 class UserController extends Controller
 {
@@ -33,7 +35,7 @@ class UserController extends Controller
           $pagina_anterior = '/listado';
       }
 
-      $pagina_anterior .= '#remove_favourites_'.$prod_id;
+      $pagina_anterior .= '#prod'.$prod_id;
       return redirect($pagina_anterior);
     }
 
@@ -44,8 +46,16 @@ class UserController extends Controller
       if(! $pagina_anterior){
           $pagina_anterior = '/listado';
       }
-      $pagina_anterior .= '#add_favourites_'.$prod_id;
+      $pagina_anterior .= '#prod'.$prod_id;
       return redirect($pagina_anterior);
+    }
+
+    public function showOptions()
+    {
+        $options1 = Answer::limit(4)->get();
+        $options2 = Answer::offset(4)->limit(4)->get();
+        //dd($options1);
+        return view('Front.perfil', ['options1' => $options1, 'options2' => $options2]);
     }
 
 }
