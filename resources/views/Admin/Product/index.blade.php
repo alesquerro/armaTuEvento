@@ -20,7 +20,7 @@
 									<div class="card-body">
 										<form action="/Admin/Product" method="post">
                       @csrf
-											<img class="card-img-top" style="max-width: 10em"  src="/subidos/productos/{{$product->cover}}" alt="{{$product->name}}">
+											<img class="card-img-top" style="max-width: 10em"  src="{{ URL::to('storage/' . $product->cover)}}" alt="{{$product->name}}">
 											<input type="hidden" name="producto" value="{{$product->id}}">
                       <div class="form-group  text-center">
                         <div>

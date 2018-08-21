@@ -63,26 +63,40 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $path = request()->file('cover')->store('subidos.productos');
+        $filename = '';
+        if ($request->hasFile('cover')) {
+            $file = $request->file('cover');
+            $filename = $request['name'] . '.' . $file->extension();
+            $folder = 'subidos/productos';
+            $filename = $file->storeAs($folder, $filename);
+        // dd($filename);
+        }
+        // $path = $request->file('cover')->store('subidos/productos');
+        // Storage::put($request->file('cover'), 'subidos/productos/');
+        // $path = Storage::putFile('subidos.productos', $request->file('cover'));
         // $product_types = [];
         // $product_types = $this->product_types();
         // $product_types = ProductType::find($product_type_id);
-
-        return Product::create([
+// dd($path);
+        $newProduct = Product::create([
             'name' => $request['name'],
             'description' => $request['description'],
             'capacity' => $request['capacity'],
-            'cover' => $path,
+            'cover' => $filename,
             'phone' => $request['phone'],
             'mail' => $request['mail'],
             'price' => $request['price'],
-            'product_types' => $request['product_types'],
+            // 'product_types' => $request['product_types'],
             'type' => $request['type'],
             'price_type' => $request['price_type'],
             'minimum_reservation' => $request['minimum_reservation'],
             'active' => 1,            
             'company_id' => $request['company_id'],
         ]);
+
+        $newProduct->product_types()->sync($request['product_types']);
+        return redirect('/Admin/dashboard');
+
     }
 
     /**

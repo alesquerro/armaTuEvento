@@ -221,16 +221,6 @@ class CreateTables extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create('date_products', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-            $table->increments('id');
-            $table->smallInteger('product_id')->unsigned();
-            $table->date();
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
     }
 
 
@@ -256,6 +246,5 @@ class CreateTables extends Migration
         Schema::dropIfExists('event_types');
         Schema::dropIfExists('product_user');
         Schema::dropIfExists('product_types');
-
     }
 }

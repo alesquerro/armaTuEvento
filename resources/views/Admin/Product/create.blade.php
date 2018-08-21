@@ -75,7 +75,7 @@
 								<label for="tipoProducto" class="col-form-label h4">Tipo de producto
 								</label>
 								<div>
-									<select name="type[]">
+									<select name="type">
 										<option value="salon">salon</option>
 										<option value="servicio">servicio</option>
 									</select>
@@ -88,7 +88,7 @@
 								</label>
 								<div>
 									@foreach ($product_types as $product_type)
-									<input type="checkbox" name="product_types[]" value="{{ old('product_type') }}" id="{{ $product_type->name }}" @if (old('product_type_id') == $product_type->id))
+									<input type="checkbox" name="product_types[]" value="{{ $product_type->id }}" id="{{ $product_type->name }}" @if (old('product_type_id') == $product_type->id))
 									{{ 'checked'}}
 									@endif/>
 
