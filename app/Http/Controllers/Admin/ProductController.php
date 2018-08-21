@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\EventType;
+use App\ProductType;
 
 
 class ProductController extends Controller
@@ -20,15 +21,15 @@ class ProductController extends Controller
 
 
         $products = Product::where('type', '=', 'salon')->get();
-        $servicios = Product::where('type', '=', 'servicio')->get();
+        // $servicios = Product::where('type', '=', 'servicio')->get();
 
-        $tipoEventos = EventType::all();
+        // $tipoEventos = EventType::all();
         // dd($tipoEventos);
 
         return view('Admin.Product.index', [
             'products' => $products, 
-            'servicios' => $servicios,
-            'tipoEventos' => $tipoEventos, 
+            // 'servicios' => $servicios,
+            // 'tipoEventos' => $tipoEventos, 
         ]);
     }
 
@@ -83,12 +84,12 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-    
+        $product_types = ProductType::all();
+
 
         return view('Admin.Product.edit', [
-            'product' => $product
-            // 'servicios' => $servicios,
-            // 'tipoEventos' => $tipoEventos, 
+            'product' => $product,
+            'product_types' => $product_types
         ]);
     }
 
@@ -101,7 +102,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validator();
+
+        $request->fill($data);
+        $request->save();
+        Flash::message('El producto ha sido modificado!');
+        return back();
     }
 
     /**
@@ -124,5 +130,25 @@ class ProductController extends Controller
         }
       }
       return $favoritos;
+    }
+
+     public function product_types()
+    {
+        return $this->belongsToMany('ProductType');
+    }
+
+     protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:100',
+            'description' => 'required|string|max:200',
+            'mail' => 'required|email|string|max:100',
+            'price' => 'required|decimal',
+            'cover' => 'image|required',
+            'type' => 'required',
+            'active' => 'integer',
+            // 'respuesta2' => 'integer',
+            // 'terms_conditions_date' => 'required',
+        ]);
     }
 }
