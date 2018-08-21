@@ -41,7 +41,18 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+
+        // $id = request()->input('producto');
+        // $product = Product::find($id);
+        $product_types = ProductType::all();
+        // $input = $request->all();
+
+        
+        return view('Admin.Product.create', [
+        //     'product' => $product,
+            'product_types' => $product_types
+        ]
+        );
     }
 
     /**
@@ -52,7 +63,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $path = request()->file('cover')->store('subidos.productos');
+        // $product_types = [];
+        // $product_types = $this->product_types();
+        // $product_types = ProductType::find($product_type_id);
+
+        return Product::create([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'capacity' => $request['capacity'],
+            'cover' => $path,
+            'phone' => $request['phone'],
+            'mail' => $request['mail'],
+            'price' => $request['price'],
+            'product_types' => $request['product_types'],
+            'type' => $request['type'],
+            'price_type' => $request['price_type'],
+            'minimum_reservation' => $request['minimum_reservation'],
+            'active' => 1,            
+            'company_id' => $request['company_id'],
+        ]);
     }
 
     /**
@@ -135,10 +165,10 @@ class ProductController extends Controller
       return $favoritos;
     }
 
-     public function product_types()
-    {
-        return $this->belongsToMany('ProductType');
-    }
+    //  public function product_types()
+    // {
+    //     return $this->belongsToMany('ProductType');
+    // }
 
      protected function validator(array $data)
     {
