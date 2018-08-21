@@ -47,6 +47,7 @@ class AdminController extends Controller
 
         $user = User::find(request()->input('id'));
 
+
         $user->active = request()->input('active');
         $user->admin = request()->input('admin');
 
