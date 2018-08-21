@@ -1,65 +1,59 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+@include('Components.head')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<body>
+  <div class="container-fluid">
+    @include('Components.header')
+    <div class="contenido container">
+      <!-- INICIO FORM -->
+      <form method="POST" action="{{ route('password.request') }}" aria-label="{{ __('Reseteo de Password') }}" class="bg-traslucido bg-margenes">
+        @csrf
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.request') }}" aria-label="{{ __('Reset Password') }}">
-                        @csrf
+        <div class="form-group col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+          <p class="h1">Recuperar cuenta</p>
+            @if (count($errors))
 
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $email ?? old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                <div class="alert alert-danger">
+                  @foreach( $errors->all() as $error)
+                        <p>  {{$error}}</p>
+                  @endforeach
                 </div>
+            @endif
+          <label for="inputEmail3" class="col-form-label h4">Email</label>
+          <div>
+            <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email" required >
+          </div>
+          <div class="form-group">
+            <div>
+              <label>¿Nombre de su comida favorita?</label>
+              <select class="form-control col-sm-4" name="respuesta1" style="max-width: 98%;">
+                   @foreach($options1 as $option1)
+                       <option value="{{$option1->id}}"> {{$option1->name}} </option>
+                   @endforeach
+              </select>
             </div>
+          </div>
+          <div class="form-group">
+            <div>
+              <label>¿Nombre de su música favorita?</label>
+              <select class="form-control col-sm-4" name="respuesta2" style="max-width: 98%;">
+                   @foreach($options2 as $option2)
+                       <option value="{{$option2->id}}"> {{$option2->name}} </option>
+                   @endforeach
+              </select>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
-@endsection
+      <div class="form-group  text-center">
+        <div>
+          <button type="submit" class="col-lg-8 col-md-8 btn">Continuar</button>
+        </div>
+      </div>
+
+      </form>
+    </div><!-- form-group-->
+  </div><!-- row-->
+</div><!-- container-->
+<!--Footer-->
+@include('Components.footer')

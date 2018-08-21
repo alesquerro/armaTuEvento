@@ -132,4 +132,13 @@ class RegisterController extends Controller
         return back();
     }
 
+     public function showOptionsReset()
+    {
+
+        $options1 = Answer::limit(4)->get();
+        $options2 = Answer::offset(4)->limit(4)->get();
+        //dd($options1);
+        return view('auth.passwords.email', ['options1' => $options1, 'options2' => $options2]);
+    }
+
 }
