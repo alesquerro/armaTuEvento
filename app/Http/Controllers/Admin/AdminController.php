@@ -42,7 +42,19 @@ class AdminController extends Controller
 
         return view('Admin.modificar_usuario', compact('user'));
     }
+    public function update(Request $request)
+    {       
 
+        $user = User::find(request()->input('id'));
+
+        $user->active = request()->input('active');
+        $user->admin = request()->input('admin');
+
+        $user->save();
+
+        return view('Admin.modificar_usuario', compact('user'));
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -77,18 +89,7 @@ class AdminController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
+   
     /**
      * Remove the specified resource from storage.
      *
