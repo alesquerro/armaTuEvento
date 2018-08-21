@@ -22,7 +22,7 @@ class PurchaseController extends Controller
       $url = '/Admin/reservas';
       if($reservation && $action == 'aceptar'){
         $rd = DatePurchase::where(['purchase_id'=>$reservation->id],['date'=>$reservation->event_date])->get();
-        if(! $rd){
+        // if(! $rd){
           $reservation->state = 'aceptada';
           $reservation->save();
           DatePurchase::create([
@@ -30,7 +30,7 @@ class PurchaseController extends Controller
               'date' => $reservation->event_date,
           ]);
           return redirect($url);
-        }
+        // }
       }
       if($reservation && $action == 'rechazar'){
         $reservation->state = 'rechazada';

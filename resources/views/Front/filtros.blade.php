@@ -1,3 +1,4 @@
+
 <div class="filtros_arriba">
   <button onclick="mostrar_orden()">
     Orden
@@ -25,6 +26,7 @@
 
       <ul>
         @foreach ($tipo_eventos as $value)
+
           <a href="{{ 'te_'.$value->id }}" >
             <li>{{ $value->name }}</li>
           </a>
@@ -83,7 +85,14 @@
       </div>
     </div>
     </form>
+    <div>
 
+      <h4>Tipo de Producto</h4>
+      <ul>
+        <li>Salón</li>
+        <li>Servicio</li>
+      </ul>
+    </div>
   <h4>Tipo de eventos</h4>
   <ul>
     @foreach ($tipo_eventos as $value)

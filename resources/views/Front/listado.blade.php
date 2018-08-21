@@ -7,9 +7,9 @@
     <!-- INICIO NAV -->
     @include('Components.header')
     <!-- FIN NAV -->
-
+    
     <div class="listado contenido">
-      @include('Front.filtros',['tipo_eventos' => $tipo_eventos,'tipo_salon'=>$tipo_salon, 'tipo_servicio'=>$tipo_servicio, 'tipo' => $tipo])
+      @include('Front.filtros',['tipo_eventos' => $tipo_eventos,'tipo_salon'=>$tipo_salon, 'tipo_servicio'=>$tipo_servicio, 'tipo' => $tipo,'filtros_aplicados' =>$filtros_aplicados])
 
       <main class="list_prod">
         <div class="row card_row">

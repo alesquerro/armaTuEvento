@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 	 protected $fillable = [
-	 	'name', 
-	 	'mail', 
-	 	'cover', 
-	 	'phone', 
-	 	'capacity', 
-	 	'description', 
-	 	'product_type_id', 
+	 	'name',
+	 	'mail',
+	 	'cover',
+	 	'phone',
+	 	'capacity',
+	 	'description',
+	 	'product_type_id',
 	 	'minimum_resrevation',
-	 	'price', 
+	 	'price',
 	 	'price_type',
-	 	// 'address_id', 
-	 	// 'company_id', 
+	 	// 'address_id',
+	 	// 'company_id',
 	 	// 'type',
 	 	// 'active',
 
@@ -29,6 +29,6 @@ class Product extends Model
     }
 
     public function event_types(){
-      return $this->hasMany('App\EventType');
+      return $this->belongsToMany('App\EventType');
     }
 }

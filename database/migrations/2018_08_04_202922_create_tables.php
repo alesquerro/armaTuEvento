@@ -221,11 +221,11 @@ class CreateTables extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create('date_purchases', function (Blueprint $table) {
+        Schema::create('date_products', function (Blueprint $table) {
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             $table->increments('id');
-            $table->smallInteger('purchase_id')->unsigned();
+            $table->smallInteger('product_id')->unsigned();
             $table->date();
             $table->timestamps();
             $table->softDeletes();

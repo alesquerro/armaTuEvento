@@ -106,36 +106,42 @@ class ProductController extends Controller
 
     //FIXME falta seguir esto!!!!!
     public function listParameters($tipo, $tipo_evento,$fecha,$tipo_producto,$texto){
+      $filtros_aplicados = [];
       $query = Product::query();
       $tipo_list =  explode('=',$tipo);
       if(count($tipo_list) == 2 && $tipo_list[1] && ($tipo_list[1] == 'salon' || $tipo_list[1] == 'servicio')){
           $query->where('type',$tipo_list[1]);
           $tipo = $tipo_list[1];
+          $filtros_aplicados['tipo'] = $tipo_list[1];
       }
       else{
         $tipo = 'todo';
       }
-      // if($tipo_evento != 'todo'){
-      //   //dd($tipo_evento);
-      //   $te_list =  explode('=',$tipo_evento);
-      //   //dd($te_list);
-      //   $tes = explode('_',$te_list[1]);
-      //   $first = true;
-      //   foreach ($tes as $te) {
-      //     if($first ){
-      //       $query->where('event_type_id',$te);
-      //       $first = false;
-      //     }
-      //     else{
-      //       $query->orWhere('event_type_id',$te);
-      //     }
-      //   }
-      // }
+      if($tipo_evento != 'todo'){
+        $te_list =  explode('=',$tipo_evento);
+        if( count($te_list) == 2 && $te_list[1]){
+          $tes = explode('_',$te_list[1]);
+          $first = true;
+          $te_ids = [];
+          foreach ($tes as $te) {
+            if(is_numeric($te)){
+              $te_ids[] = $te;
+            }
+          }
+           if($te_ids){
+            $query->whereHas('event_types',function($type) use($te_ids) {
+              $type->whereIn('event_types.id',$te_ids);
+            });
+            $filtros_aplicados['tipo_eventos'] = $te_ids;
+          }
+        }
+      }
       if($tipo_producto){
 
         $tp_list =  explode('=',$tipo_producto);
         if(count( $tp_list ) == 2 && $tp_list[1] && $tp_list[1] != 'todo'){
           $query->where('product_type_id',$tp_list[1]);
+          $fitros_aplicados['tipo_producto'] = $tp_list[1];
         }
       }
       if($texto){
@@ -144,6 +150,7 @@ class ProductController extends Controller
           if(count($txt_list) == 2 && $txt_list[1] != 'todo' && $txt_list[1] != ''){
             $query->where('name','like',"%{$txt_list[1]}%");
             $query->orWhere('description','like',"%{$txt_list[1]}%");
+            $fitros_aplicados['texto'] = $texto;
           }
 
       }
@@ -154,6 +161,7 @@ class ProductController extends Controller
           $favoritos[] = $product->id;
         }
       }
+      //dd($filtros_aplicados);
       $tipo_eventos = EventType::all();
       $tipo_salon = ProductType::where('product_type','salon')->get();
       $tipo_servicio = ProductType::where('product_type','servicio')->get();
@@ -164,6 +172,7 @@ class ProductController extends Controller
           'tipo_salon' => $tipo_salon,
           'tipo_servicio' => $tipo_servicio,
           'tipo' => $tipo,
+          'filtros_aplicados' => $filtros_aplicados,
         ]);
     }
 
