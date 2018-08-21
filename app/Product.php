@@ -36,4 +36,8 @@ class Product extends Model
     public function event_types(){
       return $this->belongsToMany('App\EventType');
     }
+
+		public function date_products(){
+      return $this->hasMany('App\DateProducts');
+    }
 }

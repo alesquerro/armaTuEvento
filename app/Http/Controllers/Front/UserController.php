@@ -67,11 +67,13 @@ class UserController extends Controller
       }
       if( $tipo == 'rechazar'){
         $reservation->state = 'anulada por usuario';
-        $rd = DatePurchase::where(['purchase_id'=>$reservation->id],['date'=>$reservation->event_date])->get();
-        if($rd){
-
-          $rd[0]->delete();
+        foreach ($reservation->products as $product) {          # code...
+          $rd = DateProduct::where(['product_id'=>$reservation->product_id],['date'=>$reservation->event_date])->get();
+          if($rd){
+            $rd[0]->delete();
+          }
         }
+
         $reservation->save();
       }
       return redirect('/mis_compras');

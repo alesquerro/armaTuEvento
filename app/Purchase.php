@@ -16,7 +16,5 @@ class Purchase extends Model
       return $this->belongsTo('App\User');
     }
 
-    public function date_purchases(){
-      return $this->hasMany('App\DatePurchase');
-    }
+    
 }

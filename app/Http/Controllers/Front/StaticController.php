@@ -14,7 +14,7 @@ class StaticController extends Controller
 
     public function showContacto()
     {
-      return view('Front.contacto');
+      return view('Front.contacto',['product'=> null]);
     }
     public function showContactoProducto($id)
     {
