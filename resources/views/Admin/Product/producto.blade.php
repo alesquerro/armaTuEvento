@@ -17,41 +17,8 @@
         <div class="col-sm-12 col-md-4 col-lg-4 card_margin"><!-- Bloque Izquierdo -->
           <div class="card-body">
             <p class="h4"> {{ $producto->nombre }}</p>
-            <!-- INICIO CAROUSEL -->
-           <div class="img_thumb">
-             <div id="carouselExampleIndicators" class="carousel slide carrusel" data-ride="carousel">
-               <ol class="carousel-indicators">
-                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-
-               </ol>
-               <div class="carousel-inner">
-                 <div class="carousel-item active ">
-                   <img class="d-block w-100" src="subidos/productos/{{ $producto->portada }}" alt="First slide">
-                 </div>
-                 @foreach ($producto->photos as $key => $photo)
-                   @if ($key == 0)
-                     continue;
-                   @endif
-
-                 <div class="carousel-item ">
-                   <img class="d-block w-100" src="subidos/productos/{{ $photo }}" alt="First slide">
-                 </div>
-
-               @endforeach
-               </div>
-               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                 <span class="sr-only">Anterior</span>
-               </a>
-               <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                 <span class="sr-only">Siguiente</span>
-               </a>
-             </div>
-           </div>
-           <!-- FIN CARROUSEL -->
+           
+          
           </div>
         </div>
         <div class="col-sm-12 col-md-6 col-lg-6 card_margin"> <!-- bloque derecho -->
