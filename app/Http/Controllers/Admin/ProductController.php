@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\EventType;
 use App\ProductType;
+use Illuminate\Support\Facades\Validator;
 
 
 class ProductController extends Controller
@@ -27,9 +28,9 @@ class ProductController extends Controller
         // dd($tipoEventos);
 
         return view('Admin.Product.index', [
-            'products' => $products, 
+            'products' => $products,
             // 'servicios' => $servicios,
-            // 'tipoEventos' => $tipoEventos, 
+            // 'tipoEventos' => $tipoEventos,
         ]);
     }
 
@@ -69,7 +70,7 @@ class ProductController extends Controller
             $pagina_anterior = '/';
         }
         return view('Admin.Product.producto', [
-            'producto' => $producto, 
+            'producto' => $producto,
             'pagina_anterior' => $pagina_anterior,
             'favoritos' => $favoritos,
         ]);
@@ -81,8 +82,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
+        $id = request()->input('producto');
         $product = Product::find($id);
         $product_types = ProductType::all();
 
@@ -100,14 +102,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $data = $request->validator();
-
-        $request->fill($data);
-        $request->save();
-        Flash::message('El producto ha sido modificado!');
-        return back();
+        $id = request()->input('id');
+        $data = $this->validator($request->all());
+        $product = Product::find($id);
+        //dd($data);
+        $product->fill($request->all());
+        //dd($product);
+        $product->save();
+        //Flash::message('El producto ha sido modificado!');
+        return redirect('/Admin/listar_productos');
     }
 
     /**

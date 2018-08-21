@@ -16,7 +16,8 @@
 					<ul>
 						<h1 style="text-align: center">Editar {{ $product->name }}</h1>
 						{{-- INICIO FORM--}}
-						<form action="/Admin/listar_productos" method="put" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2" enctype="multipart/form-data">
+						<form action="/Admin/EditarProducto" method="post" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2" enctype="multipart/form-data">
+							@method('PUT')
 							@csrf
 							<input type="hidden" class="form-control" name="tipo_form" value="modificar">
 							<input type="hidden" class="form-control" name="accion" value="modificar">
@@ -75,7 +76,7 @@
 									<select name="type">
 										<option value="salon">salon
 										</option>
-										
+
 										<option value="servicio">servicio
 										</option>
 									</select>
@@ -106,7 +107,7 @@
 								</div>
 							</div>
 							<!-- FIN RESERVA MINIMA -->
-							<!-- PRECIO --> 
+							<!-- PRECIO -->
 							<div class="form-group">
 								<label for="inputPrecio" class="col-form-label h4">Precio</label>
 								<div>

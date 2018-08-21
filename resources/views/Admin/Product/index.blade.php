@@ -18,7 +18,7 @@
 							{{-- <li class="modificar"> --}}
 								<div class="card">
 									<div class="card-body">
-										<form action="Product/{{$product->id}}" method="post">
+										<form action="/Admin/Product" method="post">
                       @csrf
 											<img class="card-img-top" style="max-width: 10em"  src="/subidos/productos/{{$product->cover}}" alt="{{$product->name}}">
 											<input type="hidden" name="producto" value="{{$product->id}}">
@@ -30,7 +30,7 @@
 											{{-- <button type="submit" value="Editar {{$product->name}}" class="col-lg-8 col-md-8 btn"> --}}
 										</form>
 									</div>
-								</div>	
+								</div>
 							{{-- </li>  --}}
 						</div>
 						@endforeach
@@ -44,7 +44,7 @@
 <script type="text/javascript">
 
   var chart;
-  var chartData = [  
+  var chartData = [
   ['Salones',534],
   ['Servicios' ,32],
   ['Catering' ,34],
@@ -52,7 +52,7 @@
   ['Cotillon' , 7],
   ];
   var chart2;
-  var chartData2 = [  
+  var chartData2 = [
   ['Salones', 434],
   ['Servicios' , 532],
   ['Catering' , 734],
@@ -72,7 +72,7 @@
       bindto: '#bar-chart-one',
       data: {
         type: 'bar',
-        columns: chartData,      
+        columns: chartData,
       }
 
     });
@@ -80,7 +80,7 @@
       bindto: '#bar-chart-two',
       data: {
         type: 'bar',
-        columns: chartData2,      
+        columns: chartData2,
       }
 
     });
