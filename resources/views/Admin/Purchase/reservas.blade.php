@@ -19,8 +19,11 @@
           @else
             @foreach ($reservas as $reserva)
               <div style="border: 1px solid grey;border-radius: 10px;margin-top:10px;">
-              <p>{{ 'Fecha compra: '.$reserva->purchase_date }}</p>
-              <p><strong>{{ 'Fecha compra: '.$reserva->event_date }}</strong></p>
+              <p>
+                {{ 'Fecha compra: '.$reserva->purchase_date }}
+              </p>
+              <p>{{ 'Usuario: ('. $reserva->user->id .') '.$reserva->user->first_name. ' - '.$reserva->user->email }}</p>
+              <p><strong>{{ 'Fecha reserva: '.$reserva->event_date }}</strong></p>
                   <table class="table-bordered tabla-reservas">
                     <thead >
                       <tr>
@@ -42,7 +45,7 @@
                   <form action="/Admin/reserva_admin/{{$reserva->id}}" method="post" class="botones-admin">
                   @csrf
                   <input type="hidden" name="tipo" value="aceptar">
-                  
+
                   <button type="submit" name="button"><span class="fa fa-check"></span>Aceptar</button>
                   </form>
                   <form action="/Admin/reserva_admin/{{$reserva->id}}" method="post" class="botones-admin">

@@ -11,4 +11,12 @@ class Purchase extends Model
     public function product_purchases(){
       return $this->hasMany('App\ProductPurchase');
     }
+
+    public function user(){
+      return $this->belongsTo('App\User');
+    }
+
+    public function date_purchases(){
+      return $this->hasMany('App\DatePurchase');
+    }
 }

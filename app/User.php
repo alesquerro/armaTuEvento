@@ -31,4 +31,8 @@ class User extends Authenticatable
       return $this->belongsToMany('App\Product');
     }
 
+    // public function complete_name(){
+    //   return $this->first_name.' '.$this->last_name;
+    // }
+
 }

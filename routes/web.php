@@ -44,6 +44,8 @@ Route::get('/','Front\ProductController@index');
 Route::get('mis_compras','Front\UserController@show_purchases')->middleware('auth');
 Route::post('add_favourites/{id}','Front\UserController@add_favourites')->middleware('auth');
 Route::post('remove_favourites/{id}','Front\UserController@remove_favourites')->middleware('auth');
+Route::post('confirmar_reserva/{id}','Front\UserController@user_reservation')->middleware('auth');
+Route::post('rechazar_reserva/{id}','Front\UserController@user_reservation')->middleware('auth');
 
 Route::get('Admin/listar_productos','Admin\ProductController@index')->middleware('IsAdmin');
 

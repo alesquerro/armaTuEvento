@@ -22,7 +22,7 @@
             @foreach ($reservas as $reserva)
               <div style="border: 1px solid grey;border-radius: 10px;margin-top:10px;">
               <p>{{ 'Fecha compra: '.$reserva->purchase_date }}</p>
-              <p><strong>{{ 'Fecha compra: '.$reserva->event_date }}</strong></p>
+              <p><strong>{{ 'Fecha evento: '.$reserva->event_date }}</strong></p>
                   <table class="table-bordered tabla-reservas">
                     <thead >
                       <tr>
@@ -39,7 +39,21 @@
                   </table>
               <p>{{ 'Precio Final $: '.$reserva->total_amount }}</p>
               <p><strong>{{ 'Saldo a pagar $: '.$reserva->remainder }}</strong></p>
-              <p class="texto_color"><strong >{{ 'Estado de la reserva: En Espera' }}</strong></p>
+              <p class="texto_color"><strong >{{ 'Estado de la reserva: '.$reserva->state }}</strong></p>
+              @if ($reserva->state == 'aceptada')
+                <div class="">
+                  <form action="/confirmar_reserva/{{$reserva->id}}" method="post" class="botones-admin">
+                  @csrf
+                  <input type="hidden" name="tipo" value="aceptar">
+                  <button type="submit" name="button" ><span class="fa fa-check"></span>Aceptar</button>
+                  </form>
+                  <form action="/rechazar_reserva/{{$reserva->id}}" method="post" class="botones-admin">
+                  @csrf
+                  <input type="hidden" name="tipo" value="rechazar">
+                  <button type="submit" name="button" ><span class="fa fa-remove"></span>Rechazar</button>
+                  </form>
+                </div>
+              @endif
               </div>
             @endforeach
           @endif

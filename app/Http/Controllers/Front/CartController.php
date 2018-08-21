@@ -54,7 +54,6 @@ class CartController extends Controller
 
     //FIXME falta controlar logueo cuando este listo!!
     public function save(Request $request){
-
       $errores = $request->validate([
         'fecha_evento'=> 'required',
       ],[
@@ -71,9 +70,7 @@ class CartController extends Controller
         'state' => 'en espera',
         'event_date'=>request()->input('fecha_evento'),
         'active' => 1,
-        //FIXME falta agregar usuario logeado cuando este
-        //'user_id'=> $request->session()->get('usuario'),
-        'user_id' => 1,
+        'user_id' => auth()->user()->id,
         //FIXME falta direcciones!!!
         'address_id' => 1,
       ]);
