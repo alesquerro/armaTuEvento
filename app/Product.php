@@ -18,13 +18,18 @@ class Product extends Model
 	 	'price',
 	 	'price_type',
 	 	// 'address_id',
-	 	// 'company_id',
-	 	// 'type',
+	 	'company_id',
+	 	'type',
 	 	// 'active',
 
     ];
+	public function product_types()
+    {
+        return $this->belongsToMany('App\ProductType');
+    }
 
-    public function photos(){
+    public function photos()
+    {
       return $this->hasMany('App\ProductPhotos');
     }
 
