@@ -49,7 +49,8 @@ Route::get('Admin/listar_productos','Admin\ProductController@index')->middleware
 
 Route::get('Admin/dashboard','Admin\StaticController@dashboard')->middleware('IsAdmin');
 
-Route::get('Admin/Producto/edit/{id}','Admin\ProductController@edit')->middleware('IsAdmin');
+Route::post('Admin/Product/{id}','Admin\ProductController@edit')->middleware('IsAdmin');
+Route::put('Admin/Product/{id}','Admin\ProductController@update')->middleware('IsAdmin');
 Route::get('Admin/listar_productos','Admin\ProductController@index')->middleware('IsAdmin');
 
 Route::get('Admin/reservas','Admin\PurchaseController@reservation_list')->middleware('IsAdmin');

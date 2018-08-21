@@ -1,44 +1,91 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-@include('Components.head')
+@include('/Components/Admin/head')
 <body>
   <div class="container-fluid contenido">
-    <!-- INICIO NAV -->
-    @include('Components.header')
-    <!-- FIN NAV -->
+    @include('/Components/header')
+		<!-- FIN NAV -->
 
 
 
+		<div class="container-fluid  todo" >
+			<div class="contenido_listar_productos container">
+				<h1>Productos </h1>
+				<div class="row">
+					{{-- <ul> --}}
+						@foreach ($products as $product)
+  						<div class="col-sm-6">
+							{{-- <li class="modificar"> --}}
+								<div class="card">
+									<div class="card-body">
+										<form action="Product/{{$product->id}}" method="post">
+                      @csrf
+											<img class="card-img-top" style="max-width: 10em"  src="/subidos/productos/{{$product->cover}}" alt="{{$product->name}}">
+											<input type="hidden" name="producto" value="{{$product->id}}">
+                      <div class="form-group  text-center">
+                        <div>
+                          <button type="submit" class="col-lg-8 col-md-8 btn">Editar {{$product->name}}</button>
+                        </div>
+                      </div>
+											{{-- <button type="submit" value="Editar {{$product->name}}" class="col-lg-8 col-md-8 btn"> --}}
+										</form>
+									</div>
+								</div>	
+							{{-- </li>  --}}
+						</div>
+						@endforeach
+					{{-- </ul> --}}
+				</div>
+			</div>
 
-
-
-
-
-
-
-
-
-    <!--Footer-->
-    @include('Components.footer')
-    <!--/Footer-->
-    <script>
-      function mostrar_filtros(){
-        $("#lista_filtro").toggle(1000);
-      }
-      function mostrar_orden(){
-        $("#orden_filtro").toggle(1000);
-      }
-      function add_favourites(prod){
-        $("#add_favourites_"+prod).submit();
-      }
-      function remove_favourites(prod){
-        $("#remove_favourites_"+prod).submit();
-      }
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  @include('/Components/footer')
 </div>
+
+<script type="text/javascript">
+
+  var chart;
+  var chartData = [  
+  ['Salones',534],
+  ['Servicios' ,32],
+  ['Catering' ,34],
+  ['Amoblamiento',45],
+  ['Cotillon' , 7],
+  ];
+  var chart2;
+  var chartData2 = [  
+  ['Salones', 434],
+  ['Servicios' , 532],
+  ['Catering' , 734],
+  ['Amoblamiento',455],
+  ['Cotillon' , 723],
+  ];
+
+  $(document).ready(function(){
+
+    addChart();
+
+  });
+
+
+  addChart = function(){
+    chart = c3.generate({
+      bindto: '#bar-chart-one',
+      data: {
+        type: 'bar',
+        columns: chartData,      
+      }
+
+    });
+    chart2 = c3.generate({
+      bindto: '#bar-chart-two',
+      data: {
+        type: 'bar',
+        columns: chartData2,      
+      }
+
+    });
+  }
+
+</script>
 </body>
 </html>
