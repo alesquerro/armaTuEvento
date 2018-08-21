@@ -107,9 +107,7 @@ class ProductController extends Controller
         $id = request()->input('id');
         $data = $this->validator($request->all());
         $product = Product::find($id);
-        //dd($data);
         $product->fill($request->all());
-        //dd($product);
         $product->save();
         //Flash::message('El producto ha sido modificado!');
         return redirect('/Admin/listar_productos');
