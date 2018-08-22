@@ -61,7 +61,8 @@
             Reserva mínima $: {{ $producto->minimum_reservation }} </p>
           <p class="card-text">{{ $producto->description }}</p><!-- Descripcion salon -->
 
-            <div class="corazon card-body">
+            <div class="corazon card-body"  style="    justify-content: stretch;
+    padding: 15px;     align-items: center;">
               <p class="card-text"> <!-- botones favorito y compartir -->
                 <div class="d-flex justify-content align-items-left">
 
@@ -82,15 +83,17 @@
                           <span class="fa fa-heart-o" style="font-size:24px;color:#B21917"></span>
                         </a>
                       @endif
-
-                  <a href="#" id="likes">
-                    <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
-                  </a>
+                </p>
+              </div><!-- <div class="d-flex justify-content align-items-left"> -->
+                 <div id="social-links " class="mr-4">
+                  <ul style="list-style: none; margin-bottom: 0px;">
+                    <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://jorenvanhocht.be" class="social-button my-class" id="my-id"><span class="fa fa-facebook-official"></span></a></li>
+                  </ul>
+                </div>
                   <!--a href="#" id="shopping-cart">
                     <i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i>
                   </a-->
-                </p>
-              </div><!-- <div class="d-flex justify-content align-items-left"> -->
+
                 <div class="btn-group">
                   <a class="btn btn-sm btn-outline-secondary"  href="contacto/{{ $producto->id }}">Consultar</a>
                   <!--<a class="btn btn-sm btn-outline-secondary"  href="carrito.php?producto=<?php //echo $producto['id'];  ?>">Agregar a carrito</a>-->

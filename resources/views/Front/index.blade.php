@@ -93,7 +93,8 @@
                 <p class="card-text">{{ $salon->description }}></p>
                 <p class="card-text">Consultar disponibilidad y precio</p>
               </div>
-              <div class="corazon" style="justify-content: flex-end; padding: 15px;">
+              <div class="corazon" style="    justify-content: space-evenly;
+    padding: 15px;     align-items: center;">
 
                 @if (Auth::check() && in_array($salon->id,$favoritos) )
                   <form id="remove_favourites_{{$salon->id}}" action="remove_favourites/{{$salon->id}}" method="post">
@@ -121,9 +122,14 @@
                     <span class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></span>
                   </button>
                 </form>
-                <a href="#" id="likes">
+                <!--<a href="#" id="likes">
                   <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
-                </a>
+                </a>-->
+                <div id="social-links">
+                  <ul style="list-style: none; margin-bottom: 0px;">
+                    <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://jorenvanhocht.be" class="social-button my-class" id="my-id"><span class="fa fa-facebook-official"></span></a></li>
+                  </ul>
+                </div>
 
 
                 <div class="d-flex justify-content-between align-items-center">
@@ -159,7 +165,8 @@
                   <p class="card-text">{{ $servicio->description }}</p>
                   <p class="card-text">Consultar disponibilidad y precio</p>
                 </div>
-                <div class="corazon" style="justify-content: flex-end; padding: 15px;">
+                <div class="corazon" style="    justify-content: space-evenly;
+    padding: 15px;     align-items: center;">
                   @if (Auth::check() && in_array($servicio->id,$favoritos) )
                     <form id="remove_favourites_{{$servicio->id}}" action="remove_favourites/{{$servicio->id}}" method="post">
                       @csrf
@@ -177,9 +184,9 @@
                       <span class="fa fa-heart-o" style="font-size:24px;color:#B21917"></span>
                     </a>
                   @endif
-                  <a href="#" id="likes">
+                  <!--<a href="#" id="likes">
                     <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
-                  </a>
+                  </a>-->
                   <form  action="/carrito/{{ $servicio->id }}" method="post" id="agregar_carrito_{{ $servicio->id }}">
                     @csrf
                     <input type="hidden" name="id" value="{{ $servicio->id }}">
@@ -188,6 +195,15 @@
                 <button onclick="agregar_carrito({{ $servicio->id }})" class="btn btn-link btn-link-custom">
                   <span class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></span>
                 </button>
+                   </form>
+                                <!--<a href="#" id="likes">
+                  <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
+                </a>-->
+                <div id="social-links">
+                  <ul style="list-style: none;margin-bottom: 0px;">
+                    <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://jorenvanhocht.be" class="social-button my-class" id="my-id"><span class="fa fa-facebook-official"></span></a></li>
+                  </ul>
+                </div>
                 <!--input type="submit" name="" value="carrito"-->
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
@@ -195,7 +211,7 @@
                     <a class="btn btn-sm btn-outline-secondary" href="contacto/{{ $servicio->id }}"  onclick="agregar_carrito(<?php //echo servicio id ?>)">Consultar</a>
                   </div>
                 </div>
-              </form>
+           
             </div>
           </div><!-- card -->
         </div> <!-- col -->

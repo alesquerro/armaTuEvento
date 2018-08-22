@@ -23,7 +23,7 @@
               <div style="border: 1px solid grey;border-radius: 10px;margin-top:10px;">
               <p>{{ 'Fecha compra: '.$reserva->purchase_date }}</p>
               <p><strong>{{ 'Fecha evento: '.$reserva->event_date }}</strong></p>
-                  <table class="table-bordered tabla-reservas">
+                  <table class="table table-bordered tabla-reservas">
                     <thead >
                       <tr>
                         <th>Producto</th>

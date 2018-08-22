@@ -24,7 +24,7 @@
               </p>
               <p>{{ 'Usuario: ('. $reserva->user->id .') '.$reserva->user->first_name. ' - '.$reserva->user->email }}</p>
               <p><strong>{{ 'Fecha reserva: '.$reserva->event_date }}</strong></p>
-                  <table class="table-bordered tabla-reservas">
+                  <table class="table table-bordered tabla-reservas">
                     <thead >
                       <tr>
                         <th>Producto</th>
