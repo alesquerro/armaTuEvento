@@ -42,6 +42,7 @@ Route::get('listado','Front\ProductController@list');
 Route::post('listado','Front\ProductController@list_post');
 Route::get('listado/{tipo}/{tipo_evento}/{fecha}/{tipo_producto}/{texto}','Front\ProductController@listParameters');
 Route::get('/','Front\ProductController@index');
+Route::post('add_filter','Front\ProductController@add_filter');
 
 Route::get('mis_compras','Front\UserController@show_purchases')->middleware('auth');
 Route::post('add_favourites/{id}','Front\UserController@add_favourites')->middleware('auth');

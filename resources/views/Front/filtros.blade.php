@@ -77,9 +77,32 @@
 </div>
 
 <aside class="list_lateral">
+
+  <h4>Filtros aplicados</h4>
+  <ul>
+  @forelse ($filtros_aplicados as $key => $value)
+    <h4>{{ $key }}</h4>
+    @foreach ($value as $val)
+      @if ($key == 'tipo_eventos')
+        @foreach ($tipo_eventos as $te)
+          @if ($te['id'] == $val)
+            <li>
+              <span>{{ $te['name']}}</span>
+              <span class="fa fa-remove"></span>
+            </li>
+          @endif
+        @endforeach
+      @else
+        <li>{{ $val }}</li>
+      @endif
+    @endforeach
+  @empty
+    No hay filtros aplicados
+  @endforelse
+  </ul>
+  <h4>Fecha</h4>
   <form action="" method="post">
     <div class="form-group fecha_listado">
-      <label for="fecha-bg" class="col-3">Fecha</label>
       <div class="col-12">
         <input type="date" id="fecha-bg" class="form-control" placeholder="Fecha" name="Fecha" value="<?php echo $_GET['Fecha'] ?? ''; ?>">
       </div>
@@ -89,15 +112,30 @@
 
       <h4>Tipo de Producto</h4>
       <ul>
-        <li>Salón</li>
-        <li>Servicio</li>
+        @foreach (['salon'=>'Salón','servicio' => 'Servicio'] as $key => $value)
+        <li><span>{{ $value }}<span>
+            @if ($tipo == $key)
+                <span class="fa fa-check"></span>
+            @endif
+        </li>
+        @endforeach
       </ul>
     </div>
   <h4>Tipo de eventos</h4>
   <ul>
     @foreach ($tipo_eventos as $value)
       <a href="{{ 'te_'.$value->id }}" >
-        <li>{{ $value->name }}</li>
+        <li>
+            @if (!array_key_exists('tipo_eventos',$filtros_aplicados) || array_key_exists('tipo_eventos',$filtros_aplicados) && ! in_array($value->id,$filtros_aplicados['tipo_eventos']) )
+              <form action="/add_filter" method="post">
+                @csrf
+                <input type="hidden" name="tipo_evento" value="{{ $value->id }}">
+                <button type="sumbit" class="btn btn-link">{{ $value->name }}</button>
+              </form>
+
+            @endif
+
+        </li>
       </a>
     @endforeach
   </ul>
