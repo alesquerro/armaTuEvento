@@ -7,14 +7,14 @@
     <!-- INICIO NAV -->
     @include('Components.header')
     <!-- FIN NAV -->
-    
+
     <div class="listado contenido">
       @include('Front.filtros',['tipo_eventos' => $tipo_eventos,'tipo_salon'=>$tipo_salon, 'tipo_servicio'=>$tipo_servicio, 'tipo' => $tipo,'filtros_aplicados' =>$filtros_aplicados])
 
       <main class="list_prod">
         <div class="row card_row">
 
-          @foreach ($productos as $producto)
+          @forelse ($productos as $producto)
             <div class="col-sm-12 col-md-6 col-lg-4 card_margin">
               <div class="card mb-4 box-shadow" id="prod{{$producto->id}}">
                 <div class="img_thumb">
@@ -67,12 +67,11 @@
                   </div>
                 </div>
               </div>
-          @endforeach
+          @empty
 
-
+            No hay productos que coincidan con todos los filtros seleccionados
+          @endforelse
           </div>
-
-
         </div>
       </main>
 

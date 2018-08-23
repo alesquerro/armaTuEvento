@@ -106,6 +106,7 @@ class ProductController extends Controller
 
     //FIXME falta seguir esto!!!!!
     public function listParameters($tipo, $tipo_evento,$fecha,$tipo_producto,$texto){
+
       $filtros_aplicados = [];
       $query = Product::query();
       $tipo_list =  explode('=',$tipo);
@@ -137,12 +138,24 @@ class ProductController extends Controller
         }
       }
       if($tipo_producto){
-
         $tp_list =  explode('=',$tipo_producto);
         if(count( $tp_list ) == 2 && $tp_list[1] && $tp_list[1] != 'todo'){
           $query->where('product_type_id',$tp_list[1]);
-          $fitros_aplicados['tipo_producto'] = [$tp_list[1]];
+          $filtros_aplicados['tipo_producto'] = [$tp_list[1]];
+          $tps = explode('_',$tp_list[1]);
+          $first = true;
+          $tp_ids = [];
+          foreach ($tps as $tp) {
+            if(is_numeric($tp)){
+              $tp_ids[] = $tp;
+            }
+          }
+           if($tp_ids){
+            $query->whereIn('product_type_id',$tp_ids);
+            $filtros_aplicados['tipo_producto'] = $tp_ids;
+          }
         }
+
       }
       if($texto){
           //FIXME ver esto!!!!
@@ -165,11 +178,13 @@ class ProductController extends Controller
       $tipo_eventos = EventType::all();
       $tipo_salon = ProductType::where('product_type','salon')->get();
       $tipo_servicio = ProductType::where('product_type','servicio')->get();
+      $tipo_productos = $tipo_salon->merge($tipo_servicio);
       return view('Front.listado', [
           'productos' => $productos,
           'favoritos' => $favoritos,
           'tipo_eventos' => $tipo_eventos,
           'tipo_salon' => $tipo_salon,
+          'tipo_productos' => $tipo_productos,
           'tipo_servicio' => $tipo_servicio,
           'tipo' => $tipo,
           'filtros_aplicados' => $filtros_aplicados,
@@ -189,8 +204,33 @@ class ProductController extends Controller
       }
 
       if(array_key_exists('tipo_evento', $data)){
+        if ($path_data['tipo-evento'][0] == 'todo') {
+          $path_data['tipo-evento'] = [];
+        }
         if(! in_array($data['tipo_evento'],$path_data['tipo-evento'])){
           $path_data['tipo-evento'][] = $data['tipo_evento'];
+        }
+      }
+      if(array_key_exists('tipo_producto', $data)){
+        //dd($path_data['tipo-producto']);
+        if ($path_data['tipo-producto'][0] == 'todo') {
+          $path_data['tipo-producto'] = [];
+        }
+        if(! in_array($data['tipo_producto'],$path_data['tipo-producto'])){
+          $path_data['tipo-producto'][] = $data['tipo_producto'];
+        }
+      }
+
+      if(array_key_exists('tipo', $data)){
+        //dd($path_data);
+        if($data['tipo'] == 'salon' && $path_data['tipo'][0] != 'servicio'){
+            $path_data['tipo'] = ['salon'];
+        }
+        elseif($data['tipo'] == 'servicio' && $path_data['tipo'][0] != 'salon'){
+            $path_data['tipo'] = ['servicio'];
+        }
+        else{
+            $path_data['tipo'] = ['todo'];
         }
       }
 
@@ -200,6 +240,47 @@ class ProductController extends Controller
         $url .= $key.'=';
         $url .= implode('_',$value);
       }
+      return redirect($url);
+    }
+
+    public function remove_filter(){
+      $pagina_anterior = url()->previous();
+      $pa_list = explode('/',$pagina_anterior);
+      $path_data = [];
+      $data = request()->all();
+      foreach ($pa_list as $value) {
+        $var = explode('=',$value);
+        if(in_array($var[0],['tipo','tipo-evento','fecha','tipo-producto','texto'])){
+          $path_data[$var[0]] = explode('_',$var[1]);
+        }
+      }
+      foreach ($data as $key => $value) {
+        if (array_key_exists($key,$path_data)) {
+          if(in_array($value,$path_data[$key])){
+            //dd($path_data[$key], $value);
+            foreach ($path_data[$key] as $k => $val){
+              if($value == $val){
+                unset($path_data[$key][$k]);
+                if(empty($path_data[$key])){
+                  $path_data[$key][] = 'todo';
+                }
+              }
+            }
+          }
+        }
+      }
+      $url = '/listado';
+      foreach ($path_data as $key => $value) {
+        $url .= '/';
+        $url .= $key.'=';
+        $url .= implode('_',$value);
+      }
+      return redirect($url);
+
+    }
+
+    public function clean_filters(){
+      $url = "/listado/tipo=todo/tipo-evento=todo/fecha=todo/tipo-producto=todo/texto=todo";
       return redirect($url);
     }
 

@@ -83,23 +83,44 @@
   @forelse ($filtros_aplicados as $key => $value)
     <h4>{{ $key }}</h4>
     @foreach ($value as $val)
+      <form class="" action="/eliminar_filtro" method="post">
+        @csrf
+        @if ($key == 'tipo_eventos')
+          <input type="hidden" name="tipo-evento" value="{{$val}}">
+        @elseif($key == 'tipo_producto')
+          <input type="hidden" name="tipo-producto" value="{{$val}}">
+        @else
+          <input type="hidden" name="{{$key}}" value="{{$val}}">
+        @endif
+        <li>
       @if ($key == 'tipo_eventos')
         @foreach ($tipo_eventos as $te)
           @if ($te['id'] == $val)
-            <li>
               <span>{{ $te['name']}}</span>
-              <span class="fa fa-remove"></span>
-            </li>
+          @endif
+        @endforeach
+      @elseif($key == 'tipo_producto')
+        @foreach ($tipo_productos as $tp)
+          @if ($tp['id'] == $val)
+
+              <span>{{ $tp['name']}}</span>
           @endif
         @endforeach
       @else
-        <li>{{ $val }}</li>
+          <span>{{ $val }}</span>
       @endif
+      <button type="sumbit" name="button" class="btn btn-link"><span class="fa fa-remove"></span></button>
+      </li>
+      </form>
     @endforeach
   @empty
     No hay filtros aplicados
   @endforelse
   </ul>
+  <form class="" action="/limpiar_filtros" method="post">
+    @csrf
+    <button type="submit" name="button">Limpiar Filtros</button>
+  </form>
   <h4>Fecha</h4>
   <form action="" method="post">
     <div class="form-group fecha_listado">
@@ -113,9 +134,14 @@
       <h4>Tipo de Producto</h4>
       <ul>
         @foreach (['salon'=>'Salón','servicio' => 'Servicio'] as $key => $value)
-        <li><span>{{ $value }}<span>
-            @if ($tipo == $key)
-                <span class="fa fa-check"></span>
+        <li>
+            @if ($tipo != $key)
+              <form action="/add_filter" method="post">
+                @csrf
+                <input type="hidden" name="tipo" value="{{ $key }}">
+                <button type="sumbit" class="btn btn-link">{{ $value }}</button>
+              </form>
+
             @endif
         </li>
         @endforeach
@@ -139,13 +165,20 @@
       </a>
     @endforeach
   </ul>
+
     @if ( $tipo !='servicio')
     <h4>Tipo de Salón</h4>
     <ul>
       @foreach ($tipo_salon as $value)
-        <a href="{{ 'tsa_'.$value->id }}" >
-          <li>{{ $value->name }}</li>
-        </a>
+
+        @if (!array_key_exists('tipo_producto',$filtros_aplicados) || array_key_exists('tipo_producto',$filtros_aplicados) && ! in_array($value->id,$filtros_aplicados['tipo_producto']) )
+          <form action="/add_filter" method="post">
+            @csrf
+            <input type="hidden" name="tipo_producto" value="{{ $value->id }}">
+            <button type="sumbit" class="btn btn-link">{{ $value->name }}</button>
+          </form>
+
+        @endif
       @endforeach
     </ul>
     @endif
@@ -153,9 +186,14 @@
     <h4>Tipo de Servicios</h4>
     <ul>
       @foreach ($tipo_servicio as $value)
-        <a href="{{ 'tse_'.$value->id }}" >
-          <li>{{ $value->name }}</li>
-        </a>
+        @if (!array_key_exists('tipo_producto',$filtros_aplicados) || array_key_exists('tipo_producto',$filtros_aplicados) && ! in_array($value->id,$filtros_aplicados['tipo_producto']) )
+          <form action="/add_filter" method="post">
+            @csrf
+            <input type="hidden" name="tipo_producto" value="{{ $value->id }}">
+            <button type="sumbit" class="btn btn-link">{{ $value->name }}</button>
+          </form>
+
+        @endif
       @endforeach
     </ul>
     @endif
