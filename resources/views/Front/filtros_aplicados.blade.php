@@ -14,7 +14,8 @@
       @else
         <input type="hidden" name="{{$key}}" value="{{$val}}">
       @endif
-      <li class="filtros_aplicados">
+    <li class="filtros_aplicados">
+    <button type="sumbit" name="button" class="btn btn-link link_filtros">
     @if ($key == 'tipo_eventos')
       @foreach ($tipo_eventos as $te)
         @if ($te['id'] == $val)
@@ -31,7 +32,7 @@
     @else
         <span>{{ $val }}</span>
     @endif
-    <button type="sumbit" name="button" class="btn btn-link link_filtros"><span class="fa fa-remove"></span></button>
+    <span class="fa fa-remove"></span></button>
     </li>
     </form>
   @endforeach

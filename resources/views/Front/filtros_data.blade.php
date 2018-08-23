@@ -28,8 +28,8 @@
 <h4>Tipo de eventos</h4>
 <ul>
   @foreach ($tipo_eventos as $value)
-    <a href="{{ 'te_'.$value->id }}" >
-      <li>
+
+      <li class="filtros_aplicados">
           @if (!array_key_exists('tipo_eventos',$filtros_aplicados) || array_key_exists('tipo_eventos',$filtros_aplicados) && ! in_array($value->id,$filtros_aplicados['tipo_eventos']) )
             <form action="/add_filter" method="post">
               @csrf
@@ -40,7 +40,7 @@
           @endif
 
       </li>
-    </a>
+
   @endforeach
 </ul>
 
@@ -50,13 +50,15 @@
     @foreach ($tipo_salon as $value)
 
       @if (!array_key_exists('tipo_producto',$filtros_aplicados) || array_key_exists('tipo_producto',$filtros_aplicados) && ! in_array($value->id,$filtros_aplicados['tipo_producto']) )
+        <li class="filtros_aplicados">
         <form action="/add_filter" method="post">
           @csrf
           <input type="hidden" name="tipo_producto" value="{{ $value->id }}">
           <button type="sumbit" class="btn btn-link link_filtros">{{ $value->name }}</button>
         </form>
-
+        </li>
       @endif
+
     @endforeach
   </ul>
   @endif
@@ -65,12 +67,13 @@
   <ul>
     @foreach ($tipo_servicio as $value)
       @if (!array_key_exists('tipo_producto',$filtros_aplicados) || array_key_exists('tipo_producto',$filtros_aplicados) && ! in_array($value->id,$filtros_aplicados['tipo_producto']) )
+        <li class="filtros_aplicados">
         <form action="/add_filter" method="post">
           @csrf
           <input type="hidden" name="tipo_producto" value="{{ $value->id }}">
           <button type="sumbit" class="btn btn-link link_filtros">{{ $value->name }}</button>
         </form>
-
+        </li>
       @endif
     @endforeach
   </ul>
