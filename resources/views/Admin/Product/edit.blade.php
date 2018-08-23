@@ -76,13 +76,19 @@
 							<div class="form-group">
 								<label for="tipoProducto" class="col-form-label h4">Tipo de producto
 								</label>
+										{{$product->type}}
 								<div>
 									<select name="type">
-										<option value="salon">salon
-										</option>
 
-										<option value="servicio">servicio
-										</option>
+										
+											<option value="salon" {{ $product->type == 'salon' ? 'selected' : '' }}>
+												salon
+											</option>
+										
+											<option value="servicio" {{ $product->type == 'servicio' ? 'selected' : '' }}>
+												servicio
+											</option>
+										
 									</select>
 								</div>
 							</div>

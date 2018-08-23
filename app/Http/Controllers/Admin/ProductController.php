@@ -136,7 +136,7 @@ class ProductController extends Controller
         return view('Admin.Product.edit', [
             'product' => $product,
             'product_types' => $product_types, 
-            'own_product_types' => $own_products_id;
+            'own_product_types' => $own_products_id,
             'salonServicio' => $salonServicio
         ]);
     }
@@ -153,7 +153,7 @@ class ProductController extends Controller
         $id = request()->input('id');
         $data = $this->validator($request->all());
         $product = Product::find($id);
-        $filename = '';
+        $filename = $product->cover;
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
             $filename = $request['name'] . '.' . $file->extension();
@@ -162,6 +162,7 @@ class ProductController extends Controller
         }
         $product->fill($request->all());
         $product->cover = $filename;
+        $product->product_types()->sync($request['product_types']);
         $product->save();
         // Flash::message('El producto ha sido modificado!');
         return redirect('/Admin/listar_productos');
