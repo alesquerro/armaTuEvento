@@ -85,7 +85,7 @@
         <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
           <div class="card mb-4 box-shadow">
             <div class="img_thumb">
-              <img class="card-img-top" src="subidos/productos/{{ $salon->cover }}"  alt="Salón 1">
+              <img class="card-img-top" src="/storage/{{ $salon->cover }}"  alt="Salón 1">
             </div>
             <div class="card-body">
               <p class="h4" id="nombre_salon" name="nombre_salon">
@@ -157,7 +157,7 @@
           <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
             <div class="card mb-4 box-shadow">
               <div class="img_thumb">
-                <img class="card-img-top" src="subidos/productos/{{ $servicio->cover }}"  alt="Foto Servicio">
+                <img class="card-img-top" src="/storage/{{ $servicio->cover }}"  alt="Foto Servicio">
               </div>
               <div class="card-body">
                 <p class="h4" id="nombre_salon" name="nombre_salon">
@@ -211,7 +211,7 @@
                     <a class="btn btn-sm btn-outline-secondary" href="contacto/{{ $servicio->id }}"  onclick="agregar_carrito(<?php //echo servicio id ?>)">Consultar</a>
                   </div>
                 </div>
-           
+
             </div>
           </div><!-- card -->
         </div> <!-- col -->
