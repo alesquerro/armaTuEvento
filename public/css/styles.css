@@ -230,6 +230,10 @@ color: #999;font-size: 20px; line-height: 1.45; margin-bottom: 40px;
 .carrito_boton{
 	margin-left: 10px;
 }
+.botones_carrito{
+	display: flex;
+	justify-content: space-around;
+}
 
 /* Para no separar el icono del buscador del nav*/
 

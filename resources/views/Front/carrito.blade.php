@@ -50,10 +50,14 @@
         </div>
 
       </div>
-    </div><div class="form-group  text-center">
-      <div>
+    </div><div class="form-group text-center">
+      <div class="botones_carrito text-center">
         <a tabindex="0" class="btn btn-lg btn-info btn-sm" role="button" onclick="solicitar_reserva()">Solicitar Reserva</a>
-        <a class="btn btn-lg btn-secondary btn-sm" id="volver" href="/listado">Ver más productos</a>
+        {{-- <a class="btn btn-lg btn-secondary btn-sm" id="volver" href="/listado">Ver más productos</a> --}}
+        <form class="" action="/listado" method="post">
+          @csrf
+          <button class="btn btn-lg btn-secondary btn-sm" id="volver" type="submit" name="button">Ver más productos</button>
+        </form>
       </div>
     </div>
     <div class="form-group  text-center">

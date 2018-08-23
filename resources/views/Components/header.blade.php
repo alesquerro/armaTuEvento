@@ -28,7 +28,8 @@ $usuario = false;
     </a>
   </div>
   <div class="ingreso-busquedas">
-    <form action="listado" method="get" id="buscar_lg">
+    <form action="/listado" method="post" id="buscar_lg">
+      @csrf
       <div class="input-group buscador">
         <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" name="texto">
         <button class="btn" type="submit" onclick="buscar_lg()">
@@ -112,7 +113,8 @@ function mostrar_menu_md(){
     </div>
   </div>
   <div class="ingreso-busquedas">
-    <form action="listado" method="get" id="buscar_sm">
+    <form action="/listado" method="post" id="buscar_sm">
+      @csrf
       <div class="input-group buscador">
         <input class="form-control" type="search" placeholder="Buscar" name="texto">
         <button class="btn" type="submit" onclick="buscar_sm()">
@@ -178,7 +180,8 @@ function mostrar_menu_md(){
       </a>
     </div>
     <div class="ingreso-busquedas-md">
-      <form action="listado" method="get" id="buscar_md">
+      <form action="/listado" method="post" id="buscar_md">
+        @csrf
         <div class="input-group buscador">
           <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" name="texto">
           <button class="btn" type="submit" onclick="buscar_md()">

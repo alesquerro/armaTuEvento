@@ -58,6 +58,7 @@ class ProductController extends Controller
 
     public function list()
     {
+      dd('aca');
         $productos = Product::get();
         $favoritos = [];
         if(auth()->check()){
@@ -78,25 +79,33 @@ class ProductController extends Controller
         ]);
     }
     public function list_post(Request $request){
+      $data = $request->all();
+      //dd($data);
       $tipo = 'todo';
       $fecha = 'todo';
       $tipo_evento = 'todo';
       $tipo_producto = 'todo';
       $texto = 'todo';
-      $tipo_prod = $request->input('tipo');
-      if($tipo_prod && count($tipo_prod) == 1 ){
-        if($tipo_prod[0] == 'salon'){
-          $tipo = $tipo_prod[0];
-        }
-        if($tipo_prod[0] == 'servicio'){
-          $tipo = $tipo_prod[0];
+      if(array_key_exists('tipo',$data)){
+        $tipo_prod = $data['tipo'];
+        if($tipo_prod && count($tipo_prod) == 1 ){
+          if($tipo_prod[0] == 'salon'){
+            $tipo = $tipo_prod[0];
+          }
+          if($tipo_prod[0] == 'servicio'){
+            $tipo = $tipo_prod[0];
+          }
         }
       }
-      if($request->input('tipoEvento')){
-        $tipo_evento = $request->input('tipoEvento');
+      if(array_key_exists('tipoEvento',$data)){
+        if($data['tipoEvento']){
+          $tipo_evento = $data['tipoEvento'];
+        }
       }
-      if($request->input('texto')){
-        $tipo_producto = input('texto');
+      if(array_key_exists('texto',$data)){
+        if($data['texto']){
+          $texto = $data['texto'];
+        }
       }
       $url = "/listado/tipo=$tipo/tipo-evento=$tipo_evento/fecha=$fecha/tipo-producto=$tipo_producto/texto=$texto";
 
@@ -106,7 +115,7 @@ class ProductController extends Controller
 
     //FIXME falta seguir esto!!!!!
     public function listParameters($tipo, $tipo_evento,$fecha,$tipo_producto,$texto){
-
+      //dd('aca');
       $filtros_aplicados = [];
       $query = Product::query();
       $tipo_list =  explode('=',$tipo);
