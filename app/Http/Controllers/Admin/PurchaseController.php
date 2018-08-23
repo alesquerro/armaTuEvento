@@ -12,7 +12,17 @@ class PurchaseController extends Controller
 {
     public function reservation_list(){
       $reservations = Purchase::where('state','en espera')->get();
-      return view('Admin/Purchase/reservas',['reservas'=> $reservations]);
+      return view('Admin/Purchase/reservas',['reservas'=> $reservations, 'title'=>'Reservas pendientes', 'type'=>'pendientes']);
+    }
+
+    public function confirmed_reservation_list(){
+      $reservations = Purchase::whereIn('state',['confirmada','aceptada'])->get();
+      return view('Admin/Purchase/reservas',['reservas'=> $reservations, 'title'=>'Reservas aceptadas', 'type'=>'aceptadas']);
+    }
+
+    public function rejected_reservation_list(){
+      $reservations = Purchase::whereIn('state',['rechazada','anulada por usuario'])->get();
+      return view('Admin/Purchase/reservas',['reservas'=> $reservations, 'title'=>'Reservas anuladas','type'=>'anuladas']);
     }
 
     public function reservation_admin($id){

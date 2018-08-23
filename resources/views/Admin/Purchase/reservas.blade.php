@@ -9,7 +9,7 @@
       <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2" >
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" id="seleccionados-tab" data-toggle="tab" href="#seleccionados" role="tab" aria-controls="seleccionados" aria-selected="true">Reservas</a>
+          <a class="nav-link active" id="seleccionados-tab" data-toggle="tab" href="#seleccionados" role="tab" aria-controls="seleccionados" aria-selected="true">{{ $title }}</a>
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
@@ -20,6 +20,17 @@
             @if (Session::has('message'))
               <div class="alert alert-info">{{ Session::get('message') }}</div>
             @endif
+            <div class="form-group text-center botones-reservas">
+              <form action="/Admin/reservas" method="get">
+              <button type="submit" class="btn btn-lg {{ $type == 'pendientes' ? 'btn-primary': 'btn-secondary' }} btn-sm" id="volver">Ver reservas Pendientes</button>
+              </form>
+              <form action="/Admin/reservas_confirmadas" method="get">
+              <button type="submit" class="btn btn-lg {{ $type == 'aceptadas' ? 'btn-primary': 'btn-secondary' }} btn-sm" id="volver">Ver reservas Aceptadas</button>
+              </form>
+              <form action="/Admin/reservas_anuladas" method="get">
+              <button type="submit" class="btn btn-lg {{ $type == 'anuladas' ? 'btn-primary': 'btn-secondary' }} btn-sm" id="volver">Ver reservas Anuladas</button>
+              </form>
+            </div>
             @foreach ($reservas as $reserva)
               <div style="border: 1px solid grey;border-radius: 10px;margin-top:10px;">
                 <p>
@@ -46,7 +57,7 @@
                   </table>
               <p>{{ 'Precio Final $: '.$reserva->total_amount }}</p>
               <p><strong>{{ 'Saldo a pagar $: '.$reserva->remainder }}</strong></p>
-              <p class="texto_color"><strong >{{ 'Estado de la reserva: En Espera' }}</strong></p>
+              <p class="texto_color"><strong >{{ 'Estado de la reserva: '. $reserva->state }}</strong></p>
                 <div class="reservas-admin">
                   <form action="/Admin/reserva_admin/{{$reserva->id}}" method="post" class="botones-admin">
                   @csrf

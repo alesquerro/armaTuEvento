@@ -18,7 +18,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 card_margin">
               <div class="card mb-4 box-shadow" id="prod{{$producto->id}}">
                 <div class="img_thumb">
-                  <img class="card-img-top" src="/subidos/productos/{{ $producto->cover }}" alt="Foto producto">
+                  <img class="card-img-top" src="/storage/{{ $producto->cover }}" alt="Foto producto">
                 </div>
                 <div class="card-body" id="prod{{$producto->name}}">
                   <p class="h4">{{ $producto->name }}</p>
@@ -87,7 +87,7 @@
 
     <script>
 
-      
+
       function add_favourites(prod){
         $("#add_favourites_"+prod).submit();
       }
