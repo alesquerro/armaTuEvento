@@ -55,9 +55,10 @@ class CartController extends Controller
     //FIXME falta controlar logueo cuando este listo!!
     public function save(Request $request){
       $errores = $request->validate([
-        'fecha_evento'=> 'required',
+        'fecha_evento'=> 'required|after:today',
       ],[
         'fecha_evento.required' => 'La fecha del evento es obligatoria',
+        'fecha_evento.after' => 'La fecha del evento debe ser mayor a hoy'
       ]);
       $product_ids = $request->session()->get('carrito');
       $products = Product::whereIn('id',$product_ids)->get();
