@@ -602,6 +602,11 @@ p.texto_color {
 .filtros_aplicados{
 	list-style: none;
 }
+
+.botones-reservas{
+	display: flex;
+	justify-content: space-around;
+}
 /* FIN CARRITO */
 
 

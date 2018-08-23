@@ -9,19 +9,28 @@
       <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2" >
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" id="seleccionados-tab" data-toggle="tab" href="#seleccionados" role="tab" aria-controls="seleccionados" aria-selected="true">Reservas</a>
+          <a class="nav-link active" id="seleccionados-tab" data-toggle="tab" href="#seleccionados" role="tab" aria-controls="seleccionados" aria-selected="true">{{$title}}</a>
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active text-center" id="seleccionados" role="tabpanel" aria-labelledby="seleccionados-tab">
           @if (! $reservas)
-            <h1 class="carrito_vacio text-center mt-5 mb-5" >No tenés reservas</h1>
+            <h1 class="carrito_vacio text-center mt-5 mb-5" >No tenés reservas pendientes</h1>
             <h2 class="bajada-carrito" >¿No sabés qué reservar? ¡Miles de salones y servicios te esperan!</h2>
 
           @else
             @if (Session::has('message'))
               <div class="alert alert-info">{{ Session::get('message') }}</div>
             @endif
+            <div class="form-group text-center botones-reservas">
+
+              <form action="/mis_compras_confirmadas" method="get">
+              <button type="submit" class="btn btn-lg btn-secondary btn-sm" id="volver">Ver reservas Confirmadas</button>
+              </form>
+              <form action="/mis_compras_anuladas" method="get">
+              <button type="submit" class="btn btn-lg btn-secondary btn-sm" id="volver">Ver reservas Anuladas</button>
+              </form>
+            </div>
             @foreach ($reservas as $reserva)
               <div style="border: 1px solid grey;border-radius: 10px;margin-top:10px;">
               <p>{{ 'Fecha compra: '.$reserva->purchase_date }}</p>
@@ -64,9 +73,11 @@
       </div>
     </div>
     <div class="form-group  text-center">
-      <div>
-        <a class="btn btn-lg btn-secondary btn-sm" id="volver" href="/listado">Ver más productos</a>
-      </div>
+
+      <form action="/listado" method="post">
+      @csrf
+      <button type="submit" name="button" class="btn btn-lg btn-secondary btn-sm" id="volver">Ver más productos</button>
+      </form>
     </div>
   </div>
     @include('Components.footer')

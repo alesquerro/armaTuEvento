@@ -47,6 +47,8 @@ Route::post('eliminar_filtro','Front\ProductController@remove_filter');
 Route::post('limpiar_filtros','Front\ProductController@clean_filters');
 
 Route::get('mis_compras','Front\UserController@show_purchases')->middleware('auth');
+Route::get('mis_compras_confirmadas','Front\UserController@show_confirmed_purchases')->middleware('auth');
+Route::get('mis_compras_anuladas','Front\UserController@show_rejected_purchases')->middleware('auth');
 Route::post('add_favourites/{id}','Front\UserController@add_favourites')->middleware('auth');
 Route::post('remove_favourites/{id}','Front\UserController@remove_favourites')->middleware('auth');
 Route::post('confirmar_reserva/{id}','Front\UserController@user_reservation')->middleware('auth');
