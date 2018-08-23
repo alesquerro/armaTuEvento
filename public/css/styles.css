@@ -599,6 +599,9 @@ p.texto_color {
 	padding: 0;
 
 }
+.filtros_aplicados{
+	list-style: none;
+}
 /* FIN CARRITO */
 
 

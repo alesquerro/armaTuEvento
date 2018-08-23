@@ -87,12 +87,7 @@
 
     <script>
 
-      function mostrar_filtros(){
-        $("#lista_filtro").toggle(1000);
-      }
-      function mostrar_orden(){
-        $("#orden_filtro").toggle(1000);
-      }
+      
       function add_favourites(prod){
         $("#add_favourites_"+prod).submit();
       }
