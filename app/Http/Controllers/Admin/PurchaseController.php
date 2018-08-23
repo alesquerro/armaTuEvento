@@ -21,38 +21,39 @@ class PurchaseController extends Controller
       $action = request()->input('tipo');
       $url = '/Admin/reservas';
       $all_products_ok = true;
-      //dd($reservation->);
+      $msg = '';
       if($reservation && $action == 'aceptar'){
+        $msg = 'Reserva ID: '.$reservation->id.' aceptada';
         foreach ($reservation->product_purchases as $product_purchase) {
 
           $product = $product_purchase->product;
-          //dd($product);
+
           $rd = DateProduct::where(['product_id'=> $product->id],['date'=>$reservation->event_date])->get();
-          //dd($rd->isEmpty());
           if(! $rd->isEmpty()){
             $all_products_ok = false;
+            $msg = "No se puede aceptar la reserva ID: ".$reservation->id." porque el producto".$product->name." está reservado en esa fecha";
           }
+
         }
-        //dd($all_products_ok);
          if( $all_products_ok){
           $reservation->state = 'aceptada';
           $reservation->save();
 
           foreach ($reservation->product_purchases as $product_purchase) {
             $product = $product_purchase->product;
-            // dd($product);
             DateProduct::create([
               'product_id'=> $product->id,
               'date' => $reservation->event_date,
           ]);
-          return redirect($url);
+          return redirect($url)->with('message',$msg);
           }
         }
       }
       if($reservation && $action == 'rechazar'){
+        $msg = "Reserva ID: ".$reservation->id." rechazada";
         $reservation->state = 'rechazada';
         $reservation->save();
       }
-      return redirect($url);
+      return redirect($url)->with('message',$msg);
     }
 }

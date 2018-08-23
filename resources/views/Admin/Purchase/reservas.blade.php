@@ -17,8 +17,14 @@
           @if (! $reservas)
             <h1 class="carrito_vacio text-center mt-5 mb-5" >No hay reservas pendientes</h1>
           @else
+            @if (Session::has('message'))
+              <div class="alert alert-info">{{ Session::get('message') }}</div>
+            @endif
             @foreach ($reservas as $reserva)
               <div style="border: 1px solid grey;border-radius: 10px;margin-top:10px;">
+                <p>
+                  {{ 'ID reserva: '.$reserva->id }}
+                </p>
               <p>
                 {{ 'Fecha compra: '.$reserva->purchase_date }}
               </p>

@@ -19,6 +19,9 @@
             <h2 class="bajada-carrito" >¿No sabés qué reservar? ¡Miles de salones y servicios te esperan!</h2>
 
           @else
+            @if (Session::has('message'))
+              <div class="alert alert-info">{{ Session::get('message') }}</div>
+            @endif
             @foreach ($reservas as $reserva)
               <div style="border: 1px solid grey;border-radius: 10px;margin-top:10px;">
               <p>{{ 'Fecha compra: '.$reserva->purchase_date }}</p>

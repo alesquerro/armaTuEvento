@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Purchase;
 use App\Answer;
-use App\DatePurchase;
+use App\DateProduct;
 
 
 class UserController extends Controller
@@ -59,24 +59,31 @@ class UserController extends Controller
     }
 
     public function user_reservation($id){
+
       $reservation = Purchase::find($id);
       $tipo = request()->input('tipo');
+      $msg = '';
       if( $tipo == 'aceptar'){
         $reservation->state = 'confirmada';
         $reservation->save();
+        $msg = 'Reserva confirmada';
       }
       if( $tipo == 'rechazar'){
+        $reservation;
         $reservation->state = 'anulada por usuario';
-        foreach ($reservation->products as $product) {         
-          $rd = DateProduct::where(['product_id'=>$reservation->product_id],['date'=>$reservation->event_date])->get();
-          if($rd){
+        foreach ($reservation->product_purchases as $reservation_product) {
+          $product = $reservation_product->product;
+
+          $rd = DateProduct::where(['product_id'=>$product->id],['date'=>$reservation->event_date])->get();
+          if(! $rd->isEmpty()){
             $rd[0]->delete();
           }
         }
 
         $reservation->save();
+        $msg = 'Reserva eliminada';
       }
-      return redirect('/mis_compras');
+      return redirect('/mis_compras')->with('message',$msg);
     }
 
 }
