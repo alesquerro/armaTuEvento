@@ -28,7 +28,9 @@
 							<div class="form-group">
 								<label for="inputNombre" class="col-form-label h4">Nombre del producto</label>
 								<div>
+									{{$product->id}}
 									<input type="text" class="form-control" name="name" id="inputNombre" placeholder="Nombre" required value="{{ $product->name }}">
+									
 								</div>
 							</div>
 							<!-- FIN NOMBRE -->
@@ -91,10 +93,11 @@
 								</label>
 								<div>
 									@foreach ($product_types as $product_type)
-									<input type="checkbox" name="product_types[]" value="{{ $product_type->id }}" id="{{ $product_type->name }}" @if ($product->product_type_id ==$product_type->id))
-									{{ 'checked'}}
+									<input type="checkbox" name="product_types[]" value="{{ $product_type->id }}" id="{{ $product_type->name }}" 
+									@if (in_array($product_type->id, $own_product_types))
+									{{ 'checked' }}
 									@endif/>
-
+									{{-- {{ $product->product_types}} --}}
 									<label class="form-check-label" for="{{ $product_type->name }}">{{ $product_type->name }}</label>
 									<br>
 									@endforeach

@@ -124,11 +124,20 @@ class ProductController extends Controller
         $id = request()->input('producto');
         $product = Product::find($id);
         $product_types = ProductType::all();
+        $own_products = $product->product_types;
+        $own_products_id = [];
+        $salonServicio = $product->type;
+
+        foreach ($own_products as $value) {
+            $own_products_id[] = $value->id;
+        }
 
 
         return view('Admin.Product.edit', [
             'product' => $product,
-            'product_types' => $product_types
+            'product_types' => $product_types, 
+            'own_product_types' => $own_products_id;
+            'salonServicio' => $salonServicio
         ]);
     }
 

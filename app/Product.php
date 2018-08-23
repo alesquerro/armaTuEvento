@@ -14,7 +14,7 @@ class Product extends Model
 	 	'capacity',
 	 	'description',
 	 	'product_type_id',
-	 	'minimum_resrevation',
+	 	'minimum_reservation',
 	 	'price',
 	 	'price_type',
 	 	// 'address_id',
