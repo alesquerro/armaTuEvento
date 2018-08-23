@@ -152,6 +152,7 @@ class ProductController extends Controller
             $filename = $file->storeAs($folder, $filename);
         }
         $product->fill($request->all());
+        $product->cover = $filename;
         $product->save();
         // Flash::message('El producto ha sido modificado!');
         return redirect('/Admin/listar_productos');
