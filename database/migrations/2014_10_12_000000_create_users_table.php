@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('terms_conditions_date', 45)->nullable();
             //nullable?
             $table->tinyInteger('company_id')->unsigned()->nullable();
-            $table->string('active', 45)->unsigned()->nullable();
+            $table->tinyInteger('active', 45)->unsigned()->nullable();
             $table->string('avatar', 250)->nullable();
             $table->smallInteger('respuesta1')->unsigned()->nullable();
             $table->smallInteger('respuesta2')->unsigned()->nullable();
