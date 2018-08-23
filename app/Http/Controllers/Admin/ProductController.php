@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+//falta hacer el js para que dependiendo de si es salon o servicio se muestren unas u otras opciones
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
@@ -21,7 +21,7 @@ class ProductController extends Controller
     {
 
 
-        $products = Product::where('type', '=', 'salon')->get();
+        $products = Product::all();
         // $servicios = Product::where('type', '=', 'servicio')->get();
 
         // $tipoEventos = EventType::all();
@@ -66,18 +66,11 @@ class ProductController extends Controller
         $filename = '';
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
-            $filename = $request['name'] . '.' . $file->extension();
+            $filename = $request['cover'] . '.' . $file->extension();
             $folder = 'subidos/productos';
             $filename = $file->storeAs($folder, $filename);
-        // dd($filename);
         }
-        // $path = $request->file('cover')->store('subidos/productos');
-        // Storage::put($request->file('cover'), 'subidos/productos/');
-        // $path = Storage::putFile('subidos.productos', $request->file('cover'));
-        // $product_types = [];
-        // $product_types = $this->product_types();
-        // $product_types = ProductType::find($product_type_id);
-// dd($path);
+
         $newProduct = Product::create([
             'name' => $request['name'],
             'description' => $request['description'],
@@ -86,7 +79,6 @@ class ProductController extends Controller
             'phone' => $request['phone'],
             'mail' => $request['mail'],
             'price' => $request['price'],
-            // 'product_types' => $request['product_types'],
             'type' => $request['type'],
             'price_type' => $request['price_type'],
             'minimum_reservation' => $request['minimum_reservation'],
@@ -128,6 +120,7 @@ class ProductController extends Controller
      */
     public function edit()
     {
+        //archivo!!
         $id = request()->input('producto');
         $product = Product::find($id);
         $product_types = ProductType::all();
@@ -151,9 +144,16 @@ class ProductController extends Controller
         $id = request()->input('id');
         $data = $this->validator($request->all());
         $product = Product::find($id);
+        $filename = '';
+        if ($request->hasFile('cover')) {
+            $file = $request->file('cover');
+            $filename = $request['name'] . '.' . $file->extension();
+            $folder = 'subidos/productos';
+            $filename = $file->storeAs($folder, $filename);
+        }
         $product->fill($request->all());
         $product->save();
-        //Flash::message('El producto ha sido modificado!');
+        // Flash::message('El producto ha sido modificado!');
         return redirect('/Admin/listar_productos');
     }
 
@@ -165,7 +165,15 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //falta es un soft delete y active = 0
+        $producto = Product::find($id);
+
+        $producto->delete();
+
+        return redirect('backend/dashboard')->with([
+            'flash_message' => 'Producto eliminado',
+            'flash_message_important' => false
+  ]);
     }
 
 
