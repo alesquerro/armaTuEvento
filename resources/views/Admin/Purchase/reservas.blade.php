@@ -58,6 +58,8 @@
               <p>{{ 'Precio Final $: '.$reserva->total_amount }}</p>
               <p><strong>{{ 'Saldo a pagar $: '.$reserva->remainder }}</strong></p>
               <p class="texto_color"><strong >{{ 'Estado de la reserva: '. $reserva->state }}</strong></p>
+              @if ($type == 'pendientes')
+
                 <div class="reservas-admin">
                   <form action="/Admin/reserva_admin/{{$reserva->id}}" method="post" class="botones-admin">
                   @csrf
@@ -72,6 +74,7 @@
                   </form>
 
                 </div>
+                @endif
               </div>
             @endforeach
           @endif

@@ -23,12 +23,14 @@
               <div class="alert alert-info">{{ Session::get('message') }}</div>
             @endif
             <div class="form-group text-center botones-reservas">
-
+              <form action="/mis_compras" method="get">
+              <button type="submit" class="btn btn-lg {{ $type == 'pendientes' ? 'btn-danger': 'btn-secondary' }} btn-sm" id="volver">Ver reservas Pendientes</button>
+              </form>
               <form action="/mis_compras_confirmadas" method="get">
-              <button type="submit" class="btn btn-lg btn-secondary btn-sm" id="volver">Ver reservas Confirmadas</button>
+              <button type="submit" class="btn btn-lg {{ $type == 'confirmadas' ? 'btn-danger': 'btn-secondary' }} btn-sm" id="volver">Ver reservas Confirmadas</button>
               </form>
               <form action="/mis_compras_anuladas" method="get">
-              <button type="submit" class="btn btn-lg btn-secondary btn-sm" id="volver">Ver reservas Anuladas</button>
+              <button type="submit" class="btn btn-lg {{ $type == 'anuladas' ? 'btn-danger': 'btn-secondary' }} btn-sm" id="volver">Ver reservas Anuladas</button>
               </form>
             </div>
             @foreach ($reservas as $reserva)

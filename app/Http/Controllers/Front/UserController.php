@@ -19,7 +19,7 @@ class UserController extends Controller
                             ->whereIn('state',['en espera', 'aceptada'])
                             ->orderBy('purchase_date','DESC')->get();
 
-      return view('Front.mis_compras',['reservas' => $purchases, 'title'=> 'Reservas pendientes']);
+      return view('Front.mis_compras',['reservas' => $purchases, 'title'=> 'Reservas pendientes','type'=>'pendientes']);
     }
 
     public function show_confirmed_purchases(Request $request){
@@ -28,7 +28,7 @@ class UserController extends Controller
                             ->whereIn('state',['confirmada'])
                             ->orderBy('purchase_date','DESC')->get();
 
-      return view('Front.mis_compras',['reservas' => $purchases, 'title'=> 'Reservas confirmadas']);
+      return view('Front.mis_compras',['reservas' => $purchases, 'title'=> 'Reservas confirmadas','type'=>'confirmadas']);
     }
 
     public function show_rejected_purchases(Request $request){
@@ -39,7 +39,7 @@ class UserController extends Controller
                             ->whereIn('state',['anulada por usuario', 'rechazada'])
                             ->orderBy('purchase_date','DESC')->get();
 
-      return view('Front.mis_compras',['reservas' => $purchases, 'title'=> 'Reservas anuladas']);
+      return view('Front.mis_compras',['reservas' => $purchases, 'title'=> 'Reservas anuladas','type'=>'anuladas']);
     }
 
     public function add_favourites($prod_id){
