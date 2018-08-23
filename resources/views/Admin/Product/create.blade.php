@@ -36,7 +36,7 @@
 							<div class="form-group">
 								<label for="inputEmail3" class="col-form-label h4">Email</label>
 								<div>
-									<input type="email" class="form-control" name="mail" id="inputEmail" placeholder="" required value="{{ old('mail') }}" placeholder="ejemplo@correo.com">
+									<input type="email" class="form-control" name="mail" id="inputEmail" placeholder="ejemplo@mail.com" required value="{{ old('mail') }}">
 								</div>
 							</div>
 							<!-- FIN EMAIL -->
@@ -102,7 +102,7 @@
 							<div class="form-group">
 								<label for="inputReservaMinima" class="col-form-label h4">Reserva minima</label>
 								<div>
-									<input type="text" class="form-control" name="reserva_minima" id="inputReservaMinima" placeholder="% reserva minima" required value="{{ old('minimum_reservation')}}">
+									<input type="text" class="form-control" name="minimum_reservation" id="inputReservaMinima" placeholder="% reserva minima" required value="{{ old('minimum_reservation')}}">
 								</div>
 							</div>
 							<!-- FIN RESERVA MINIMA -->

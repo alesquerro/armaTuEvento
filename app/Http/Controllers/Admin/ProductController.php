@@ -85,7 +85,7 @@ class ProductController extends Controller
             'active' => 1,            
             'company_id' => $request['company_id'],
         ]);
-
+// dd($newProduct);
         $newProduct->product_types()->sync($request['product_types']);
         return redirect('/Admin/dashboard');
 

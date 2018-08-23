@@ -105,7 +105,7 @@
 							<div class="form-group">
 								<label for="inputReservaMinima" class="col-form-label h4">Reserva minima</label>
 								<div>
-									<input type="text" class="form-control" name="reserva_minima" id="inputReservaMinima" placeholder="% reserva minima" required value="{{ $product->minimum_reservation}}">
+									<input type="text" class="form-control" name="minimum_reservation" id="inputReservaMinima" placeholder="% reserva minima" required value="{{ $product->minimum_reservation}}">
 								</div>
 							</div>
 							<!-- FIN RESERVA MINIMA -->
