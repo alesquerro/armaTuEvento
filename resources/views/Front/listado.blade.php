@@ -79,10 +79,6 @@
 
     <!-- FIN CONTENIDO GENERICO -->
 
-
-
-
-
     <!--Footer-->
 
     @include('Components.footer')

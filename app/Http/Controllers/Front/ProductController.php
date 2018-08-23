@@ -58,7 +58,6 @@ class ProductController extends Controller
 
     public function list()
     {
-      dd('aca');
         $productos = Product::get();
         $favoritos = [];
         if(auth()->check()){
@@ -80,7 +79,6 @@ class ProductController extends Controller
     }
     public function list_post(Request $request){
       $data = $request->all();
-      //dd($data);
       $tipo = 'todo';
       $fecha = 'todo';
       $tipo_evento = 'todo';
@@ -115,7 +113,6 @@ class ProductController extends Controller
 
     //FIXME falta seguir esto!!!!!
     public function listParameters($tipo, $tipo_evento,$fecha,$tipo_producto,$texto){
-      //dd('aca');
       $filtros_aplicados = [];
       $query = Product::query();
       $tipo_list =  explode('=',$tipo);
@@ -172,10 +169,11 @@ class ProductController extends Controller
           if(count($txt_list) == 2 && $txt_list[1] != 'todo' && $txt_list[1] != ''){
             $query->where('name','like',"%{$txt_list[1]}%");
             $query->orWhere('description','like',"%{$txt_list[1]}%");
-            $fitros_aplicados['texto'] = [$texto];
+            $filtros_aplicados['texto'] = [$txt_list[1]];
           }
 
       }
+
       $productos = $query->get();
       $favoritos = [];
       if(auth()->check()){
@@ -188,6 +186,10 @@ class ProductController extends Controller
       $tipo_salon = ProductType::where('product_type','salon')->get();
       $tipo_servicio = ProductType::where('product_type','servicio')->get();
       $tipo_productos = $tipo_salon->merge($tipo_servicio);
+      $titulos = ['tipo_eventos'=> 'Tipo de eventos',
+                  'tipo'=>'Tipo de Producto',
+                  'tipo_producto'=>'Categorías',
+                  'texto' => 'Texto'];
       return view('Front.listado', [
           'productos' => $productos,
           'favoritos' => $favoritos,
@@ -197,6 +199,7 @@ class ProductController extends Controller
           'tipo_servicio' => $tipo_servicio,
           'tipo' => $tipo,
           'filtros_aplicados' => $filtros_aplicados,
+          'titulos' => $titulos,
         ]);
     }
 

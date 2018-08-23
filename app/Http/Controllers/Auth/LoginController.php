@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
 use Illuminate\Http\Request;
+use App\Input;
 
 class LoginController extends Controller
 {
@@ -42,5 +43,17 @@ class LoginController extends Controller
     public function logout(Request $request) {
       Auth::logout();
       return redirect('/login');
+    }
+    public function login()
+    {
+        if (Auth::attempt(['email' => request()->input('email'), 'password' => request()->input('password')])) {
+            // Authentication passed...
+            if(request()->method() == 'POST'){
+              // FIXME Ver si se puede reenviar post que mandaron
+              $url = "/listado/tipo=todo/tipo-evento=todo/fecha=todo/tipo-producto=todo/texto=todo";
+              return redirect($url);
+            }
+            return redirect()->back();
+        }
     }
 }

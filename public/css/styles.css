@@ -592,7 +592,13 @@ a.volver{
 p.texto_color {
 	color: #B21917;
 }
+.link_filtros{
+	color: black;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
 
+}
 /* FIN CARRITO */
 
 
