@@ -66,7 +66,7 @@ class ProductController extends Controller
         $filename = '';
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
-            $filename = $request['cover'] . '.' . $file->extension();
+            $filename = $file->hashName() . '.' . $file->extension();
             $folder = 'subidos/productos';
             $filename = $file->storeAs($folder, $filename);
         }

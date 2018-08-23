@@ -40,7 +40,7 @@ class CreateTables extends Migration
             //nullable?
             $table->smallInteger('address_id')->unsigned()->nullable();
             //nullable?
-            $table->Integer('product_type_id')->unsigned()->nullable();
+            $table->integer('product_type_id')->unsigned()->nullable();
             $table->tinyInteger('company_id')->unsigned();
             $table->string('type', 10);
             $table->string('cover', 250);
