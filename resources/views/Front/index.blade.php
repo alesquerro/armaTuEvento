@@ -92,6 +92,9 @@
                 {{ $salon->name }}</p>
                 <p class="card-text">{{ $salon->description }}></p>
                 <p class="card-text">Consultar disponibilidad y precio</p>
+                <ul style="list-style: none; margin-bottom: 0px;">
+                  <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://jorenvanhocht.be" class="social-button my-class" id="my-id"><span class="fa fa-facebook-official"></span></a></li>
+                </ul>
               </div>
               <div class="corazon" style="    justify-content: space-evenly;
     padding: 15px;     align-items: center;">
@@ -125,13 +128,14 @@
                 <!--<a href="#" id="likes">
                   <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
                 </a>-->
-                <div id="social-links">
+                {{-- <div id="social-links">
                   <ul style="list-style: none; margin-bottom: 0px;">
                     <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://jorenvanhocht.be" class="social-button my-class" id="my-id"><span class="fa fa-facebook-official"></span></a></li>
                   </ul>
+                </div> --}}
+                <div id="social-links">
+                  <p class="social-button my-class"><span class="fa fa-share-alt"></span></p>
                 </div>
-
-
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <a class="btn btn-sm btn-outline-secondary" href="producto/{{ $salon->id }}">Ver</a>

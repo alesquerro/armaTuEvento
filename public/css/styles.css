@@ -42,7 +42,7 @@ button{
 	margin-top: 4em;
 }
 
-#link-forget{
+.link-forget{
 	color: #B21917 !important;
 	text-decoration: none !important;
 }
@@ -195,7 +195,7 @@ button{
 	height: 70px;
 	display: flex;
 	align-items: center;
-    justify-content: center;
+  justify-content: center;
 
 }
 .avatar img{
@@ -932,10 +932,11 @@ p.texto_color {
 		display:none;
 	}
 	.menu_lista-sm{
-		padding: 20px;
+		padding: 1em;
 		list-style-type: none;
 		display: none;
 		text-align: left;
+		font-size: 14px;
 	}
 	.menu_lista-sm a:visited{
 		color: white;
@@ -952,6 +953,7 @@ p.texto_color {
 	.menu_lista-sm li{
 		color: white;
 		text-decoration: none;
+		margin: 0.5em;
 	}
 	.opciones_menu{
 		width: 100%;
