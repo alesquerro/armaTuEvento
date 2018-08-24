@@ -110,16 +110,29 @@ class RegisterController extends Controller
 
     }
 
+    ///FIXME corregir todo el EDIT
     public function getRegisterEdit()
     {
+        //dd('aca');
+
         $this->validator(request()->all());
-        $this->create(request()->all());
-        return view('Front.index');
+        //dd(auth()->user());
+        auth()->user()->fill(request()->all());
+        if(request()->hasFile('avatar')){
+          $file = request()->file('avatar');
+          $filename = $file->hashName().'.'.$file->extension();
+          $folder = "subidos/usuarios";
+          $filename = $file->storeAs($folder,$filename);
+          auth()->user()->avatar = $filename;
+        }
+        auth()->user()->save();
+
+        return redirect('/');
 
     }
 
     public function updateUser(User $user, Request $request)
-    { 
+    {
         $data = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',

@@ -135,6 +135,7 @@ class ProductController extends Controller
               $te_ids[] = $te;
             }
           }
+
            if($te_ids){
             $query->whereHas('event_types',function($type) use($te_ids) {
               $type->whereIn('event_types.id',$te_ids);
@@ -143,12 +144,15 @@ class ProductController extends Controller
           }
         }
       }
+
       if($tipo_producto){
         $tp_list =  explode('=',$tipo_producto);
         if(count( $tp_list ) == 2 && $tp_list[1] && $tp_list[1] != 'todo'){
-          $query->where('product_type_id',$tp_list[1]);
+
+          //$query->where('product_type_id',$tp_list[1]);
           $filtros_aplicados['tipo_producto'] = [$tp_list[1]];
           $tps = explode('_',$tp_list[1]);
+
           $first = true;
           $tp_ids = [];
           foreach ($tps as $tp) {
@@ -156,9 +160,15 @@ class ProductController extends Controller
               $tp_ids[] = $tp;
             }
           }
+
            if($tp_ids){
-            $query->whereIn('product_type_id',$tp_ids);
+
+            $query->whereHas('product_types',function($type) use($tp_ids) {
+              $type->whereIn('product_types.id',$tp_ids);
+            });
+          
             $filtros_aplicados['tipo_producto'] = $tp_ids;
+
           }
         }
 
@@ -175,6 +185,7 @@ class ProductController extends Controller
       }
 
       $productos = $query->get();
+      //dd($productos);
       $favoritos = [];
       if(auth()->check()){
         foreach (auth()->user()->products as $product) {

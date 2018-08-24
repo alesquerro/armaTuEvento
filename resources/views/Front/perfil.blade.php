@@ -14,8 +14,9 @@
             </div>
         @endif
         <h1>Editar perfil</h1>
-        <form method="POST" action="{{ route('perfil') }}" aria-label="{{ __('Editar perfil') }}"  class="col-lg-8 offset-lg-2 col-md-8 offset-md-2" enctype="multipart/form-data">
-          @csrf
+        <form method="POST" action="/perfil"  class="col-lg-8 offset-lg-2 col-md-8 offset-md-2" enctype="multipart/form-data">
+              @csrf
+              @method('PUT')
               <div class="form-group">
                   <label for="inputNombre" class="col-form-label h4">Nombre (*)</label>
                 <div>
@@ -31,21 +32,21 @@
               <div class="form-group">
                 <label for="inputEmail3" class="col-form-label h4">Email (*)</label>
                 <div>
-                  <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email" required value="{{Auth::user()->email}}">
+                  <input type="email" class="form-control" name="" id="inputEmail" placeholder="Email" required value="{{Auth::user()->email}}" readonly>
                 </div>
               </div>
-              <div class="form-group">
+              {{-- <div class="form-group">
                 <label for="contrasena">Contraseña (*)</label>
                 <input type="password" class="form-control" id="contrasena" name="password" placeholder="Ingrese contraseña" required>
               </div>
               <div class="form-group">
                  <label for="contrasena-confirm">Confirmar Contraseña (*)</label>
                  <input type="password" class="form-control" id="contrasena-confirm" name="password_confirm" placeholder="Vuelva a ingresar la contraseña" required>
-              </div>
+              </div> --}}
               <div class="form-group">
                   <input type="file" name="avatar" accept=".jpg, .jpeg, .png, gif"/>
               </div>
-              <div class="form-group">
+              {{-- <div class="form-group">
                  <label class="col-form-label"><strong>Pregunta de recuperación de cuenta (*)</strong></label>
                  <div>
                    <label>¿Nombre de su comida favorita?</label>
@@ -55,8 +56,8 @@
                    @endforeach
                    </select>
                  </div>
-               </div>
-              <div class="form-group">
+               </div> --}}
+              {{-- <div class="form-group">
                  <label class="col-form-label"><strong>Pregunta 2 de recuperación de cuenta (*)</strong></label>
                  <div>
                    <label>¿Nombre de su música favorita?</label>
@@ -66,24 +67,24 @@
                    @endforeach
                    </select>
                  </div>
-               </div>
+               </div> --}}
 
 
-              <div class="checkbox text-center">
+              {{-- <div class="checkbox text-center">
                 <label>
                   <input type="checkbox" id="chk-terminos" name="terms_conditions_date"> Acepto los términos y condiciones
                 </label>
-              </div>
+              </div> --}}
 
               <div class="form-group  text-center">
                 <div>
-                  <button type="submit" class="col-lg-8 col-md-8 btn">Registrame</button>
+                  <button type="submit" class="col-lg-8 col-md-8 btn">Modificar</button>
                 </div>
               </div>
 
               <div class="form-group text-center">
                   <button type="button" class="col-lg-8  offset-lg-2 col-md-8 offset-md-2 mx-auto btn btn-link" id="link-forget" style="max-width: 100%;">
-                  <a href="/login" id="link-forget">¿Ya tenés usuario? Ingresá</a>
+                  <a href="/olvidoContrasena" id="link-forget">Modificá contraseña</a>
                   </button>
               </div>
 

@@ -28,7 +28,7 @@
                </ol>
                <div class="carousel-inner">
                  <div class="carousel-item active ">
-                   <img class="d-block w-100" src="/subidos/productos/{{ $producto->cover }}" alt="First slide">
+                   <img class="d-block w-100" src="/storage/{{ $producto->cover }}" alt="First slide">
                  </div>
                  @foreach ($producto->photos as $key => $photo)
                    @if ($key == 0)
