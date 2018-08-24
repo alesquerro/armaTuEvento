@@ -67,11 +67,17 @@
                   </div>
                 </div>
               </div>
+
           @empty
 
             No hay productos que coincidan con todos los filtros seleccionados
           @endforelse
+
           </div>
+          <div class="paginas">
+            {{ $productos->links() }}
+          </div>
+
         </div>
       </main>
 

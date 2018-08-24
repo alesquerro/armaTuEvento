@@ -607,6 +607,24 @@ p.texto_color {
 	display: flex;
 	justify-content: space-around;
 }
+
+.paginas{
+	display: flex;
+	justify-content: center;
+	margin:auto;
+	color: black;
+}
+.paginas a{
+	color: #B21917;
+}
+.page-item.active .page-link{
+	background-color: #B21917;
+	border-color: #B21917;
+}
+.paginas a:hover{
+	color: #B21917;
+}
+
 /* FIN CARRITO */
 
 
