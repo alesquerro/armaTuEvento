@@ -26,38 +26,54 @@
   
     //Test campo obligatorio
     if(txtNombre == null || txtNombre.length == 0 || /^\s+$/.test(txtNombre)){
-      alert('El campo nombre no puede estar vacío');
+      //alert('El campo nombre no puede estar vacío');
+      var pNode = document.createElement('P');
+      pNode.innerHTML = 'El campo nombre no puede estar vacío';
+      document.getElementById('errores').appendChild(pNode);
       evento.preventDefault();
       return false;
 
     }
     if(txtApellido == null || txtApellido.length == 0 || /^\s+$/.test(txtApellido)){
-      alert('El campo apellido no puede estar vacío');
+      //alert('El campo apellido no puede estar vacío');
+      var pNode = document.createElement('P');
+      pNode.innerHTML = 'El campo apellido no puede estar vacío';
+      document.getElementById('errores').appendChild(pNode);
       evento.preventDefault();
       return false;
     }  
     //Test Pass
     if (txtPass.length < 6) {
-      alert('La contraseña debe constar de al menos 6 carácteres.');
-      //document.registro
+      //alert('La contraseña debe constar de al menos 6 carácteres.');
+      var pNode = document.createElement('P');
+      pNode.innerHTML = 'La contraseña debe constar de al menos 6 carácteres';
+      document.getElementById('errores').appendChild(pNode);      
       evento.preventDefault();
       return false;
     }
     if (txtPass != txtPassConfirm) {
-      alert("Las contraseñas ingresadas no son iguales");
-      //document.registro
+      //alert("Las contraseñas ingresadas no son iguales");
+      var pNode = document.createElement('P');
+      pNode.innerHTML = 'Las contraseñas ingresadas no son iguales';
+      document.getElementById('errores').appendChild(pNode);     
       evento.preventDefault();
       return false;
     }           
-    //Test correo
+    //Test del mail
     if(!(/\S+@\S+\.\S+/.test(txtEmail))){
-      alert('Debe escribir un email válido');
+      //alert('Debe escribir un email válido');
+      var pNode = document.createElement('P');
+      pNode.innerHTML = 'Debe escribir un email válido';
+      document.getElementById('errores').appendChild(pNode);   
       evento.preventDefault();
       return false;
     }
-    //Test checkBox
+    //Test del checkBox de los términos
     if(!chkTerminos.checked){
-      alert('Debe aceptar los términos y condiciones');
+      //alert('Debe aceptar los términos y condiciones');
+      var pNode = document.createElement('P');
+      pNode.innerHTML = 'Debe aceptar los términos y condiciones';
+      document.getElementById('errores').appendChild(pNode);         
       evento.preventDefault();
       return false;
     }
@@ -78,7 +94,7 @@ window.onload = function(){
       <div class="contenido container" id="contenido-principal">
         @if (count($errors))
 
-            <div class="alert alert-danger">
+            <div class="alert alert-danger" id="errores">
               @foreach( $errors->all() as $error)
                     <p>  {{$error}}</p>
               @endforeach
