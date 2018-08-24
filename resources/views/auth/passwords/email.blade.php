@@ -7,7 +7,10 @@
     @include('Components.header')
     <div class="contenido container">
       <!-- INICIO FORM -->
-      <form method="post" action="{{ route('password.email') }}" aria-label="{{ __('Reseteo de Password') }}" class="bg-traslucido bg-margenes">
+      @if (Session::has('message'))
+        <div class="alert alert-info">{{ Session::get('message') }}</div>
+      @endif
+      <form method="post" action="/olvidoContrasena" aria-label="{{ __('Reseteo de Password') }}" class="bg-traslucido bg-margenes">
         @csrf
 
         <div class="form-group col-lg-8 offset-lg-2 col-md-8 offset-md-2">
@@ -22,7 +25,7 @@
             @endif
           <label for="inputEmail3" class="col-form-label h4">Email</label>
           <div>
-            <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email" required >
+            <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email" required  value="{{auth()->user()->email}}" readonly>
           </div>
           <div class="form-group mt-3">
             <div>

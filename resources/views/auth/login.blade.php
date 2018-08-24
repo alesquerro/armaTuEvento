@@ -7,7 +7,9 @@
 @include('Components.header')
 
 <div class="contenido container">
-
+  @if (Session::has('message'))
+    <div class="alert alert-info">{{ Session::get('message') }}</div>
+  @endif
    <!-- INICIO FORM -->
  <form method="POST" action="{{ route('login') }}" class="bg-traslucido bg-margenes" aria-label="{{ __('Login') }}">
     @csrf

@@ -6,6 +6,9 @@
   <div class="container-fluid">
     @include('Components.header')
     <div class="contenido container">
+      @if (Session::has('message'))
+        <div class="alert alert-info">{{ Session::get('message') }}</div>
+      @endif
       <!-- INICIO FORM -->
       <form method="POST" action="{{ route('password.request') }}" aria-label="{{ __('Reseteo de Password') }}" class="bg-traslucido bg-margenes">
         @csrf

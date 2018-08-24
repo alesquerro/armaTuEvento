@@ -52,7 +52,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-      //dd('aca');
         return Validator::make($data, [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -146,21 +145,21 @@ class RegisterController extends Controller
 
     public function getRegisterContra(User $user, Request $request)
     {
-      //dd('aca');
-        $userId = auth()->user()->id;
-        $user = User::find($userId);
-        //dd(request()->input('email'));
-        if((request()->input('email') == $user->email) && (request()->input('respuesta1') == $user->respuesta1) && (request()->input('respuesta2') == $user->respuesta2)){
+        $user = auth()->user();
+        //$user = User::find($userId);
+        if(($request->input('email') == $user->email) && ($request->input('respuesta1') == $user->respuesta1) && ($request->input('respuesta2') == $user->respuesta2)){
             return redirect('/cambiarPass');
+            //return $this->changePass($request);
         }
+
+        return redirect()->back()->with('message','Al menos una de las respuestas es incorrecta');
 
     }
 
     public function changePass(Request $request){
-      //dd(request()->all());
-      //dd(request()->input('password') );
-        if(request()->input('password') != request()->input('password-confirm')){
-            return redirect()->back()->with("La nueva contraseña no puede ser igual que la anterior");
+        //dd('veamos');
+        if($request->input('password') != $request->input('password-confirm')){
+            return redirect()->back()->with("Las contraseñas no coinciden");
         }
 
         $validatedData = $request->validate([
@@ -169,7 +168,7 @@ class RegisterController extends Controller
         ]);
 
         $user = Auth::user();
-        $user->password = Hash::make(request()->input('password'));
+        $user->password = Hash::make($request->input('password'));
         $user->save();
 
         //auth()->user()->fill(request()->all());

@@ -53,7 +53,10 @@ class LoginController extends Controller
               $url = "/listado/tipo=todo/tipo-evento=todo/fecha=todo/tipo-producto=todo/texto=todo";
               return redirect($url);
             }
+
             return redirect()->back();
         }
+        
+        return redirect('/login')->with('message','Datos ingresados incorrectos');
     }
 }
