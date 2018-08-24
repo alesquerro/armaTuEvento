@@ -19,8 +19,8 @@ Auth::routes();
 
 Route::get('registro', 'Auth\RegisterController@showOptions')->name('register');
 Route::post('registro', 'Auth\RegisterController@getRegister')->name('register');
-Route::get('perfil', 'Front\UserController@showOptions');
-Route::put('perfil', 'Auth\RegisterController@getRegisterEdit');
+Route::get('perfil', 'Front\UserController@showOptions')->name('perfil');
+Route::post('perfil', 'Auth\RegisterController@getRegisterEdit')->name('perfil');
 Route::get('olvidoContrasena', 'Auth\RegisterController@showOptionsReset')->name('password.email');
 Route::post('olvidoContrasena', 'Auth\RegisterController@getRegister')->name('password.email');
 
@@ -58,16 +58,23 @@ Route::get('Admin/listar_productos','Admin\ProductController@index')->middleware
 
 Route::get('Admin/dashboard','Admin\StaticController@dashboard')->middleware('IsAdmin');
 
+//el listado de productos -->el camino sigue a Admin/Product
+Route::get('Admin/listar_productos','Admin\ProductController@index')->middleware('IsAdmin'); 
+//formulario para elegir producto
 Route::post('Admin/Product','Admin\ProductController@edit')->middleware('IsAdmin');
-Route::put('Admin/EditarProducto','Admin\ProductController@update')->middleware('IsAdmin');
-Route::get('Admin/nuevoProducto','Admin\ProductController@create')->middleware('IsAdmin');
-Route::put('Admin/Product','Admin\ProductController@store')->middleware('IsAdmin');
-Route::get('Admin/listar_productos','Admin\ProductController@index')->middleware('IsAdmin');
+//pagina interna para que actualice cambios de productos seguía a @update. Lo cambio a handleRequest
+Route::put('Admin/EditarProducto','Admin\ProductController@handleRequest')->middleware('IsAdmin');
+//formulario crear producto
+Route::get('Admin/nuevoProducto','Admin\ProductController@create')->middleware('IsAdmin'); 
+//pagina interna para que guarde nuevos productos
+Route::put('Admin/Product','Admin\ProductController@store')->middleware('IsAdmin'); 
+//formulario para eliminar producto
+//Route::post('Admin/Product','Admin\ProductController@edit')->middleware('IsAdmin');
+//pagina interna para que actualice eliminación de productos
+//Route::put('Admin/EditarProducto','Admin\ProductController@update')->middleware('IsAdmin');
 
 Route::get('Admin/reservas','Admin\PurchaseController@reservation_list')->middleware('IsAdmin');
-Route::get('Admin/reservas_confirmadas','Admin\PurchaseController@confirmed_reservation_list')->middleware('IsAdmin');
-Route::get('Admin/reservas_anuladas','Admin\PurchaseController@rejected_reservation_list')->middleware('IsAdmin');
 Route::post('Admin/reserva_admin/{id}','Admin\PurchaseController@reservation_admin')->middleware('IsAdmin');
 Route::get('Admin/listar_usuarios', 'Admin\AdminController@indexUsers')->middleware('IsAdmin');
 Route::get('Admin/modificar_usuario/{id}', 'Admin\AdminController@show')->middleware('IsAdmin');
-Route::post('Admin/modificar_usuario/{id}', 'Admin\AdminController@update')->middleware('IsAdmin');
+Route::post('Admin/modificar_usuario/{id}', 'Admin\AdminController@update')->middleware('IsAdmin')->name('user.update');

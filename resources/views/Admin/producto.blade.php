@@ -9,7 +9,7 @@
 
     <div class="form-group  text-center">
       <div class="volver">
-        <a class="btn btn-sm btn-danger volver" id="volver" href="{{-- <?php echo $pagina_anterior; ?> --}}">Volver</a>
+        <a class="btn btn-sm btn-danger volver" id="volver" href="<?php echo $pagina_anterior; ?>">Volver</a>
       </div>
     </div>
     <div class="contenido_thumbnail">
@@ -17,8 +17,41 @@
         <div class="col-sm-12 col-md-4 col-lg-4 card_margin"><!-- Bloque Izquierdo -->
           <div class="card-body">
             <p class="h4"> {{ $producto->nombre }}</p>
-           
-          
+            <!-- INICIO CAROUSEL -->
+           <div class="img_thumb">
+             <div id="carouselExampleIndicators" class="carousel slide carrusel" data-ride="carousel">
+               <ol class="carousel-indicators">
+                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+
+               </ol>
+               <div class="carousel-inner">
+                 <div class="carousel-item active ">
+                   <img class="d-block w-100" src="/storage/{{ $producto->cover }}" alt="First slide">
+                 </div>
+                 @foreach ($producto->photos as $key => $photo)
+                   @if ($key == 0)
+                     continue;
+                   @endif
+
+                 <div class="carousel-item ">
+                   <img class="d-block w-100" src="subidos/productos/{{ $photo }}" alt="First slide">
+                 </div>
+
+               @endforeach
+               </div>
+               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                 <span class="sr-only">Anterior</span>
+               </a>
+               <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                 <span class="sr-only">Siguiente</span>
+               </a>
+             </div>
+           </div>
+           <!-- FIN CARROUSEL -->
           </div>
         </div>
         <div class="col-sm-12 col-md-6 col-lg-6 card_margin"> <!-- bloque derecho -->
@@ -28,10 +61,11 @@
             Reserva mínima $: {{ $producto->minimum_reservation }} </p>
           <p class="card-text">{{ $producto->description }}</p><!-- Descripcion salon -->
 
-            <div class="corazon card-body">
+            <div class="corazon card-body"  style="    justify-content: stretch;
+    padding: 15px;     align-items: center;">
               <p class="card-text"> <!-- botones favorito y compartir -->
                 <div class="d-flex justify-content align-items-left">
-                
+
                       @if (Auth::check() && in_array($producto->id,$favoritos) )
                         <form id="remove_favourites_{{$producto->id}}" action="/remove_favourites/{{$producto->id}}" method="post">
                           @csrf
@@ -49,18 +83,20 @@
                           <span class="fa fa-heart-o" style="font-size:24px;color:#B21917"></span>
                         </a>
                       @endif
-
-                  <a href="#" id="likes">
-                    <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
-                  </a>
+                </p>
+              </div><!-- <div class="d-flex justify-content align-items-left"> -->
+                 <div id="social-links " class="mr-4">
+                  <ul style="list-style: none; margin-bottom: 0px;">
+                    <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://jorenvanhocht.be" class="social-button my-class" id="my-id"><span class="fa fa-facebook-official"></span></a></li>
+                  </ul>
+                </div>
                   <!--a href="#" id="shopping-cart">
                     <i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i>
                   </a-->
-                </p>
-              </div><!-- <div class="d-flex justify-content align-items-left"> -->
+
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary"  href="edit/{{ $producto->id }}">Editar</a>
-                 
+                  <a class="btn btn-sm btn-outline-secondary"  href="contacto/{{ $producto->id }}">Consultar</a>
+                  <!--<a class="btn btn-sm btn-outline-secondary"  href="carrito.php?producto=<?php //echo $producto['id'];  ?>">Agregar a carrito</a>-->
                   <a class="btn btn-sm btn-outline-secondary"  onclick="agregar_carrito()"><span class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></span><span class="carrito_boton">Agregar a carrito</span></a>
                 </div><!-- <div class="btn-group"> -->
                 </div><!-- <div class="corazon"> -->
@@ -90,7 +126,7 @@
                 </form>
                 <!--Footer-->
                 @include('Components.footer')
-                <!--/Footer-->
+                <!--Footer-->
                   <script type="text/javascript">
                     function agregar_carrito(){
                       $( "#agregar_carrito" ).submit();
@@ -102,10 +138,7 @@
                       $("#remove_favourites_"+prod).submit();
                     }
                   </script>
-                  </div><!-- FIN CONTAINER BOOTSTRAP -->
-                  <!-- Los scripts aca es momentaneo para que ande el carousel, hay que ver donde va-->
-                  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-                  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    </div><!-- FIN CONTAINER BOOTSTRAP -->
+
   </body>
 </html>

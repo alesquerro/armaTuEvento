@@ -21,7 +21,7 @@
             <ul>
               <li><a href="/Admin/listar_usuarios"  class="listado-panel">Modificar Usuarios</a></li>
               <li><a href="/Admin/listar_productos"  class="listado-panel">Modificar Productos</a></li>
-              <li><a href="/Admin/nuevoProducto"  class="listado-panel">Nuevo Producto</a></li>
+              <li><a href="/Admin/deleteProducts"  class="listado-panel">Eliminar Productos</a></li>
               <li><a href="/Admin/reservas"  class="listado-panel">Reservas</a></li>
             </ul>
 

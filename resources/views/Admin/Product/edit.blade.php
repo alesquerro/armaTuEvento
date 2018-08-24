@@ -74,9 +74,10 @@
 							{{-- FIN DESCRIPCION  --}}
 							{{-- TIPO DE PRODUCTO  --}}
 							<div class="form-group">
-								<label for="tipoProducto" class="col-form-label h4">Tipo de producto
+								<label for="tipoProducto" class="col-form-label h4">
+									Tipo de producto
 								</label>
-										{{$product->type}}
+										{{-- {{$product->type}} --}}
 								<div>
 									<select name="type" id="type">
 											<option value="salon" {{ $product->type == 'salon' ? 'selected' : '' }}>
@@ -140,7 +141,18 @@
 							<div class="form-group">
 								<label for="tipoPrecio" class="col-form-label h4">Tipo de precio</label>
 								<div>
-									<input type="text" class="form-control" name="price_type" id="inputPrecio" placeholder="Precio" required value="{{ $product->price_type}}">
+									<select name="price_type" id="inputPrecio">
+										<option value="Por persona" {{ $product->price_type == 'Por persona' ? 'selected' : '' }}>
+											Por persona
+										</option>
+										<option value="Por hora" {{ $product->price_type == 'Por hora' ? 'selected' : '' }}>
+											Por hora
+										</option>
+										<option value="Fijo" {{ $product->price_type == 'Fijo' ? 'selected' : '' }}>
+											Fijo
+										</option>
+									</select>
+									{{-- <input type="text" class="form-control" name="price_type" id="inputPrecio" placeholder="Precio" required value="{{ $product->price_type}}"> --}}
 								</div>
 							</div>
 							<!-- FIN TIPO DE PRECIO  -->
@@ -148,7 +160,11 @@
 
 							<div class="form-group  text-center">
 								<div>
-									<button type="submit" class="col-lg-8 col-md-8 btn">Guardar Cambios</button>
+							<input type="hidden" class="form-control" name="active" value="0">
+
+									<button type="submit" name="submit" class="col-lg-8 col-md-8 btn" value="edit">Guardar Cambios</button>
+
+                  <button type="submit" name="submit" class="col-lg-8 col-md-8 btn" value="delete">Eliminar Producto</button>
 								</div>
 							</div>
 							<!-- FIN GUARDAR -->

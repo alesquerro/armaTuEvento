@@ -8,6 +8,7 @@ use App\Product;
 use App\EventType;
 use App\ProductType;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Collection\SoftDeletes;
 
 
 class ProductController extends Controller
@@ -137,6 +138,8 @@ class ProductController extends Controller
         }
 
 
+
+
         foreach ($own_products as $value) {
             $own_products_id[] = $value->id;
         }
@@ -165,6 +168,7 @@ class ProductController extends Controller
         $data = $this->validator($request->all());
         $product = Product::find($id);
         $filename = $product->cover;
+        // dd($product);
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
             $filename = $request['name'] . '.' . $file->extension();
@@ -179,23 +183,46 @@ class ProductController extends Controller
         return redirect('/Admin/listar_productos');
     }
 
+    // public function delete()
+    // {
+
+
+    //     $products = Product::all();
+    //     // $servicios = Product::where('type', '=', 'servicio')->get();
+
+    //     // $tipoEventos = EventType::all();
+    //     // dd($tipoEventos);
+
+    //     return view('Admin.Product.delete', [
+    //         'products' => $products,
+    //         // 'servicios' => $servicios,
+    //         // 'tipoEventos' => $tipoEventos,
+    //     ]);
+    // }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->id;
         //falta es un soft delete y active = 0
-        $producto = Product::find($id);
+        $product = Product::find($id);
+        // dd($product);
+        $product->active = 0;
+        // $product->update('active', '0');
+        $product->save();
+        $product->delete();
 
-        $producto->delete();
+        // return redirect('Admin.Product.index');
+        return redirect('/Admin/listar_productos');
 
-        return redirect('backend/dashboard')->with([
-            'flash_message' => 'Producto eliminado',
-            'flash_message_important' => false
-  ]);
+  //       ->with([
+  //           'flash_message' => 'Producto eliminado',
+  //           'flash_message_important' => false
+  // ]);
     }
 
 
@@ -228,4 +255,29 @@ class ProductController extends Controller
             // 'terms_conditions_date' => 'required',
         ]);
     }
+    public function handleRequest(Request $request)
+    {
+        // dd($request);
+        if ($request->submit == 'edit') {
+            // dd($request);
+            return $this->update($request);
+        } elseif ($request->submit == 'delete') {
+            return $this->destroy($request);
+        }
+    }
+    // public function handleEdit(Request $request)
+    // {
+    //     return $request->all();
+    // }
+
+    // public function handleDelete(Request $request)
+    // {
+    //     $draft = $request->get('delete',false);
+    //     if($draft) {
+    //         return $this->handleDraft($request);
+    //     }
+    //     return $request->all();
+    // }
+
+
 }
