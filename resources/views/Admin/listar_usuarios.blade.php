@@ -8,9 +8,6 @@
     @include('/Components/header')
 
     <main>
-
-      <header>
-
         <div>
 
           <h1>Administración de usuarios</h1>
@@ -30,11 +27,12 @@
                  </li>
                @endforeach
              </ul>
+             <input type="hidden" id="last" value="{{ $user->id }}">
            </div>
           <button id="boton" class="btn btn-success mb-5 float-rigth">Traer más</button>
 
        </div>
-    </header>
+
   </main>
 
 @include('/Components/footer')
@@ -43,12 +41,13 @@
 <script>
     $(document).ready(function(){
       $('#boton').click(function(){
-        $.ajax({url: "http://127.0.0.1:8000/api/users",
+        $.ajax({url: "/api/users",
         success: function(result){
-          console.log(result);
-
+          //console.log(result);
+          var last = $('#last').val();
+          //console.log(last,'aca ');
           var usuarios = result.filter(function(usuario){
-            return usuario.id > 5;
+            return usuario.id > last;
           });
 
           usuarios.forEach(function(user, index){
@@ -79,6 +78,7 @@
             pNode.classList.add('mr-5', 'mt-2', 'mb-3');
             form.setAttribute('action', '/Admin/modificar_usuario/'+user.id);
             form.setAttribute('method', 'post');
+            $('#last').val(user.id);
           });
         },
         error: function(error){
