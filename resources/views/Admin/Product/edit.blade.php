@@ -74,9 +74,10 @@
 							{{-- FIN DESCRIPCION  --}}
 							{{-- TIPO DE PRODUCTO  --}}
 							<div class="form-group">
-								<label for="tipoProducto" class="col-form-label h4">Tipo de producto
+								<label for="tipoProducto" class="col-form-label h4">
+									Tipo de producto
 								</label>
-										{{$product->type}}
+										{{-- {{$product->type}} --}}
 								<div>
 									<select name="type">
 
@@ -93,23 +94,43 @@
 								</div>
 							</div>
 							<!-- FIN TIPO DE PRODUCTO -->
-							<!-- TIPO DE EVENTO -->
-							<div class="form-group">
-								<label for="tipoEvento" class="col-form-label h4">Tipo de evento
-								</label>
-								<div>
-									@foreach ($product_types as $product_type)
-									<input type="checkbox" name="product_types[]" value="{{ $product_type->id }}" id="{{ $product_type->name }}" 
-									@if (in_array($product_type->id, $own_product_types))
-									{{ 'checked' }}
-									@endif/>
-									{{-- {{ $product->product_types}} --}}
-									<label class="form-check-label" for="{{ $product_type->name }}">{{ $product_type->name }}</label>
-									<br>
-									@endforeach
-								</div>
-							</div>
-							<!--  FIN TIPO DE EVENTO  -->
+
+
+
+
+
+
+
+
+
+<!-- TIPO DE EVENTO -->
+<div class="form-group">
+	<label for="tipoEvento" class="col-form-label h4">Tipo de evento
+	</label>
+	<div class="prodType">
+		@foreach ($product_types as $product_type)
+			<input type="checkbox" name="product_types[]" value="{{ $product_type->id }}" id="{{ $product_type->product_type }}" 
+		@if (in_array($product_type->id, $own_product_types))
+		{{ 'checked' }}
+		@endif/>
+		{{-- {{ $product->product_types}} --}}
+			<label class="form-check-label" for="{{ $product_type->name }}">{{ $product_type->name }}</label>
+			<br>
+		@endforeach
+	</div>
+</div>
+<!--  FIN TIPO DE EVENTO  -->
+
+
+
+
+
+
+
+
+
+
+
 							<!-- RESERVA MINIMA -->
 							<div class="form-group">
 								<label for="inputReservaMinima" class="col-form-label h4">Reserva minima</label>
@@ -130,7 +151,18 @@
 							<div class="form-group">
 								<label for="tipoPrecio" class="col-form-label h4">Tipo de precio</label>
 								<div>
-									<input type="text" class="form-control" name="price_type" id="inputPrecio" placeholder="Precio" required value="{{ $product->price_type}}">
+									<select name="price_type" id="inputPrecio">
+										<option value="Por persona" {{ $product->price_type == 'Por persona' ? 'selected' : '' }}>
+											Por persona 
+										</option>
+										<option value="Por hora" {{ $product->price_type == 'Por hora' ? 'selected' : '' }}>
+											Por hora 
+										</option>
+										<option value="Fijo" {{ $product->price_type == 'Fijo' ? 'selected' : '' }}>
+											Fijo 
+										</option>
+									</select>
+									{{-- <input type="text" class="form-control" name="price_type" id="inputPrecio" placeholder="Precio" required value="{{ $product->price_type}}"> --}}
 								</div>
 							</div>
 							<!-- FIN TIPO DE PRECIO  -->
@@ -138,7 +170,11 @@
 
 							<div class="form-group  text-center">
 								<div>
-									<button type="submit" class="col-lg-8 col-md-8 btn">Guardar Cambios</button>
+							<input type="hidden" class="form-control" name="active" value="0">
+
+									<button type="submit" name="submit" class="col-lg-8 col-md-8 btn" value="edit">Guardar Cambios</button>
+
+                  <button type="submit" name="submit" class="col-lg-8 col-md-8 btn" value="delete">Eliminar Producto</button>
 								</div>
 							</div>
 							<!-- FIN GUARDAR -->
@@ -155,5 +191,22 @@
 		</div>
 	</div>
 </div>
+{{-- <script>
+	// var prodType = document.querySelector('.prodType');
+	// console.log(prodType);
+
+	var matches = [];
+	 matches = document.querySelector('.prodType').children;
+	// for(var i = 0; i < searchElements.length; i++) {
+	//     if(searchElements[i].tagName == 'INPUT') {
+	        
+	//             matches.push(searchElements[i]);
+	        
+	//     }
+	// }
+	console.log(matches);
+	var attributes = matches.dataset.id;
+</script> --}}
+
 </body>
 </html>

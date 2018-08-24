@@ -3,10 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-	 protected $fillable = [
+	// use SoftDeletes;
+	// use SoftDeletes;
+	use SoftDeletes;
+
+    // protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at'];
+
+	protected $fillable = [
 	 	'name',
 	 	'mail',
 	 	'cover',
@@ -23,6 +33,9 @@ class Product extends Model
 	 	// 'active',
 
     ];
+
+    // protected $table = 'products';
+	
 	public function product_types()
     {
         return $this->belongsToMany('App\ProductType');
