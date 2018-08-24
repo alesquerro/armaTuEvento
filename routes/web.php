@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('registro', 'Auth\RegisterController@showOptions')->name('register');
 Route::post('registro', 'Auth\RegisterController@getRegister')->name('register');
 Route::get('perfil', 'Front\UserController@showOptions')->name('perfil');
-Route::post('perfil', 'Auth\RegisterController@getRegisterEdit')->name('perfil');
+Route::put('perfil', 'Auth\RegisterController@getRegisterEdit')->name('perfil');
 Route::get('olvidoContrasena', 'Auth\RegisterController@showOptionsReset')->name('password.email');
 Route::post('olvidoContrasena', 'Auth\RegisterController@getRegister')->name('password.email');
 
@@ -59,15 +59,15 @@ Route::get('Admin/listar_productos','Admin\ProductController@index')->middleware
 Route::get('Admin/dashboard','Admin\StaticController@dashboard')->middleware('IsAdmin');
 
 //el listado de productos -->el camino sigue a Admin/Product
-Route::get('Admin/listar_productos','Admin\ProductController@index')->middleware('IsAdmin'); 
+Route::get('Admin/listar_productos','Admin\ProductController@index')->middleware('IsAdmin');
 //formulario para elegir producto
 Route::post('Admin/Product','Admin\ProductController@edit')->middleware('IsAdmin');
 //pagina interna para que actualice cambios de productos seguía a @update. Lo cambio a handleRequest
 Route::put('Admin/EditarProducto','Admin\ProductController@handleRequest')->middleware('IsAdmin');
 //formulario crear producto
-Route::get('Admin/nuevoProducto','Admin\ProductController@create')->middleware('IsAdmin'); 
+Route::get('Admin/nuevoProducto','Admin\ProductController@create')->middleware('IsAdmin');
 //pagina interna para que guarde nuevos productos
-Route::put('Admin/Product','Admin\ProductController@store')->middleware('IsAdmin'); 
+Route::put('Admin/Product','Admin\ProductController@store')->middleware('IsAdmin');
 //formulario para eliminar producto
 //Route::post('Admin/Product','Admin\ProductController@edit')->middleware('IsAdmin');
 //pagina interna para que actualice eliminación de productos
