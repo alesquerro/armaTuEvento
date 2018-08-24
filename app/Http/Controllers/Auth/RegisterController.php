@@ -153,21 +153,21 @@ class RegisterController extends Controller
         if((request()->input('email') == $user->email) && (request()->input('respuesta1') == $user->respuesta1) && (request()->input('respuesta2') == $user->respuesta2)){
             return redirect('/cambiarPass');
         }
-       
+
     }
 
     public function changePass(Request $request){
-      //dd('aca');
+      //dd(request()->all());
       //dd(request()->input('password') );
         if(request()->input('password') != request()->input('password-confirm')){
             return redirect()->back()->with("La nueva contraseña no puede ser igual que la anterior");
         }
- 
+
         $validatedData = $request->validate([
             'password' => 'required',
-            'password-confirm' => 'required|string|min:6|confirmed',
+            'password-confirm' => 'required|string|min:6',
         ]);
- 
+
         $user = Auth::user();
         $user->password = Hash::make(request()->input('password'));
         $user->save();
@@ -177,7 +177,7 @@ class RegisterController extends Controller
         return redirect('/');
 
     }
-    
+
 
     public function updateUser(User $user, Request $request)
     {

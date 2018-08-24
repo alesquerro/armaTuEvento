@@ -23,7 +23,7 @@ Route::get('perfil', 'Front\UserController@showOptions')->name('perfil');
 Route::put('perfil', 'Auth\RegisterController@getRegisterEdit')->name('perfil');
 Route::get('olvidoContrasena', 'Auth\RegisterController@showOptionsReset')->name('password.email');
 Route::post('olvidoContrasena', 'Auth\RegisterController@getRegisterContra')->name('password.email');
-Route::get('cambiarPass', 'Auth\RegisterController@getFromPass')->name('password.pass');
+Route::get('cambiarPass', 'Auth\RegisterController@getFromPass');
 Route::post('cambiarPass', 'Auth\RegisterController@changePass')->name('password.pass');
 
 Route::get('/','Front\StaticController@showIndex');
