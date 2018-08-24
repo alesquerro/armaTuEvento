@@ -166,7 +166,7 @@ class ProductController extends Controller
             $query->whereHas('product_types',function($type) use($tp_ids) {
               $type->whereIn('product_types.id',$tp_ids);
             });
-          
+
             $filtros_aplicados['tipo_producto'] = $tp_ids;
 
           }
@@ -174,7 +174,7 @@ class ProductController extends Controller
 
       }
       if($texto){
-          //FIXME ver esto!!!!
+          //FIXME ver esto!!!! y agregar busqueda por tipos y eventos
           $txt_list =  explode('=',$texto);
           if(count($txt_list) == 2 && $txt_list[1] != 'todo' && $txt_list[1] != ''){
             $query->where('name','like',"%{$txt_list[1]}%");
@@ -184,8 +184,7 @@ class ProductController extends Controller
 
       }
 
-      $productos = $query->get();
-      //dd($productos);
+      $productos = $query->paginate(9);
       $favoritos = [];
       if(auth()->check()){
         foreach (auth()->user()->products as $product) {

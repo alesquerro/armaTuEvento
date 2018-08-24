@@ -62,7 +62,7 @@ $usuario = false;
         @else
           <img src="/imagenes/default_avatar.png" alt="">
         @endif
-      
+
       </div>
   @endif
 
@@ -96,11 +96,11 @@ $usuario = false;
 
 function mostrar_menu_sm(){
 
-  $("#menu_lista-sm").toggle(1000);
+  $("#menu_lista-sm").toggle(500);
 }
 function mostrar_menu_md(){
 
-  $("#menu_lista-md").toggle(1000);
+  $("#menu_lista-md").toggle(500);
 }
 </script>
 <nav class="navigation-sm bg-header">
@@ -129,51 +129,51 @@ function mostrar_menu_md(){
     </form>
   </div>
   <ul class="menu_lista-sm" id="menu_lista-sm">
-      @if (! Auth::check())
+    @if (! Auth::check())
 
-    <li class="">
-      <a class="" href="/login">Ingresar</a>
-    </li>
-    <li class="">
-      <a class="" href="/registro">Registrarme</a>
-    </li>
+      <li class="">
+        <a class="" href="/login">Ingresar</a>
+      </li>
+      <li class="">
+        <a class="" href="/registro">Registrarme</a>
+      </li>
+    @else
+      <div class="">
+        @if (Auth::user()->avatar == null)
+          <div class="avatar">
+            <img src="/imagenes/default_avatar.png" alt="">
+          </div>
         @else
-  <div class="header_usuario">
-
-
-  @if (Auth::user()->avatar == null)
-      <div class="avatar">
-        <img src="/imagenes/default_avatar.png" alt="">
-      </div>
-  @else
-      <div class="avatar">
-        <img src="/storage/{{Auth::user()->avatar}}" alt="">
-      </div>
-  @endif
-
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->email }}</a>
-      <div class="dropdown-menu">
-        <a class="" href="perfil">Mi cuenta</a><br>
-        <a class="" href="mis_compras">Mis reservas</a><br>
-        @if (Auth::user()->admin)
-         <a class="" href="/Admin/dashboard">Administrar</a><br>
-       @endif
+          <div class="avatar">
+            <img src="/storage/{{Auth::user()->avatar}}" alt="">
+          </div>
+        @endif
+      <li class="">{{ Auth::user()->email }}</li> <br>
+      <li class="">
+        <a class="" href="perfil">Mi cuenta</a>
+      </li>
+      <li>
+        <a class="" href="mis_compras">Mis reservas</a>
+      </li>
+      @if (Auth::user()->admin)
+        <li>
+          <a class="" href="/Admin/dashboard">Administrar</a>
+        </li>
+      @endif
+      <li>
         <a class="" href="/logout">Cerrar sesión</a>
-      </div>
+      </li>
     </div>
+    @endif
+  <li class="">
+    <a class="" href="/FAQs">FAQs</a>
   </li>
-  @endif
-
-    <li class="">
-      <a class="" href="/FAQs">FAQs</a>
-    </li>
-    <li class="">
-      <a class="" href="/contacto">Contacto</a>
-    </li>
-    <li class="">
-      <a class="" href="/carrito"><img id="carrito" src="/imagenes/w-shop.png"></a>
-    </li>
+  <li class="">
+    <a class="" href="/contacto">Contacto</a>
+  </li>
+  <li class="">
+    <a class="" href="/carrito"><img id="carrito" src="/imagenes/w-shop.png"></a>
+  </li>
   </ul>
 </nav>
 
@@ -205,40 +205,40 @@ function mostrar_menu_md(){
   <ul class="menu_lista-md" id="menu_lista-md">
       @if (! Auth::check())
 
-    <li class="">
-      <a class="" href="/login">Ingresar</a>
-    </li>
-    <li class="">
-      <a class="" href="/registro">Registrarme</a>
-    </li>
+        <li class="">
+          <a class="" href="/login">Ingresar</a>
+        </li>
+        <li class="">
+          <a class="" href="/registro">Registrarme</a>
+        </li>
+      @else
+      <div class="">
+        @if (Auth::user()->avatar == null)
+            <div class="avatar">
+              <img src="/imagenes/default_avatar.png" alt="">
+            </div>
         @else
-  <div class="header_usuario">
-
-
-  @if (Auth::user()->avatar == null)
-      <div class="avatar">
-        <img src="/imagenes/default_avatar.png" alt="">
-      </div>
-  @else
-      <div class="avatar">
-        <img src="/storage/{{Auth::user()->avatar}}" alt="">
-      </div>
-  @endif
-
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->email }}</a>
-      <div class="dropdown-menu">
-        <a class="" href="perfil">Mi cuenta</a><br>
-        <a class="" href="mis_compras">Mis reservas</a><br>
+            <div class="avatar">
+              <img src="/storage/{{Auth::user()->avatar}}" alt="">
+            </div>
+        @endif
+        <li class="">{{ Auth::user()->email }}</li> <br>
+        <li class="">
+          <a class="" href="perfil">Mi cuenta</a>
+        </li>
+        <li>
+          <a class="" href="mis_compras">Mis reservas</a>
+        </li>
         @if (Auth::user()->admin)
-         <a class="" href="/Admin/dashboard">Administrar</a><br>
-       @endif
-        <a class="" href="/logout">Cerrar sesión</a>
+          <li>
+            <a class="" href="/Admin/dashboard">Administrar</a>
+          </li>
+        @endif
+        <li>
+          <a class="" href="/logout">Cerrar sesión</a>
+        </li>
       </div>
-    </div>
-  </li>
   @endif
-
     <li class="">
       <a class="" href="/FAQs">FAQs</a>
     </li>

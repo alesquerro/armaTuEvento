@@ -83,7 +83,7 @@
     </div>
     <div class="form-group  text-center">
       <div>
-        <a class="btn btn-lg btn-secondary btn-sm" id="volver" href="/listado">Ver más productos</a>
+        <a class="btn btn-lg btn-secondary btn-sm" id="volver" href="/Admin/dashboard">Volver</a>
       </div>
     </div>
   </div>

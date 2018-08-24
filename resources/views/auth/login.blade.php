@@ -42,10 +42,10 @@
             <button type="submit" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 btn">Enviar</button>
         </div>
         <div class="form-group col-lg-8 offset-lg-2 col-md-8 offset-md-2">
-            <button type="button" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 btn btn-link" id="link-forget"><a href="/olvidoContrasena" id="link-forget">Olvidé mi contraseña</a></button>
+            <button type="button" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 btn btn-link" id="link-forget"><a class="link-forget href="/olvidoContrasena" id="link-forget">Olvidé mi contraseña</a></button>
         </div>
         <div class="form-group col-lg-8 offset-lg-2 col-md-8 offset-md-2">
-            <button type="button" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 btn btn-link" id="link-forget"><a href="/registro" id="link-forget">Si no tenés usuario: ¡Registrate!</a></button>
+            <button type="button" class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 btn btn-link" ><a href="/registro" class="link-forget">Si no tenés usuario: ¡Registrate!</a></button>
         </div>
       </form>
       <!--  FIN FORM -->
@@ -61,5 +61,3 @@
 
 </body>
 </html>
-
-

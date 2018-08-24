@@ -87,11 +87,16 @@
             <div class="img_thumb">
               <img class="card-img-top" src="/storage/{{ $salon->cover }}"  alt="Salón 1">
             </div>
-            <div class="card-body">
+            <div class="card-body" id="{{ $salon->id }}">
               <p class="h4" id="nombre_salon" name="nombre_salon">
                 {{ $salon->name }}</p>
                 <p class="card-text">{{ $salon->description }}></p>
                 <p class="card-text">Consultar disponibilidad y precio</p>
+                <ul class="shares_hide" id="share_links_{{ $salon->id }}">
+                  <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:8000/producto/{{$salon->id}}" class="social-button my-class" ><span class="fa fa-facebook-official"></span></a></li>
+                  <li style="list-style: none; font-size:24px;"><a href="http://twitter.com/share?text=armaTuEvento&url=http://localhost:8000/producto/{{$salon->id}}" class="social-button my-class" ><span class="fa fa-twitter"></span></a></li>
+                  <li style="list-style: none; font-size:24px;"><a href="https://api.whatsapp.com/send?phone=whatsappphonenumber&text=http://localhost:8000/producto/{{$salon->id}}"  class="social-button my-class"><span class="fa fa-whatsapp"></span></a></li>
+                </ul>
               </div>
               <div class="corazon" style="    justify-content: space-evenly;
     padding: 15px;     align-items: center;">
@@ -125,20 +130,22 @@
                 <!--<a href="#" id="likes">
                   <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
                 </a>-->
-                <div id="social-links">
+                {{-- <div id="social-links">
                   <ul style="list-style: none; margin-bottom: 0px;">
                     <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://jorenvanhocht.be" class="social-button my-class" id="my-id"><span class="fa fa-facebook-official"></span></a></li>
                   </ul>
+                </div> --}}
+                <div>
+                  <a href="#{{$salon->id}}" onclick="show_shares({{ $salon->id }})">
+                    <span class="fa fa-share-alt" style="font-size:24px;color:#B21917"></span>
+                  </a>
                 </div>
-
-
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <a class="btn btn-sm btn-outline-secondary" href="producto/{{ $salon->id }}">Ver</a>
                     <a class="btn btn-sm btn-outline-secondary" href="contacto/{{ $salon->id }}"  onclick="agregar_carrito({{ $salon->id }})">Consultar</a>
                   </div>
                 </div>
-
               </div>
             </div><!-- card -->
           </div> <!-- col -->
@@ -152,7 +159,7 @@
       <section style="padding: 5rem; padding-bottom: 1rem;">
         <!-- NUEVO INICIO CONTENIDO -->
         <p class="h4" style="margin-top: 50px; font-size: 40px; ">Conocé nuestros servicios</p>
-        <div class="row card_row">
+        <div class="row card_row" >
           @foreach ($servicios as $servicio)
           <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
             <div class="card mb-4 box-shadow">
@@ -160,10 +167,15 @@
                 <img class="card-img-top" src="/storage/{{ $servicio->cover }}"  alt="Foto Servicio">
               </div>
               <div class="card-body">
-                <p class="h4" id="nombre_salon" name="nombre_salon">
+                <p class="h4" id="nombre_servicio" name="nombre_salon">
                   {{ $servicio->name }}</p>
                   <p class="card-text">{{ $servicio->description }}</p>
                   <p class="card-text">Consultar disponibilidad y precio</p>
+                  <ul class="shares_hide" id="share_links_{{ $servicio->id }}">
+                    <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:8000/producto/{{$servicio->id}}" class="social-button my-class" ><span class="fa fa-facebook-official"></span></a></li>
+                    <li style="list-style: none; font-size:24px;"><a href="http://twitter.com/share?text=armaTuEvento&url=http://localhost:8000/producto/{{$servicio->id}}" class="social-button my-class" ><span class="fa fa-twitter"></span></a></li>
+                    <li style="list-style: none; font-size:24px;"><a href="https://api.whatsapp.com/send?phone=whatsappphonenumber&text=http://localhost:8000/producto/{{$servicio->id}}"  class="social-button my-class"><span class="fa fa-whatsapp"></span></a></li>
+                  </ul>
                 </div>
                 <div class="corazon" style="    justify-content: space-evenly;
     padding: 15px;     align-items: center;">
@@ -199,10 +211,10 @@
                                 <!--<a href="#" id="likes">
                   <i class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></i>
                 </a>-->
-                <div id="social-links">
-                  <ul style="list-style: none;margin-bottom: 0px;">
-                    <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://jorenvanhocht.be" class="social-button my-class" id="my-id"><span class="fa fa-facebook-official"></span></a></li>
-                  </ul>
+                <div >
+                  <a href="#{{$servicio->id}}" onclick="show_shares({{ $servicio->id }})">
+                    <span class="fa fa-share-alt" style="font-size:24px;color:#B21917"></span>
+                  </a>
                 </div>
                 <!--input type="submit" name="" value="carrito"-->
                 <div class="d-flex justify-content-between align-items-center">
@@ -228,6 +240,9 @@
     }
     function remove_favourites(prod){
       $("#remove_favourites_"+prod).submit();
+    }
+    function show_shares(prod){
+      $("#share_links_"+prod).toggleClass("shares");
     }
     </script>
 

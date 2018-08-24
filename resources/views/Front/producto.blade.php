@@ -61,6 +61,11 @@
             Reserva mínima $: {{ $producto->minimum_reservation }} </p>
           <p class="card-text">{{ $producto->description }}</p><!-- Descripcion salon -->
 
+          <ul class="shares_hide" id="share_links_{{ $producto->id }}">
+            <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:8000/producto/{{$producto->id}}" class="social-button my-class" ><span class="fa fa-facebook-official"></span></a></li>
+            <li style="list-style: none; font-size:24px;"><a href="http://twitter.com/share?text=armaTuEvento&url=http://localhost:8000/producto/{{$producto->id}}" class="social-button my-class" ><span class="fa fa-twitter"></span></a></li>
+            <li style="list-style: none; font-size:24px;"><a href="https://api.whatsapp.com/send?phone=whatsappphonenumber&text=http://localhost:8000/producto/{{$producto->id}}"  class="social-button my-class"><span class="fa fa-whatsapp"></span></a></li>
+          </ul>
             <div class="corazon card-body"  style="    justify-content: stretch;
     padding: 15px;     align-items: center;">
               <p class="card-text"> <!-- botones favorito y compartir -->
@@ -85,10 +90,13 @@
                       @endif
                 </p>
               </div><!-- <div class="d-flex justify-content align-items-left"> -->
-                 <div id="social-links " class="mr-4">
-                  <ul style="list-style: none; margin-bottom: 0px;">
-                    <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://jorenvanhocht.be" class="social-button my-class" id="my-id"><span class="fa fa-facebook-official"></span></a></li>
-                  </ul>
+
+                <div >
+                  <a href="#{{$producto->id}}" onclick="show_shares({{ $producto->id }})">
+                    <span class="fa fa-share-alt" style="font-size:24px;color:#B21917"></span>
+                  </a>
+                </div>
+
                 </div>
                   <!--a href="#" id="shopping-cart">
                     <i class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></i>
@@ -136,6 +144,10 @@
                     }
                     function remove_favourites(prod){
                       $("#remove_favourites_"+prod).submit();
+                    }
+                    function show_shares(prod){
+                      $("#share_links_"+prod).toggleClass("shares");
+                      return false;
                     }
                   </script>
     </div><!-- FIN CONTAINER BOOTSTRAP -->
