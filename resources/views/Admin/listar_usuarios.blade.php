@@ -14,7 +14,7 @@
         <div>
 
           <h1>Administración de usuarios</h1>
-          
+
         </div>
           <div class="container-fluid  todo text-center">
            <div class="mt-5 mb-3 container" >
@@ -22,12 +22,13 @@
                @foreach($users as $user)
                  <li class="modificar">
                     <p class="mr-5 mt-2 mb-3">{{$user->first_name}}</p>
-                    <form action="/Admin/modificar_usuario/{{$user->id}}" method="post" > 
+                    <form action="/Admin/modificar_usuario/{{$user->id}}" method="get" >
+                      @csrf
                        <input type="hidden" name="usuario" value="{{$user->id}}">
                        <input type="submit" name="" value="Modificar usuario {{$user->first_name}}" class="btn moficar_item">
                      </form>
                  </li>
-               @endforeach   
+               @endforeach
              </ul>
            </div>
           <button id="boton" class="btn btn-success mb-5 float-rigth">Traer más</button>
@@ -51,7 +52,7 @@
           });
 
           usuarios.forEach(function(user, index){
-            
+
             var liNode = document.createElement('LI');
             var pNode = document.createElement('P');
             pNode.innerHTML = user.first_name;
@@ -60,7 +61,7 @@
             var input2Node = document.createElement('INPUT');
 
             input1Node.setAttribute('value', user.id);
-            input1Node.setAttribute('type', 'hidden');            
+            input1Node.setAttribute('type', 'hidden');
             input2Node.setAttribute('value', 'Modificar usuario '+ user.first_name);
             input2Node.setAttribute('type', 'submit');
 

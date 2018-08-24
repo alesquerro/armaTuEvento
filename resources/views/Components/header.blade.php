@@ -57,7 +57,12 @@ $usuario = false;
       </div>
   @else
       <div class="avatar">
-        <img src="/storage/{{Auth::user()->avatar}}" alt="">
+        @if (Auth::user()->avatar)
+          <img src="/storage/{{Auth::user()->avatar}}" alt="">
+        @else
+          <img src="/imagenes/default_avatar.png" alt="">
+        @endif
+      
       </div>
   @endif
 

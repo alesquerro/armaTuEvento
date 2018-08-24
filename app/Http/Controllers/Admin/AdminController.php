@@ -43,10 +43,8 @@ class AdminController extends Controller
         return view('Admin.modificar_usuario', compact('user'));
     }
     public function update(Request $request)
-    {       
-
+    {
         $user = User::find(request()->input('id'));
-
 
         $user->active = request()->input('active');
         $user->admin = request()->input('admin');
@@ -90,7 +88,7 @@ class AdminController extends Controller
         //
     }
 
-   
+
     /**
      * Remove the specified resource from storage.
      *
