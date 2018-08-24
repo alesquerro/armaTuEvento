@@ -22,7 +22,9 @@ Route::post('registro', 'Auth\RegisterController@getRegister')->name('register')
 Route::get('perfil', 'Front\UserController@showOptions')->name('perfil');
 Route::post('perfil', 'Auth\RegisterController@getRegisterEdit')->name('perfil');
 Route::get('olvidoContrasena', 'Auth\RegisterController@showOptionsReset')->name('password.email');
-Route::post('olvidoContrasena', 'Auth\RegisterController@getRegister')->name('password.email');
+Route::post('olvidoContrasena', 'Auth\RegisterController@getRegisterContra')->name('password.email');
+Route::get('cambiarPass', 'Auth\RegisterController@getFromPass')->name('password.pass');
+Route::post('cambiarPass', 'Auth\RegisterController@changePass')->name('password.pass');
 
 Route::get('/','Front\StaticController@showIndex');
 Route::get('FAQs','Front\StaticController@showFAQs');

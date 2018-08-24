@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
 use Auth;
 class RegisterController extends Controller
 {
@@ -130,11 +132,51 @@ class RegisterController extends Controller
           $filename = $file->storeAs($folder,$filename);
           auth()->user()->avatar = $filename;
         }
+
         auth()->user()->save();
 
         return redirect('/');
 
     }
+
+    public function getFromPass(){
+      return view('auth.passwords.pass');
+    }
+
+    public function getRegisterContra(User $user, Request $request)
+    {
+      //dd('aca');
+        $userId = auth()->user()->id;
+        $user = User::find($userId);
+        //dd(request()->input('email'));
+        if((request()->input('email') == $user->email) && (request()->input('respuesta1') == $user->respuesta1) && (request()->input('respuesta2') == $user->respuesta2)){
+            return redirect('/cambiarPass');
+        }
+       
+    }
+
+    public function changePass(Request $request){
+      //dd('aca');
+      //dd(request()->input('password') );
+        if(request()->input('password') != request()->input('password-confirm')){
+            return redirect()->back()->with("La nueva contraseña no puede ser igual que la anterior");
+        }
+ 
+        $validatedData = $request->validate([
+            'password' => 'required',
+            'password-confirm' => 'required|string|min:6|confirmed',
+        ]);
+ 
+        $user = Auth::user();
+        $user->password = Hash::make(request()->input('password'));
+        $user->save();
+
+        //auth()->user()->fill(request()->all());
+        //auth()->user()->save();
+        return redirect('/');
+
+    }
+    
 
     public function updateUser(User $user, Request $request)
     {

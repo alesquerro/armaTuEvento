@@ -7,7 +7,7 @@
     @include('Components.header')
     <div class="contenido container">
       <!-- INICIO FORM -->
-      <form method="POST" action="{{ route('password.email') }}" aria-label="{{ __('Reseteo de Password') }}" class="bg-traslucido bg-margenes">
+      <form method="post" action="{{ route('password.email') }}" aria-label="{{ __('Reseteo de Password') }}" class="bg-traslucido bg-margenes">
         @csrf
 
         <div class="form-group col-lg-8 offset-lg-2 col-md-8 offset-md-2">
