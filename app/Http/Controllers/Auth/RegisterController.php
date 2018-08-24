@@ -109,6 +109,7 @@ class RegisterController extends Controller
 
     public function getRegister()
     {
+
         $this->validator(request()->all());
         $user = $this->create(request()->all());
 

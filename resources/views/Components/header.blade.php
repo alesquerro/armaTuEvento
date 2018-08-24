@@ -1,25 +1,3 @@
-<?php
-//
-// require_once('funciones/autenticacion.blade.php');
-// require_once('funciones/usuarios.blade.php');
-
-$usuario = false;
-// if(isset($_SESSION['usuario']) && $_SESSION['usuario']){
-//     $usuario = $_SESSION['usuario'];
-//     $avatar = get_avatar($usuario);
-// }else{
-//   //si existe la cookie, que inicie sesión
-//   if (isset($_COOKIE['usuario'])) {
-//       $usuario = buscarUsuario('id', $_COOKIE['usuario']);
-//       $avatar = get_avatar($usuario);
-//       if ($usuario){
-//         unset($usuario['contrasena']);
-//         $_SESSION['usuario'] = $usuario;
-//       }
-//   }
-// }
-
-?>
 
 <nav class="navigation bg-header">
   <div class="logo">
