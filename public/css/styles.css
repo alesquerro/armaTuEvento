@@ -649,6 +649,12 @@ p.texto_color {
 .shares li{
 	margin-left: 0.5em;
 }
+.show_select{
+	display: block;
+}
+.hide_select{
+	display: none;
+}
 /* FIN CARRITO */
 
 

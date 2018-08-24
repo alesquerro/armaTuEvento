@@ -41,13 +41,13 @@ class ProductController extends Controller
      */
     public function create()
     {
-
+      dd('aca2');
         // $id = request()->input('producto');
         // $product = Product::find($id);
         $product_types = ProductType::all();
         // $input = $request->all();
 
-        
+
         return view('Admin.Product.create', [
         //     'product' => $product,
             'product_types' => $product_types
@@ -63,6 +63,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        dd('aca1');
         $filename = '';
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
@@ -82,7 +83,7 @@ class ProductController extends Controller
             'type' => $request['type'],
             'price_type' => $request['price_type'],
             'minimum_reservation' => $request['minimum_reservation'],
-            'active' => 1,            
+            'active' => 1,
             'company_id' => $request['company_id'],
         ]);
 // dd($newProduct);
@@ -123,10 +124,18 @@ class ProductController extends Controller
         //archivo!!
         $id = request()->input('producto');
         $product = Product::find($id);
-        $product_types = ProductType::all();
+        //$product_types = ProductType::all();
+        $tipo_salones = ProductType::where('product_type','salon')->get();
+        $tipo_servicios = ProductType::where('product_type','servicio')->get();
         $own_products = $product->product_types;
         $own_products_id = [];
         $salonServicio = $product->type;
+        $product_types = $tipo_servicios;
+        //dd($tipo_servicios);
+        if($product->type == 'salon'){
+          $product_types = $tipo_salones;
+        }
+
 
         foreach ($own_products as $value) {
             $own_products_id[] = $value->id;
@@ -135,9 +144,11 @@ class ProductController extends Controller
 
         return view('Admin.Product.edit', [
             'product' => $product,
-            'product_types' => $product_types, 
+            'product_types' => $product_types,
             'own_product_types' => $own_products_id,
-            'salonServicio' => $salonServicio
+            'salonServicio' => $salonServicio,
+            'tipo_salones' => $tipo_salones,
+            'tipo_servicios' =>$tipo_servicios
         ]);
     }
 

@@ -23,14 +23,14 @@
 							<input type="hidden" class="form-control" name="accion" value="modificar">
 							<input type="hidden" class="form-control" name="id" value="{{ $product->id }}">
 							<input type="hidden" class="form-control" name="company_id" value='1'>
-							
+
 							<!-- NOMBRE -->
 							<div class="form-group">
 								<label for="inputNombre" class="col-form-label h4">Nombre del producto</label>
 								<div>
 									{{$product->id}}
 									<input type="text" class="form-control" name="name" id="inputNombre" placeholder="Nombre" required value="{{ $product->name }}">
-									
+
 								</div>
 							</div>
 							<!-- FIN NOMBRE -->
@@ -78,17 +78,13 @@
 								</label>
 										{{$product->type}}
 								<div>
-									<select name="type">
-
-										
+									<select name="type" id="type">
 											<option value="salon" {{ $product->type == 'salon' ? 'selected' : '' }}>
 												salon
 											</option>
-										
 											<option value="servicio" {{ $product->type == 'servicio' ? 'selected' : '' }}>
 												servicio
 											</option>
-										
 									</select>
 								</div>
 							</div>
@@ -97,17 +93,31 @@
 							<div class="form-group">
 								<label for="tipoEvento" class="col-form-label h4">Tipo de evento
 								</label>
-								<div>
-									@foreach ($product_types as $product_type)
-									<input type="checkbox" name="product_types[]" value="{{ $product_type->id }}" id="{{ $product_type->name }}" 
-									@if (in_array($product_type->id, $own_product_types))
-									{{ 'checked' }}
-									@endif/>
-									{{-- {{ $product->product_types}} --}}
-									<label class="form-check-label" for="{{ $product_type->name }}">{{ $product_type->name }}</label>
-									<br>
-									@endforeach
-								</div>
+
+										<div id="tipo_servicios" class='{{ $product->type == 'servicio' ? 'show_select': 'hide_select'}}'>
+											@foreach ($tipo_servicios as $product_type)
+											<input type="checkbox" name="product_types[]" value="{{ $product_type->id }}" id="{{ $product_type->name }}"
+											@if (in_array($product_type->id, $own_product_types))
+											{{ 'checked' }}
+											@endif/>
+											{{-- {{ $product->product_types}} --}}
+											<label class="form-check-label" for="{{ $product_type->name }}">{{ $product_type->name }}</label>
+											<br>
+											@endforeach
+										</div>
+
+										<div id="tipo_salones" class='{{ $product->type == 'salon' ? 'show_select': 'hide_select'}}'>
+											@foreach ($tipo_salones as $product_type)
+											<input type="checkbox" name="product_types[]" value="{{ $product_type->id }}" id="{{ $product_type->name }}"
+											@if (in_array($product_type->id, $own_product_types))
+											{{ 'checked' }}
+											@endif/>
+											{{-- {{ $product->product_types}} --}}
+											<label class="form-check-label" for="{{ $product_type->name }}">{{ $product_type->name }}</label>
+											<br>
+											@endforeach
+										</div>
+
 							</div>
 							<!--  FIN TIPO DE EVENTO  -->
 							<!-- RESERVA MINIMA -->
@@ -155,5 +165,24 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	 $(document).ready(
+		 function(){
+			 $('#type').on('change', function() {
+ 			 		if(this.value == 'salon'){
+							$('#tipo_salones').attr('class','show_select');
+							$('#tipo_servicios').attr('class','hide_select');
+
+					}
+					else{
+							$('#tipo_servicios').attr('class','show_select');
+							$('#tipo_salones').attr('class','hide_select');
+							$('#tipo_salones').prop('selectedIndex',0);
+					}
+				});
+		 }
+	 );
+
+</script>
 </body>
 </html>
