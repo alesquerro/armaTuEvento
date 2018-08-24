@@ -165,7 +165,7 @@ class RegisterController extends Controller
  
         $validatedData = $request->validate([
             'password' => 'required',
-            'password-confirm' => 'required|string|min:6|confirmed',
+            'password-confirm' => 'required|string|min:6',
         ]);
  
         $user = Auth::user();
