@@ -535,6 +535,7 @@ background-color: #B21917 !important;
 .corazon {
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 	width: 100%;
 }
 .corazon i{
@@ -549,6 +550,12 @@ background-color: #B21917 !important;
 .corazon a:hover{
 	text-decoration: none;
 	color: #B21917;
+}
+.icon-links {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 50%;
 }
 
 .modificar{
@@ -624,7 +631,24 @@ p.texto_color {
 .paginas a:hover{
 	color: #B21917;
 }
-
+.shares_hide{
+	display: none
+}
+.shares{
+	list-style: none;
+	margin-bottom: 0px;
+	color: #B21917;
+	display: flex;
+	justify-content: center;
+	border: 1px solid #B21917;
+	border-radius: 5px;
+}
+.shares a{
+	color: #B21917;
+}
+.shares li{
+	margin-left: 0.5em;
+}
 /* FIN CARRITO */
 
 

@@ -24,8 +24,13 @@
                   <p class="h4">{{ $producto->name }}</p>
                   <p class="card-text">{{ $producto->description }}</p>
                   <p class="card-text">Consultar disponibilidad y precio</p>
+                  <ul class="shares_hide" id="share_links_{{ $producto->id }}">
+                    <li style="list-style: none; font-size:24px;"><a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:8000/producto/{{$producto->id}}" class="social-button my-class" ><span class="fa fa-facebook-official"></span></a></li>
+                    <li style="list-style: none; font-size:24px;"><a href="http://twitter.com/share?text=armaTuEvento&url=http://localhost:8000/producto/{{$producto->id}}" class="social-button my-class" ><span class="fa fa-twitter"></span></a></li>
+                    <li style="list-style: none; font-size:24px;"><a href="https://api.whatsapp.com/send?phone=whatsappphonenumber&text=http://localhost:8000/producto/{{$producto->id}}"  class="social-button my-class"><span class="fa fa-whatsapp"></span></a></li>
+                  </ul>
                   <div class="corazon card-body">
-
+                    <div class="icon-links">
                     @if (Auth::check() && in_array($producto->id,$favoritos) )
                       <form id="remove_favourites_{{$producto->id}}" action="/remove_favourites/{{$producto->id}}" method="post">
                         @csrf
@@ -43,9 +48,11 @@
                         <span class="fa fa-heart-o" style="font-size:24px;color:#B21917"></span>
                       </a>
                     @endif
-                    <a href="#" id="likes">
-                      <span class="fa fa-share-alt  ml-3 mr-3 mb-3" style="font-size:24px;color:#B21917"></span>
-                    </a>
+                    <div >
+                      <a href="#{{$producto->id}}" onclick="show_shares({{ $producto->id }})">
+                        <span class="fa fa-share-alt" style="font-size:24px;color:#B21917"></span>
+                      </a>
+                    </div>
                     <form  action="/carrito/{{ $producto->id }}" method="post" id="agregar_carrito_{{ $producto->id }}">
                       @csrf
                       <input type="hidden" name="id" value="{{ $producto->id }}">
@@ -55,15 +62,13 @@
                         <span class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></span>
                       </button>
                     </form>
-
-                  </div><!-- <div class="d-flex justify-content align-items-left"> -->
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <a class="btn btn-sm btn-outline-secondary" href="/producto/{{ $producto->id }}">Ver</a>
-                        <a class="btn btn-sm btn-outline-secondary" href="/contacto/{{ $producto->id }}">Consultar</a>
-                      </div>
-
                     </div>
+                    <div class="btn-group">
+                      <a class="btn btn-sm btn-outline-secondary" href="/producto/{{ $producto->id }}">Ver</a>
+                      <a class="btn btn-sm btn-outline-secondary" href="/contacto/{{ $producto->id }}">Consultar</a>
+                    </div>
+                  </div>
+
                   </div>
                 </div>
               </div>
@@ -100,7 +105,10 @@
       function remove_favourites(prod){
         $("#remove_favourites_"+prod).submit();
       }
-
+      function show_shares(prod){
+        $("#share_links_"+prod).toggleClass("shares");
+        return false;
+      }
     </script>
 
 </div>
