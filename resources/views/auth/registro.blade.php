@@ -3,7 +3,7 @@
   @include('Components.head')
 
 <script type="text/javascript">
-    
+
   function validarFormulario(evento){
     //alert('entro');
 
@@ -12,7 +12,7 @@
     var txtEmail = document.getElementById('email').value;
     var txtPass = document.getElementById('password').value;
     var txtPassConfirm = document.getElementById('password_confirm').value;
-
+    document.getElementById('errores').innerHTML = '';
     /*
     var ckbSelector1 = document.getElementById('respuesta1');
     var ckb1Index = ckbSelector1.selectedIndex;
@@ -23,7 +23,7 @@
     var txtSelector2 =  select.options[ckbSelector2].value;
     */
     var chkTerminos = document.getElementById('chk-terminos');
-  
+
     //Test campo obligatorio
     if(txtNombre == null || txtNombre.length == 0 || /^\s+$/.test(txtNombre)){
      // alert('El campo nombre no puede estar vacío');
@@ -39,17 +39,17 @@
       var pNode = document.createElement('P');
       pNode.innerHTML = 'El campo apellido no puede estar vacío';
       document.getElementById('errores').appendChild(pNode);
-      document.getElementById('errores').style.display = 'block';     
+      document.getElementById('errores').style.display = 'block';
       evento.preventDefault();
       //return false;
-    }  
+    }
     //Test Pass
     if (txtPass.length < 6) {
       //alert('La contraseña debe constar de al menos 6 carácteres.');
       var pNode = document.createElement('P');
       pNode.innerHTML = 'La contraseña debe constar de al menos 6 carácteres';
-      document.getElementById('errores').appendChild(pNode);   
-      document.getElementById('errores').style.display = 'block';        
+      document.getElementById('errores').appendChild(pNode);
+      document.getElementById('errores').style.display = 'block';
       evento.preventDefault();
       //return false;
     }
@@ -57,17 +57,17 @@
       //alert("Las contraseñas ingresadas no son iguales");
       var pNode = document.createElement('P');
       pNode.innerHTML = 'Las contraseñas ingresadas no son iguales';
-      document.getElementById('errores').appendChild(pNode); 
+      document.getElementById('errores').appendChild(pNode);
       document.getElementById('errores').style.display = 'block';
       evento.preventDefault();
       //return false;
-    }           
+    }
     //Test del mail
     if(!(/\S+@\S+\.\S+/.test(txtEmail))){
       //alert('Debe escribir un email válido');
       var pNode = document.createElement('P');
       pNode.innerHTML = 'Debe escribir un email válido';
-      document.getElementById('errores').appendChild(pNode);  
+      document.getElementById('errores').appendChild(pNode);
       document.getElementById('errores').style.display = 'block';
       evento.preventDefault();
       //return false;
@@ -77,15 +77,15 @@
       //alert('Debe aceptar los términos y condiciones');
       var pNode = document.createElement('P');
       pNode.innerHTML = 'Debe aceptar los términos y condiciones';
-      document.getElementById('errores').appendChild(pNode); 
-      document.getElementById('errores').style.display = 'block';        
+      document.getElementById('errores').appendChild(pNode);
+      document.getElementById('errores').style.display = 'block';
       evento.preventDefault();
       //return false;
     }
- 
+
     return true;
   }
- 
+
 window.onload = function(){
   document.getElementById('boton-submit').addEventListener('click', validarFormulario);
 };
