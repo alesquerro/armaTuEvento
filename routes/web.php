@@ -24,7 +24,7 @@ Route::put('perfil', 'Auth\RegisterController@getRegisterEdit')->name('perfil');
 Route::get('olvidoContrasena', 'Auth\RegisterController@showOptionsReset');
 Route::post('olvidoContrasena', 'Auth\RegisterController@getRegisterContra');
 Route::get('cambiarPass', 'Auth\RegisterController@getFromPass')->middleware('auth');
-Route::post('cambiarPass', 'Auth\RegisterController@changePass')->middleware('auth');
+Route::post('cambiarPass', 'Auth\RegisterController@changePass');
 
 Route::get('/','Front\StaticController@showIndex');
 Route::get('FAQs','Front\StaticController@showFAQs');

@@ -25,7 +25,7 @@
             @endif
           <label for="inputEmail3" class="col-form-label h4">Email</label>
           <div>
-            <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email" required  value="{{auth()->user()->email}}" readonly>
+            <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email" required  value="{{ auth()->check() ? auth()->user()->email : ''}}" {{auth()->check() ? 'readonly' : ''}}>
           </div>
           <div class="form-group mt-3">
             <div>

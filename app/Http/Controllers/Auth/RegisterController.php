@@ -143,17 +143,28 @@ class RegisterController extends Controller
       return view('auth.passwords.pass');
     }
 
-    public function getRegisterContra(User $user, Request $request)
+    public function getRegisterContra(Request $request)
     {
         $user = auth()->user();
-        //$user = User::find($userId);
-        if(($request->input('email') == $user->email) && ($request->input('respuesta1') == $user->respuesta1) && ($request->input('respuesta2') == $user->respuesta2)){
-            return redirect('/cambiarPass');
-            //return $this->changePass($request);
+        if(! $user){
+          $user = User::whereEmail($request['email'])->first();
         }
-
-        return redirect()->back()->with('message','Al menos una de las respuestas es incorrecta');
-
+        $error = '';
+        if($user){
+          if(($request->input('email') == $user->email) && ($request->input('respuesta1') == $user->respuesta1) && ($request->input('respuesta2') == $user->respuesta2)){
+              //return redirect('/cambiarPass');
+              //return $this->changePass($request);
+              //dd('aca');
+              return view('auth.passwords.pass',['usuario' =>$user]);
+          }
+          else{
+            $error = 'Al menos una de las respuestas es incorrecta';
+          }
+        }
+        if ($error){
+          return redirect()->back()->with('message','Al menos una de las respuestas es incorrecta');
+        }
+        return redirect('/olvidoContrasena');
     }
 
     public function changePass(Request $request){
@@ -166,14 +177,20 @@ class RegisterController extends Controller
             'password' => 'required',
             'password-confirm' => 'required|string|min:6',
         ]);
-
-        $user = Auth::user();
+        if(auth()->check()){
+          $user = Auth::user();
+        }
+        else{
+          $user =  User::whereEmail($request['email'])->first();
+        }
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
         //auth()->user()->fill(request()->all());
         //auth()->user()->save();
+        //Auth::login(request());
         return redirect('/');
+
 
     }
 
@@ -198,7 +215,7 @@ class RegisterController extends Controller
         $options1 = Answer::limit(4)->get();
         $options2 = Answer::offset(4)->limit(4)->get();
         //dd($options1);
-        return view('auth.passwords.email', ['options1' => $options1, 'options2' => $options2]);
+        return view('auth.passwords.email', ['options1' => $options1, 'options2' => $options2, ]);
     }
 
 }

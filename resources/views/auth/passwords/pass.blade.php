@@ -9,9 +9,10 @@
       <!-- INICIO FORM -->
       <form method="post" action="/cambiarPass" class="bg-traslucido bg-margenes">
         @csrf
-
+        <input type="hidden" name="email" value="{{ $usuario->email }}">
         <div class="form-group col-lg-8 offset-lg-2 col-md-8 offset-md-2">
           <p class="h1">Cambiar Contraseña</p>
+
             @if (count($errors))
 
                 <div class="alert alert-danger">
