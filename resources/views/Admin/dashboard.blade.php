@@ -21,7 +21,7 @@
             <ul>
               <li><a href="/Admin/listar_usuarios"  class="listado-panel">Modificar Usuarios</a></li>
               <li><a href="/Admin/listar_productos"  class="listado-panel">Modificar Productos</a></li>
-              <li><a href="/Admin/deleteProducts"  class="listado-panel">Eliminar Productos</a></li>
+              {{-- <li><a href="/Admin/deleteProducts"  class="listado-panel">Eliminar Productos</a></li> --}}
               <li><a href="/Admin/reservas"  class="listado-panel">Reservas</a></li>
             </ul>
 
@@ -92,7 +92,7 @@
      <script type="text/javascript">
 
       var chart;
-      var chartData = [  
+      var chartData = [
         ['Salones',534],
         ['Servicios' ,32],
         ['Catering' ,34],
@@ -100,7 +100,7 @@
         ['Cotillon' , 7],
      ];
       var chart2;
-        var chartData2 = [  
+        var chartData2 = [
           ['Salones', 434],
           ['Servicios' , 532],
           ['Catering' , 734],
@@ -120,7 +120,7 @@
         bindto: '#bar-chart-one',
         data: {
           type: 'bar',
-          columns: chartData,      
+          columns: chartData,
         }
 
       });
@@ -128,7 +128,7 @@
         bindto: '#bar-chart-two',
         data: {
           type: 'bar',
-          columns: chartData2,      
+          columns: chartData2,
         }
 
       });
