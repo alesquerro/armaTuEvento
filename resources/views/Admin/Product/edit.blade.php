@@ -26,9 +26,10 @@
 
 							<!-- NOMBRE -->
 							<div class="form-group">
+								{{'Editando ID: '.$product->id}}<br>
 								<label for="inputNombre" class="col-form-label h4">Nombre del producto</label>
 								<div>
-									{{$product->id}}
+
 									<input type="text" class="form-control" name="name" id="inputNombre" placeholder="Nombre" required value="{{ $product->name }}">
 
 								</div>
@@ -119,6 +120,18 @@
 											@endforeach
 										</div>
 
+							</div>
+							<label class="col-form-label h4"><strong>Tipos de eventos</strong>
+							</label>
+							<div id="tipo_eventos" >
+								@foreach ($event_types as $event_type)
+								<input type="checkbox" name="event_types[]" value="{{ $event_type->id }}" id="{{ $event_type->name }}"
+									@if (in_array($event_type->id, $own_event_types))
+										{{ 'checked' }}
+									@endif/>
+								<label class="form-check-label" for="{{ $event_type->name }}">{{ $event_type->name }}</label>
+								<br>
+								@endforeach
 							</div>
 							<!--  FIN TIPO DE EVENTO  -->
 							<!-- RESERVA MINIMA -->

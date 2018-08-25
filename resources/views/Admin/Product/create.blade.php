@@ -80,7 +80,7 @@
 							<!-- FIN TIPO DE PRODUCTO -->
 							<!-- TIPO DE EVENTO -->
 							<div class="form-group">
-								<label for="tipoEvento" class="col-form-label h4">Categoría de producto
+								<label  class="col-form-label h4"><strong>Categoría de producto</strong>
 								</label>
 
 										<div id="tipo_servicios" class='hide_select'>
@@ -102,6 +102,15 @@
 											<br>
 											@endforeach
 										</div>
+								<label class="col-form-label h4"><strong>Tipos de eventos</strong>
+								</label>
+								<div id="tipo_eventos" >
+									@foreach ($event_types as $event_type)
+									<input type="checkbox" name="event_types[]" value="{{ $event_type->id }}" id="{{ $event_type->name }}">
+									<label class="form-check-label" for="{{ $event_type->name }}">{{ $event_type->name }}</label>
+									<br>
+									@endforeach
+								</div>
 
 							</div>
 							<!--  FIN TIPO DE EVENTO  -->
@@ -125,7 +134,18 @@
 							<div class="form-group">
 								<label for="tipoPrecio" class="col-form-label h4">Tipo de precio</label>
 								<div>
-									<input type="text" class="form-control" name="price_type" id="inputPrecio" placeholder="Precio" required value="{{ old('price_type')}}">
+									<select name="price_type" id="inputPrecio">
+										<option value="Por persona">
+											Por persona
+										</option>
+										<option value="Por hora">
+											Por hora
+										</option>
+										<option value="Fijo" >
+											Fijo
+										</option>
+									</select>
+									{{-- <input type="text" class="form-control" name="price_type" id="inputPrecio" placeholder="Precio" required value="{{ $product->price_type}}"> --}}
 								</div>
 							</div>
 							<!-- FIN TIPO DE PRECIO  -->
@@ -156,7 +176,7 @@
 	 $(document).ready(
 		 function(){
 			 $('#type').on('change', function() {
-				 
+
 					if(this.value == 'salon'){
 							$('#tipo_salones').attr('class','show_select');
 							$('#tipo_servicios').attr('class','hide_select');

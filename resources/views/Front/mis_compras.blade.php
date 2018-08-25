@@ -35,6 +35,7 @@
             </div>
             @foreach ($reservas as $reserva)
               <div style="border: 1px solid grey;border-radius: 10px;margin-top:10px;">
+              <p>{{ 'Nro reserva: '.$reserva->id }}</p>
               <p>{{ 'Fecha compra: '.$reserva->purchase_date }}</p>
               <p><strong>{{ 'Fecha evento: '.$reserva->event_date }}</strong></p>
                   <table class="table table-bordered tabla-reservas">

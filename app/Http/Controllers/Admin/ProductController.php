@@ -39,10 +39,12 @@ class ProductController extends Controller
         $product_types = ProductType::all();
         $tipo_salones = ProductType::where('product_type','salon')->get();
         $tipo_servicios = ProductType::where('product_type','servicio')->get();
+        $event_types = EventType::all();
         return view('Admin.Product.create', [
             'product_types' => $product_types,
             'tipo_salones' => $tipo_salones,
-            'tipo_servicios' =>$tipo_servicios
+            'tipo_servicios' =>$tipo_servicios,
+            'event_types' => $event_types,
         ]
         );
     }
@@ -80,7 +82,8 @@ class ProductController extends Controller
         ]);
 // dd($newProduct);
         $newProduct->product_types()->sync($request['product_types']);
-        return redirect('/Admin/dashboard');
+        $newProduct->event_types()->sync($request['event_types']);
+        return redirect('/Admin/listar_productos');
 
     }
 
@@ -119,8 +122,11 @@ class ProductController extends Controller
         //$product_types = ProductType::all();
         $tipo_salones = ProductType::where('product_type','salon')->get();
         $tipo_servicios = ProductType::where('product_type','servicio')->get();
+        $event_types = EventType::all();
         $own_products = $product->product_types;
         $own_products_id = [];
+        $own_events = $product->event_types;
+        $own_events_id = [];
         $salonServicio = $product->type;
         $product_types = $tipo_servicios;
         //dd($tipo_servicios);
@@ -131,6 +137,9 @@ class ProductController extends Controller
         foreach ($own_products as $value) {
             $own_products_id[] = $value->id;
         }
+        foreach ($own_events as $value) {
+            $own_events_id[] = $value->id;
+        }
 
         return view('Admin.Product.edit', [
             'product' => $product,
@@ -138,7 +147,9 @@ class ProductController extends Controller
             'own_product_types' => $own_products_id,
             'salonServicio' => $salonServicio,
             'tipo_salones' => $tipo_salones,
-            'tipo_servicios' =>$tipo_servicios
+            'tipo_servicios' =>$tipo_servicios,
+            'event_types' => $event_types,
+            'own_event_types' => $own_events_id,
         ]);
     }
 
@@ -176,6 +187,7 @@ class ProductController extends Controller
         $product->fill($request->all());
         $product->cover = $filename;
         $product->product_types()->sync($request['product_types']);
+        $product->event_types()->sync($request['event_types']);
         $product->save();
         // Flash::message('El producto ha sido modificado!');
         return redirect('/Admin/listar_productos');
