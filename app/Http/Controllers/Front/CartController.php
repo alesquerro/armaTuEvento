@@ -61,6 +61,9 @@ class CartController extends Controller
         'fecha_evento.after' => 'La fecha del evento debe ser mayor a hoy'
       ]);
       $product_ids = $request->session()->get('carrito');
+      if(!$product_ids){
+          return redirect('carrito')->with('mensajes','El carrito está vacio');
+      }
       $products = Product::whereIn('id',$product_ids)->get();
       $purchase = Purchase::create([
         'name' => 'Compra '.date('Y-m-d'),

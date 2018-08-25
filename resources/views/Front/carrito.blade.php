@@ -13,6 +13,9 @@
           </ul>
         </div>
       @endif
+      @if (Session::has('mensajes'))
+        <div class="alert alert-info">{{ Session::get('mensajes') }}</div>
+      @endif
       <h1 class="tituloh1carrito">Carrito de compras</h1>
       <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2" >
       <ul class="nav nav-tabs" id="myTab" role="tablist">
