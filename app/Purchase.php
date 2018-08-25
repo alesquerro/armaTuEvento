@@ -16,5 +16,7 @@ class Purchase extends Model
       return $this->belongsTo('App\User');
     }
 
-    
+
+
+
 }

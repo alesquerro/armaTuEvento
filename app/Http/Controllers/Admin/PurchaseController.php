@@ -37,11 +37,16 @@ class PurchaseController extends Controller
         foreach ($reservation->product_purchases as $product_purchase) {
 
           $product = $product_purchase->product;
-
-          $rd = DateProduct::where(['product_id'=> $product->id],['date'=>$reservation->event_date])->get();
-          if(! $rd->isEmpty()){
+          if($product){
+            $rd = DateProduct::where(['product_id'=> $product->id],['date'=>$reservation->event_date])->get();
+            if(! $rd->isEmpty()){
+              $all_products_ok = false;
+              $msg = "No se puede aceptar la reserva ID: ".$reservation->id." porque el producto".$product->name." está reservado en esa fecha";
+            }
+          }
+          else{
+            $msg = 'Alguno de los productos de la compra ID: '.$reservation->id.' seleccionados ya no está disponible';
             $all_products_ok = false;
-            $msg = "No se puede aceptar la reserva ID: ".$reservation->id." porque el producto".$product->name." está reservado en esa fecha";
           }
 
         }
