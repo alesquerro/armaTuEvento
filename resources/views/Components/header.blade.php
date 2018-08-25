@@ -128,10 +128,10 @@ function mostrar_menu_md(){
         @endif
       <li class="">{{ Auth::user()->email }}</li> <br>
       <li class="">
-        <a class="" href="perfil">Mi cuenta</a>
+        <a class="" href="/perfil">Mi cuenta</a>
       </li>
       <li>
-        <a class="" href="mis_compras">Mis reservas</a>
+        <a class="" href="/mis_compras">Mis reservas</a>
       </li>
       @if (Auth::user()->admin)
         <li>
@@ -202,10 +202,10 @@ function mostrar_menu_md(){
         @endif
         <li class="">{{ Auth::user()->email }}</li> <br>
         <li class="">
-          <a class="" href="perfil">Mi cuenta</a>
+          <a class="" href="/perfil">Mi cuenta</a>
         </li>
         <li>
-          <a class="" href="mis_compras">Mis reservas</a>
+          <a class="" href="/mis_compras">Mis reservas</a>
         </li>
         @if (Auth::user()->admin)
           <li>
