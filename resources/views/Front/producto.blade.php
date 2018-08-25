@@ -103,7 +103,7 @@
                   </a-->
 
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary"  href="contacto/{{ $producto->id }}">Consultar</a>
+                  <a class="btn btn-sm btn-outline-secondary"  href="/contacto/{{ $producto->id }}">Consultar</a>
                   <!--<a class="btn btn-sm btn-outline-secondary"  href="carrito.php?producto=<?php //echo $producto['id'];  ?>">Agregar a carrito</a>-->
                   <a class="btn btn-sm btn-outline-secondary"  onclick="agregar_carrito()"><span class="fa fa-shopping-cart" style="font-size:24px;color:#B21917"></span><span class="carrito_boton">Agregar a carrito</span></a>
                 </div><!-- <div class="btn-group"> -->
