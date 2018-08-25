@@ -42,7 +42,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-      dd('aca2');
+
         // $id = request()->input('producto');
         // $product = Product::find($id);
         $product_types = ProductType::all();
