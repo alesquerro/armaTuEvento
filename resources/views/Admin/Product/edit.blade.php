@@ -92,7 +92,7 @@
 							<!-- FIN TIPO DE PRODUCTO -->
 							<!-- TIPO DE EVENTO -->
 							<div class="form-group">
-								<label for="tipoEvento" class="col-form-label h4">Tipo de evento
+								<label for="tipoEvento" class="col-form-label h4">Categoría de producto
 								</label>
 
 										<div id="tipo_servicios" class='{{ $product->type == 'servicio' ? 'show_select': 'hide_select'}}'>
@@ -174,7 +174,7 @@
 				</div></div>
 				{{-- FOOTER --}}
 				<div>
-					@include('.Components.footer')
+					@include('/Components.footer')
 				</div>
 				{{-- FIN FOOTER --}}
 			</div>

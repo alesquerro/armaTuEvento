@@ -37,8 +37,12 @@ class ProductController extends Controller
     {
 
         $product_types = ProductType::all();
+        $tipo_salones = ProductType::where('product_type','salon')->get();
+        $tipo_servicios = ProductType::where('product_type','servicio')->get();
         return view('Admin.Product.create', [
-            'product_types' => $product_types
+            'product_types' => $product_types,
+            'tipo_salones' => $tipo_salones,
+            'tipo_servicios' =>$tipo_servicios
         ]
         );
     }
@@ -124,13 +128,9 @@ class ProductController extends Controller
           $product_types = $tipo_salones;
         }
 
-
-
-
         foreach ($own_products as $value) {
             $own_products_id[] = $value->id;
         }
-
 
         return view('Admin.Product.edit', [
             'product' => $product,

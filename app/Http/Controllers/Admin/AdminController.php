@@ -38,14 +38,12 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //dd($id);
         $user = User::find($id);
-        //dd(compact('user'));
         return view('Admin.modificar_usuario', ['user' => $user]);
     }
     public function update(Request $request)
     {
-      //dd($request->all());
+
         $user = User::find(request()->input('id'));
 
         $user->active = request()->input('active');

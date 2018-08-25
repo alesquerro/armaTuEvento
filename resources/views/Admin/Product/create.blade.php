@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-@include('.Components.Admin.head')
+@include('/Components/Admin/head')
 <body>
 	{{-- INICIO NAV --}}
 	<div class="container-fluid contenido">
-		@include('.Components.header')
+		@include('/Components/header')
 	</div>
 	{{-- FIN NAV --}}
 	<div class="contenido container" id="contenido-principal">
 		<!-- INICIO FORM -->
 		<div class="row bg-traslucido bg-margenes" style="background: rgba(48, 207, 163, 0.12)">
 			<div class="form-group col-lg-8 offset-lg-2 col-md-8 offset-md-2">
-				
+
 				<div style="margin-left: 25px; margin-top: 15px; padding-bottom: 20px; background: rgba(48, 207, 163, 0.12)">
 					<ul>
 						<h1 style="text-align: center">Crear producto</h1>
@@ -41,11 +41,7 @@
 							</div>
 							<!-- FIN EMAIL -->
 							<!-- FILE -->
-							<div class="form-group">
-								<img class="imagen-muestra" src="subidos/productos/{{ old('cover') }}" alt=""><br>
-								<label for="" class="col-form-label h4">Foto Portada: </label>
-								<input type="file" name="cover" accept=".jpg, .jpeg, .png, .gif"/>
-							</div>
+
 							<!-- TELEFONO -->
 							<div class="form-group">
 								<label for="inputTelefono" class="col-form-label h4">Telefono</label>
@@ -72,11 +68,11 @@
 							{{-- FIN DESCRIPCION  --}}
 							{{-- TIPO DE PRODUCTO  --}}
 							<div class="form-group">
-								<label for="tipoProducto" class="col-form-label h4">Tipo de producto
+								<label for="tipoProducto" class="col-form-label h4" >Tipo de producto
 								</label>
 								<div>
-									<select name="type">
-										<option value="salon">salon</option>
+									<select name="type" id="type">
+										<option value="salon" selected>salon</option>
 										<option value="servicio">servicio</option>
 									</select>
 								</div>
@@ -84,18 +80,29 @@
 							<!-- FIN TIPO DE PRODUCTO -->
 							<!-- TIPO DE EVENTO -->
 							<div class="form-group">
-								<label for="tipoEvento" class="col-form-label h4">Tipo de evento
+								<label for="tipoEvento" class="col-form-label h4">Categoría de producto
 								</label>
-								<div>
-									@foreach ($product_types as $product_type)
-									<input type="checkbox" name="product_types[]" value="{{ $product_type->id }}" id="{{ $product_type->name }}" @if (old('product_type_id') == $product_type->id))
-									{{ 'checked'}}
-									@endif/>
 
-									<label class="form-check-label" for="{{ $product_type->name }}">{{ $product_type->name }}</label>
-									<br>
-									@endforeach
-								</div>
+										<div id="tipo_servicios" class='hide_select'>
+											@foreach ($tipo_servicios as $product_type)
+											<input type="checkbox" name="product_types[]" value="{{ $product_type->id }}" id="{{ $product_type->name }}"
+
+											{{-- {{ $product->product_types}} --}}
+											<label class="form-check-label" for="{{ $product_type->name }}">{{ $product_type->name }}</label>
+											<br>
+											@endforeach
+										</div>
+
+										<div id="tipo_salones" class='show_select'>
+											@foreach ($tipo_salones as $product_type)
+											<input type="checkbox" name="product_types[]" value="{{ $product_type->id }}" id="{{ $product_type->name }}"
+
+											{{-- {{ $product->product_types}} --}}
+											<label class="form-check-label" for="{{ $product_type->name }}">{{ $product_type->name }}</label>
+											<br>
+											@endforeach
+										</div>
+
 							</div>
 							<!--  FIN TIPO DE EVENTO  -->
 							<!-- RESERVA MINIMA -->
@@ -136,12 +143,34 @@
 				</div></div>
 				{{-- FOOTER --}}
 				<div>
-					@include('.Components.footer')
+					@include('/Components/footer')
 				</div>
+
 				{{-- FIN FOOTER --}}
 			</div>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	 $(document).ready(
+		 function(){
+			 $('#type').on('change', function() {
+				 
+					if(this.value == 'salon'){
+							$('#tipo_salones').attr('class','show_select');
+							$('#tipo_servicios').attr('class','hide_select');
+
+					}
+					else{
+							$('#tipo_servicios').attr('class','show_select');
+							$('#tipo_salones').attr('class','hide_select');
+							$('#tipo_salones').prop('selectedIndex',0);
+					}
+				});
+		 }
+	 );
+
+</script>
 </body>
 </html>

@@ -40,16 +40,12 @@
 
 <script>
     $(document).ready(function(){
-      //alert($('#token').val());
+
       $('#boton').click(function(){
-        //$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+
         $.ajax({url: "/api/users",
-        // _token: $('#token').val(),
-        // id: 'id',
         success: function(result){
-          //console.log(result);
           var last = $('#last').val();
-          //console.log(last,'aca ');
           var usuarios = result.filter(function(usuario){
             return usuario.id > last;
           });
