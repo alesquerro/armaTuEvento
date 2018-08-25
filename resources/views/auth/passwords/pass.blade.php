@@ -27,7 +27,7 @@
           </div>
           <label for="password" class="col-form-label h4">Confirme nueva contraseña</label>
           <div>
-            <input type="password" class="form-control" name="password-confirm" id="password" placeholder="password" required >
+            <input type="password" class="form-control" name="password_confirmation" id="password" placeholder="password" required >
           </div>
 
       <div class="form-group  text-center">

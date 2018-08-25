@@ -50,9 +50,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator($request)
     {
-        return Validator::make($data, [
+        return $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'alias' => 'required|string|max:255',
@@ -73,8 +73,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //dd($data);
-        $this->validator($data);
+
+        //$this->validator($data);
         $path = '';
         if(request()->hasFile('avatar')){
           $path = request()->file('avatar')->store('images');
@@ -106,10 +106,19 @@ class RegisterController extends Controller
         return view('auth.registro', ['options1' => $options1, 'options2' => $options2]);
     }
 
-    public function getRegister()
+    public function getRegister(Request $request)
     {
-
-        $this->validator(request()->all());
+      //dd(request()->all());
+      $request->validate([
+          'first_name' => 'required|string|max:255',
+          'last_name' => 'required|string|max:255',
+          'email' => 'required|string|email|max:255|unique:users',
+          'password' => 'required|string|min:6|confirmed',
+          'password_confirmation' => 'required|string|min:6',
+          'respuesta1' => 'integer',
+          'respuesta2' => 'integer',
+          'terms_conditions_date' => 'required',
+      ]);
         $user = $this->create(request()->all());
 
         Auth::login($user);
@@ -168,14 +177,10 @@ class RegisterController extends Controller
     }
 
     public function changePass(Request $request){
-        //dd('veamos');
-        if($request->input('password') != $request->input('password-confirm')){
-            return redirect()->back()->with("Las contraseñas no coinciden");
-        }
 
         $validatedData = $request->validate([
-            'password' => 'required',
-            'password-confirm' => 'required|string|min:6',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required|string|min:6',
         ]);
         if(auth()->check()){
           $user = Auth::user();
@@ -186,9 +191,6 @@ class RegisterController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
-        //auth()->user()->fill(request()->all());
-        //auth()->user()->save();
-        //Auth::login(request());
         return redirect('/');
 
 

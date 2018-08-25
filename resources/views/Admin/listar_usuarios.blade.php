@@ -20,7 +20,7 @@
                  <li class="modificar">
                     <p class="mr-5 mt-2 mb-3">{{$user->first_name}}</p>
                     <form action="/Admin/modificar_usuario/{{$user->id}}" method="get" >
-                      @csrf
+
                        <input type="hidden" name="usuario" value="{{$user->id}}">
                        <input type="submit" name="" value="Modificar usuario {{$user->first_name}}" class="btn moficar_item">
                      </form>
@@ -32,7 +32,7 @@
           <button id="boton" class="btn btn-success mb-5 float-rigth">Traer más</button>
 
        </div>
-
+       <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
   </main>
 
 @include('/Components/footer')
@@ -40,8 +40,12 @@
 
 <script>
     $(document).ready(function(){
+      //alert($('#token').val());
       $('#boton').click(function(){
+        //$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
         $.ajax({url: "/api/users",
+        // _token: $('#token').val(),
+        // id: 'id',
         success: function(result){
           //console.log(result);
           var last = $('#last').val();
@@ -58,26 +62,33 @@
             var formNode = document.createElement('FORM');
             var input1Node = document.createElement('INPUT');
             var input2Node = document.createElement('INPUT');
+            var input3Node = document.createElement('INPUT');
 
             input1Node.setAttribute('value', user.id);
             input1Node.setAttribute('type', 'hidden');
+            input1Node.setAttribute('name', 'id');
             input2Node.setAttribute('value', 'Modificar usuario '+ user.first_name);
             input2Node.setAttribute('type', 'submit');
+            // input3Node.setAttribute('value', $('#token').val());
+            // input3Node.setAttribute('type', 'hidden');
+            // input3Node.setAttribute('name', '_token');
+
+            formNode.appendChild(input1Node);
+            formNode.appendChild(input2Node);
+            // formNode.appendChild(input3Node);
+            formNode.setAttribute('action', '/Admin/modificar_usuario/'+user.id);
+            formNode.setAttribute('method', 'get');
 
             var li = document.getElementById('lista_us').appendChild(liNode);
             li.appendChild(pNode);
-
             var form = li.appendChild(formNode);
-            form.appendChild(input1Node);
-            form.appendChild(input2Node);
 
             li.style.listStyle = 'none';
             li.style.display = 'flex';
             li.style.marginBottom = '10px';
             input2Node.classList.add('btn', 'moficar_item');
             pNode.classList.add('mr-5', 'mt-2', 'mb-3');
-            form.setAttribute('action', '/Admin/modificar_usuario/'+user.id);
-            form.setAttribute('method', 'post');
+
             $('#last').val(user.id);
           });
         },

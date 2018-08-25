@@ -1,12 +1,12 @@
 
-<h4>Fecha</h4>
+{{-- <h4>Fecha</h4>
 <form action="" method="post">
   <div class="form-group fecha_listado">
     <div class="col-12">
-      <input type="date" id="fecha-bg" class="form-control" placeholder="Fecha" name="Fecha" value="<?php echo $_GET['Fecha'] ?? ''; ?>">
+      <input type="date" id="fecha-bg" class="form-control" placeholder="Fecha" name="Fecha" value="">
     </div>
   </div>
-  </form>
+  </form> --}}
   <div>
 
     <h4>Tipo de Producto</h4>

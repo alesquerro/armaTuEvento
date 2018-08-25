@@ -2,11 +2,11 @@
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"> --}}
-  <link rel="stylesheet" href="/css/Bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
-  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> --}}
-  <link rel="stylesheet" href="/css/Bootstrap/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 
 
   <meta name="keywords" content="evento, servicios, catering">
@@ -16,19 +16,19 @@
 
 
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">  FONTS
-  {{-- <link href="public/fonts/familyRobotoSlab" rel="stylesheet"> <!-- FONTS --> --}}
+
 
 
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">  FONTS
-  {{-- <link href="public/fonts/familyRoboto" rel="stylesheet"> <!-- FONTS --> --}}
+
 
 
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-  {{-- <link href="public/fonts/Poppins" rel="stylesheet"> --}}
+
 
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  {{-- <link rel="stylesheet" href="/css/Bootstrap/font-awesomeB.min.css"> --}}
+
 
 
   <title></title>

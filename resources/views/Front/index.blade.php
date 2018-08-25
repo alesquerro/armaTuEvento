@@ -49,14 +49,9 @@
           @csrf
           <p class="h3">Buscá salon y/o servicios para tu evento</p>
           <div class="form-group row">
-            <label for="fecha" class="col-form-label col-sm-2 col-md-2 col-lg-2">Fecha</label>
-            <input type="date" class="form-control col-sm-4 col-md-4 col-lg-4" id="fecha" placeholder="Fecha" name="Fecha">
-            <div class="form-check form-check-inline col-sm-5 col-md-5 col-lg-2">
-              <input class="form-check-input" type="checkbox" id="buscar_salon" name="tipo[]" value="salon" checked>
-              <label class="form-check-label" for="buscar_salon">Salón</label>
-              <input class="form-check-input" type="checkbox" id="buscar_servicio" name="tipo[]" value="servicio" checked>
-              <label class="form-check-label" for="buscar_servicio">Servicios</label>
-            </div>
+            {{-- <label for="fecha" class="col-form-label col-sm-2 col-md-2 col-lg-2">Fecha</label>
+            <input type="date" class="form-control col-sm-4 col-md-4 col-lg-4" id="fecha" placeholder="Fecha" name="Fecha"> --}}
+
           </div>
           <div class="form-group row">
             <label for="tipoEvento" class="col-form-label col-sm-2 col-md-2 col-lg-2">Evento</label>
@@ -69,23 +64,33 @@
               <option value="{{ $tipoEvento->id }}">{{ $tipoEvento->name }}</option>
               @endforeach
             </select>
-          </div>
-          <div class="contenedor_boton">
-            <input type="submit" class="button-meeting-room" id="Buscar" value="Buscar"></input>
-          </div>
+            </div>
+            <div class="form-group row">
+              <div class="form-check form-check-inline col-sm-5 col-md-5 col-lg-2">
+                <input class="form-check-input" type="checkbox" id="buscar_salon" name="tipo[]" value="salon" checked>
+                <label class="form-check-label" for="buscar_salon">Salón</label>
+                <input class="form-check-input" type="checkbox" id="buscar_servicio" name="tipo[]" value="servicio" checked>
+                <label class="form-check-label" for="buscar_servicio">Servicios</label>
+              </div>
+              <div class="form-check form-check-inline col-sm-7 col-md-7 col-lg-2 contenedor_boton">
+                <input type="submit" class="button-meeting-room" id="Buscar" value="Buscar"></input>
+              </div>
+            </div>
+
+
         </form>
       </section>
     {{-- FIN BUSCADOR --}}
 
     <!-- NUEVO INICIO CONTENIDO -->
-      <section style="padding: 5rem; padding-bottom: 1rem;">
+      <section style="padding: 1rem; padding-bottom: 1rem;">
       <p class="h4" style="margin-top: 50px; font-size: 40px; ">Conocé nuestros salones</p>
       <div class="row card_row">
         @foreach ($salones as $salon)
         <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
           <div class="card mb-4 box-shadow">
             <div class="img_thumb">
-              <img class="card-img-top" src="subidos/productos/{{ $salon->cover }}"  alt="Salón 1">
+              <img class="card-img-top" src="/storage/{{ $salon->cover }}"  alt="Salón 1">
             </div>
             <div class="card-body" id="{{ $salon->id }}">
               <p class="h4" id="nombre_salon" name="nombre_salon">
@@ -156,7 +161,7 @@
       </section>
 
 
-      <section style="padding: 5rem; padding-bottom: 1rem;">
+      <section style="padding: 1rem; padding-bottom: 1rem;">
         <!-- NUEVO INICIO CONTENIDO -->
         <p class="h4" style="margin-top: 50px; font-size: 40px; ">Conocé nuestros servicios</p>
         <div class="row card_row" >
@@ -164,7 +169,7 @@
           <div class="col-sm-12 col-md-4 col-lg-4 card_margin">
             <div class="card mb-4 box-shadow">
               <div class="img_thumb">
-                <img class="card-img-top" src="subidos/productos/{{ $servicio->cover }}"  alt="Foto Servicio">
+                <img class="card-img-top" src="/storage/{{ $servicio->cover }}"  alt="Foto Servicio">
               </div>
               <div class="card-body">
                 <p class="h4" id="nombre_servicio" name="nombre_salon">

@@ -101,6 +101,14 @@ window.onload = function(){
             </div>
 
         <h1>Registro</h1>
+        @if (count($errors))
+
+            <div class="alert alert-danger">
+              @foreach( $errors->all() as $error)
+                    <p>  {{$error}}</p>
+              @endforeach
+            </div>
+        @endif
         <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Registro') }}"  class="col-lg-8 offset-lg-2 col-md-8 offset-md-2" enctype="multipart/form-data">
           @csrf
               <div class="form-group">
@@ -127,7 +135,7 @@ window.onload = function(){
               </div>
               <div class="form-group">
                  <label for="password_confirm">Confirmar Contraseña (*)</label>
-                 <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Vuelva a ingresar la contraseña" >
+                 <input type="password" class="form-control" id="password_confirm" name="password_confirmation" placeholder="Vuelva a ingresar la contraseña" >
               </div>
               <div class="form-group">
                   <input type="file" name="avatar" accept=".jpg, .jpeg, .png, gif" id="avatar_us"/>

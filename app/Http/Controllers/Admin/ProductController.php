@@ -20,14 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-
-
         $products = Product::all();
-        // $servicios = Product::where('type', '=', 'servicio')->get();
-
-        // $tipoEventos = EventType::all();
-        // dd($tipoEventos);
-
         return view('Admin.Product.index', [
             'products' => $products,
             // 'servicios' => $servicios,
@@ -43,14 +36,8 @@ class ProductController extends Controller
     public function create()
     {
 
-        // $id = request()->input('producto');
-        // $product = Product::find($id);
         $product_types = ProductType::all();
-        // $input = $request->all();
-
-
         return view('Admin.Product.create', [
-        //     'product' => $product,
             'product_types' => $product_types
         ]
         );
@@ -64,7 +51,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dd('aca1');
+
         $filename = '';
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
@@ -164,8 +151,19 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
+
         $id = request()->input('id');
-        $data = $this->validator($request->all());
+        $data = Validator::make(request()->all(),[
+            'name' => 'required|string|max:100',
+            'description' => 'required|string|max:200',
+            'mail' => 'required|email|string|max:100',
+             'capacity' => 'required|max:3000',
+             'minimum_reservation' => 'required|max:99999',
+             'price' => 'required|min:0|max:99999',
+             'type' => 'required',
+             'active' => 'integer',
+        ]);
+        //dd($data->messages());
         $product = Product::find($id);
         $filename = $product->cover;
         // dd($product);
@@ -241,23 +239,37 @@ class ProductController extends Controller
     //     return $this->belongsToMany('ProductType');
     // }
 
-     protected function validator(array $data)
+     protected function validator($request)
     {
-        return Validator::make($data, [
+      //dd($request);
+        return $request->validate([
             'name' => 'required|string|max:100',
             'description' => 'required|string|max:200',
             'mail' => 'required|email|string|max:100',
-            'price' => 'required|decimal',
-            'cover' => 'image|required',
-            'type' => 'required',
-            'active' => 'integer',
-            // 'respuesta2' => 'integer',
-            // 'terms_conditions_date' => 'required',
+             'capacity' => 'required|min:1|max:3000',
+             'minimum_reservation' => 'required|min:0|max:99999',
+             'price' => 'required|min:0|max:99999',
+             'type' => 'required',
+             'active' => 'integer',
+
         ]);
     }
     public function handleRequest(Request $request)
     {
-        // dd($request);
+      //dd($request);
+      $request->validate([
+          'name' => 'required|string|max:100',
+          'description' => 'required|string|max:200',
+          'mail' => 'required|email|string|max:100',
+           'capacity' => 'required|min:1|max:3000',
+           'minimum_reservation' => 'required|min:0|max:99999',
+           'price' => 'required|min:0|max:99999',
+           'type' => 'required',
+           'active' => 'integer',
+
+      ]);
+        // dd('aca');
+
         if ($request->submit == 'edit') {
             // dd($request);
             return $this->update($request);

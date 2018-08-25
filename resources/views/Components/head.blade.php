@@ -4,12 +4,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
 
-  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"> --}}
-  <link rel="stylesheet" href="/css/Bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  {{-- <link rel="stylesheet" href="/css/Bootstrap/bootstrap.min.css"> --}}
 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/css/Bootstrap/font-awesome.min.css">
+  {{-- <link rel="stylesheet" href="/css/Bootstrap/font-awesome.min.css"> --}}
 
 
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
@@ -20,16 +20,16 @@
 
 
 
-  {{-- <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">  FONTS  --}}
-  <link href="/fonts/familyRobotoSlab" rel="stylesheet"> <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">  FONTS
+  {{-- <link href="/fonts/familyRobotoSlab" rel="stylesheet"> <!-- FONTS --> --}}
 
 
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">  FONTS
   {{-- <link href="/fonts/familyRoboto" rel="stylesheet"> <!-- FONTS --> --}}
 
 
-  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
-  <link rel="stylesheet" href="/css/Bootstrap/font-awesomeB.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  {{-- <link rel="stylesheet" href="/css/Bootstrap/font-awesomeB.min.css"> --}}
 
   {{-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> --}}
   <script src="/js/jQuery/jquery-3.1.1.min.js"></script>
